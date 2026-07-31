@@ -1,0 +1,113 @@
+{
+  "common": {
+    "siteName": "PDF Werkzeuge",
+    "tagline": "Kostenlose PDF-Tools im Browser",
+    "upload": "Datei auswählen",
+    "orDrop": "oder Datei hierher ziehen",
+    "download": "Herunterladen",
+    "processing": "Wird verarbeitet…",
+    "language": "Sprache",
+    "free": "Kostenlos",
+    "home": "Start",
+    "menu": {
+      "tools": "Werkzeuge",
+      "blog": "Blog",
+      "privacy": "Datenschutz",
+      "imprint": "Impressum",
+      "contact": "Kontakt"
+    }
+  },
+  "home": {
+    "title": "Kostenlose PDF-Werkzeuge online",
+    "subtitle": "Zusammenfügen, teilen, drehen und in Bilder umwandeln – schnell, sicher und ohne Upload.",
+    "intro": "PDF Werkzeuge ist eine kostenlose Online-Plattform für die gängigsten PDF-Aufgaben. Ob Sie Dokumente zusammenfügen, aufteilen, drehen oder in Bilder umwandeln möchten – alle Werkzeuge laufen schnell und sicher direkt in Ihrem Browser.",
+    "securityHeading": "Sicher und privat",
+    "securityNote": "Ihre Dateien verlassen niemals Ihren Browser. Alle Vorgänge laufen lokal auf Ihrem Gerät.",
+    "categoriesHeading": "Werkzeuge nach Kategorie",
+    "faqHeading": "Häufige Fragen",
+    "cta": "Tool starten",
+    "toolsHeading": "Unsere PDF-Werkzeuge",
+    "toolsSubheading": "Alle Tools laufen vollständig in Ihrem Browser.",
+    "faq": [
+      {
+        "question": "Sind meine Dateien sicher?",
+        "answer": "Ja. Alle PDFs werden ausschließlich lokal in Ihrem Browser verarbeitet. Dateien werden niemals auf einen Server hochgeladen."
+      },
+      {
+        "question": "Ist die Nutzung wirklich kostenlos?",
+        "answer": "Ja, alle Werkzeuge sind dauerhaft kostenlos und ohne Registrierung nutzbar."
+      },
+      {
+        "question": "Benötige ich eine Anmeldung?",
+        "answer": "Nein. Sie können jedes Werkzeug sofort ohne Konto oder Login verwenden."
+      },
+      {
+        "question": "Welche Betriebssysteme werden unterstützt?",
+        "answer": "Da alles im Browser läuft, funktionieren die Tools auf Windows, macOS, Linux, Android und iOS."
+      },
+      {
+        "question": "Wie groß darf eine PDF-Datei sein?",
+        "answer": "Die Verarbeitung erfolgt auf Ihrem Gerät. Sehr große Dateien hängen von Ihrem Arbeitsspeicher ab; für die meisten Dokumente ist das unproblematisch."
+      }
+    ]
+  },
+  "categories": {
+    "merge": "Zusammenfügen",
+    "split": "Teilen",
+    "rotate": "Drehen",
+    "toImage": "In Bilder umwandeln"
+  },
+  "pdfUi": {
+    "title": "PDF verarbeiten",
+    "drop": "Datei hierher ziehen oder zum Auswählen klicken",
+    "selectFiles": "Dateien auswählen",
+    "selected": "Ausgewählt",
+    "process": "Verarbeiten",
+    "processing": "Wird verarbeitet…",
+    "download": "Herunterladen",
+    "clear": "Zurücksetzen",
+    "rotateLabel": "Drehung",
+    "formatLabel": "Format",
+    "errorGeneric": "Bei der Verarbeitung ist ein Fehler aufgetreten.",
+    "noFile": "Bitte wählen Sie zuerst eine Datei aus.",
+    "mergeHint": "Wählen Sie zwei oder mehr PDFs, um sie zusammenzuführen.",
+    "splitHint": "Wählen Sie eine PDF-Datei, um sie zu teilen.",
+    "rotateHint": "Wählen Sie eine PDF-Datei und die gewünschte Drehung.",
+    "toImageHint": "Wählen Sie eine PDF-Datei, um sie in Bilder umzuwandeln."
+  },
+  "legal": {
+    "privacy": {
+      "title": "Datenschutz",
+      "intro": "Der Schutz Ihrer Daten ist uns wichtig. Diese Seite erklärt, wie wir mit Ihren Informationen umgehen."
+    },
+    "impressum": {
+      "title": "Impressum",
+      "intro": "Angaben gemäß gesetzlicher Pflicht."
+    },
+    "contact": {
+      "title": "Kontakt",
+      "intro": "Sie erreichen uns über die folgenden Kanäle."
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "intro": "Tipps, Anleitungen und Hintergründe zu PDF und Dokumenten.",
+    "empty": "Noch keine Artikel – bald mehr.",
+    "readMore": "Weiterlesen",
+    "publishedOn": "Veröffentlicht am",
+    "updatedOn": "Aktualisiert am",
+    "by": "von",
+    "tags": "Schlagworte",
+    "backToBlog": "Zurück zum Blog",
+    "rss": "RSS-Feed"
+  },
+  "notFound": {
+    "title": "Seite nicht gefunden",
+    "description": "Die gesuchte Seite existiert nicht oder wurde verschoben.",
+    "home": "Zur Startseite"
+  },
+  "footer": {
+    "rights": "Alle Rechte vorbehalten.",
+    "note": "Diese Website verarbeitet PDF-Dateien ausschließlich lokal in Ihrem Browser."
+  }
+}

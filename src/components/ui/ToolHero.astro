@@ -1,0 +1,29 @@
+---
+/**
+ * ToolHero — hero section for a tool page.
+ *
+ * Consumes ONLY tool.data.content[locale] (H1 + intro). No tool logic, no
+ * hard-coded copy. The interactive upload area is added in a later phase
+ * (T6 / Phase 2-3); this is the static, SEO-relevant heading + lead paragraph.
+ */
+import type { Locale } from '@/i18n/config';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  tool: CollectionEntry<'tools'>;
+  locale: Locale;
+}
+
+const { tool, locale } = Astro.props;
+const content = tool.data.content[locale];
+---
+<section class="py-10 sm:py-14">
+  <div class="container-page">
+    <h1 class="text-3xl font-semibold tracking-tight text-ink-900 sm:text-4xl">
+      {content.h1}
+    </h1>
+    <p class="mt-4 max-w-2xl text-lg text-ink-600">
+      {content.intro}
+    </p>
+  </div>
+</section>

@@ -1,0 +1,68 @@
+---
+/**
+ * LanguageSwitcher — locale menu for the header.
+ *
+ * Per project rule (T5 #2): language switching MUST resolve the correct URL via
+ * the router (getLocalizedPath), never a naive locale-prefix swap. This is
+ * critical because both tool slugs AND blog-post slugs differ per language
+ * (pdf-drehen → pdf-rotate; why-merge-pdfs → warum-pdfs-zusammenfuegen); a
+ * prefix swap would 404. The router resolves tools via their MDX slug map and
+ * blog posts via their shared translationKey. Static pages keep their segment.
+ *
+ * Pure HTML <details> — no JavaScript, no client island, zero JS payload.
+ */
+import type { Locale } from '@/i18n/config';
+import { locales, localeNames } from '@/i18n/config';
+import { getLocalizedPagePath } from '@/lib/tools/router';
+
+interface Props {
+  locale: Locale;
+  currentPath: string;
+}
+
+const { locale, currentPath } = Astro.props;
+
+// One link per locale, each pointing at the locale-equivalent page.
+const links = await Promise.all(
+  locales.map(async (target) => ({
+    locale: target,
+    name: localeNames[target],
+    href: await getLocalizedPagePath(currentPath, locale, target),
+    current: target === locale,
+  })),
+);
+---
+<div class="lang-switch">
+  <details class="relative inline-block">
+    <summary
+      class="flex cursor-pointer select-none items-center gap-1 rounded-md border border-ink-200 px-3 py-1.5 text-sm font-medium text-ink-700 hover:bg-ink-50"
+    >
+      <span>{localeNames[locale]}</span>
+      <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" class="text-ink-400">
+        <path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </summary>
+    <ul
+      class="absolute right-0 z-20 mt-1 w-40 overflow-hidden rounded-md border border-ink-200 bg-white py-1 shadow-sm"
+    >
+      {
+        links.map((l) => (
+          <li>
+            <a
+              href={l.href}
+              hreflang={l.locale}
+              lang={l.locale}
+              aria-current={l.current ? 'true' : undefined}
+              class:list={[
+                'block px-3 py-2 text-sm hover:bg-ink-50',
+                l.current ? 'font-semibold text-brand' : 'text-ink-700',
+              ]}
+            >
+              {l.name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </details>
+</div>

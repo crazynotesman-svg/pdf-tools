@@ -1,0 +1,36 @@
+---
+/**
+ * Imprint (Impressum) — structural placeholder, all copy from i18n.
+ * Three locales via getStaticPaths. Real legal text added before launch.
+ */
+import type { GetStaticPaths } from 'astro';
+import { locales, type Locale } from '@/i18n/config';
+import { t } from '@/i18n/ui';
+import BaseLayout from '@/components/layout/BaseLayout.astro';
+
+export const getStaticPaths = (async () =>
+  locales.map((locale) => ({ params: { lang: locale }, props: { locale } }))) satisfies GetStaticPaths;
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const tl = (key: Parameters<typeof t>[1]) => t(locale, key);
+const breadcrumb = [
+  { name: tl('common.home'), url: `/${locale}` },
+  { name: tl('common.menu.imprint'), url: `/${locale}/impressum` },
+];
+---
+<BaseLayout
+  locale={locale}
+  title={tl('legal.impressum.title')}
+  description={tl('legal.impressum.intro')}
+  breadcrumb={breadcrumb}
+>
+  <section class="container-page py-12">
+    <h1 class="text-3xl font-semibold tracking-tight text-ink-900">
+      {tl('legal.impressum.title')}
+    </h1>
+    <p class="mt-4 max-w-3xl text-lg text-ink-600">{tl('legal.impressum.intro')}</p>
+  </section>
+</BaseLayout>

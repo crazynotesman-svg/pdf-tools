@@ -1,0 +1,113 @@
+{
+  "common": {
+    "siteName": "PDF 工具",
+    "tagline": "浏览器内的免费 PDF 工具",
+    "upload": "选择文件",
+    "orDrop": "或将文件拖拽到此处",
+    "download": "下载",
+    "processing": "正在处理…",
+    "language": "语言",
+    "free": "免费",
+    "home": "首页",
+    "menu": {
+      "tools": "工具",
+      "blog": "博客",
+      "privacy": "隐私政策",
+      "imprint": "法律声明",
+      "contact": "联系我们"
+    }
+  },
+  "home": {
+    "title": "免费在线 PDF 工具",
+    "subtitle": "合并、拆分、旋转以及转换为图片——快速、安全且无需上传。",
+    "intro": "PDF 工具是一个免费的在线平台，用于处理最常见的 PDF 任务。无论是合并、拆分、旋转文档，还是将其转换为图片，所有工具都在您的浏览器中快速、安全地运行。",
+    "securityHeading": "安全与隐私",
+    "securityNote": "您的文件永远不会离开您的浏览器。所有操作都在您本地设备上完成。",
+    "categoriesHeading": "按分类浏览工具",
+    "faqHeading": "常见问题",
+    "cta": "开始使用",
+    "toolsHeading": "我们的 PDF 工具",
+    "toolsSubheading": "所有工具完全在您的浏览器中运行。",
+    "faq": [
+      {
+        "question": "我的文件安全吗？",
+        "answer": "安全。所有 PDF 仅在您的浏览器本地处理，文件永远不会上传到服务器。"
+      },
+      {
+        "question": "真的免费吗？",
+        "answer": "是的，所有工具永久免费，无需注册。"
+      },
+      {
+        "question": "需要注册吗？",
+        "answer": "不需要。您可以直接使用任何工具，无需账号或登录。"
+      },
+      {
+        "question": "支持哪些操作系统？",
+        "answer": "由于全部在浏览器中运行，工具支持 Windows、macOS、Linux、Android 和 iOS。"
+      },
+      {
+        "question": "PDF 文件可以多大？",
+        "answer": "处理在您的设备上完成。非常大的文件取决于您的内存；大多数文档都没有问题。"
+      }
+    ]
+  },
+  "categories": {
+    "merge": "合并",
+    "split": "拆分",
+    "rotate": "旋转",
+    "toImage": "转为图片"
+  },
+  "pdfUi": {
+    "title": "处理 PDF",
+    "drop": "将文件拖拽到此处，或点击选择",
+    "selectFiles": "选择文件",
+    "selected": "已选择",
+    "process": "开始处理",
+    "processing": "正在处理…",
+    "download": "下载",
+    "clear": "重置",
+    "rotateLabel": "旋转角度",
+    "formatLabel": "图片格式",
+    "errorGeneric": "处理文件时发生错误。",
+    "noFile": "请先选择一个文件。",
+    "mergeHint": "选择两个或更多 PDF 以合并为一个。",
+    "splitHint": "选择一个 PDF 文件以将其拆分。",
+    "rotateHint": "选择一个 PDF 文件并指定旋转角度。",
+    "toImageHint": "选择一个 PDF 文件以转换为图片。"
+  },
+  "legal": {
+    "privacy": {
+      "title": "隐私政策",
+      "intro": "我们重视您的数据保护。本页说明我们如何处理您的信息。"
+    },
+    "impressum": {
+      "title": "法律声明",
+      "intro": "依法须披露的信息。"
+    },
+    "contact": {
+      "title": "联系我们",
+      "intro": "您可通过以下方式联系我们。"
+    }
+  },
+  "blog": {
+    "title": "博客",
+    "intro": "关于 PDF 与文档的技巧、指南与背景知识。",
+    "empty": "暂无文章，敬请期待。",
+    "readMore": "阅读全文",
+    "publishedOn": "发布于",
+    "updatedOn": "更新于",
+    "by": "作者",
+    "tags": "标签",
+    "backToBlog": "返回博客",
+    "rss": "RSS 订阅"
+  },
+  "notFound": {
+    "title": "页面未找到",
+    "description": "您访问的页面不存在或已被移动。",
+    "home": "返回首页"
+  },
+  "footer": {
+    "rights": "版权所有。",
+    "note": "本网站完全在您的浏览器本地处理 PDF 文件。"
+  }
+}

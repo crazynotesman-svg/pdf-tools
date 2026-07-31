@@ -1,0 +1,18 @@
+# Cloudflare Pages _headers
+# https://developers.cloudflare.com/pages/configuration/headers/
+
+# Long-cache immutable hashed build assets (Astro emits content-hashed files).
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Apply security + referrer headers site-wide.
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+
+# NOTE: no Content-Security-Policy here yet. When Google AdSense is enabled
+# (Phase 2), relax script-src to allow 'self' plus
+# https://pagead2.googlesyndication.com and add the adsense client/script
+# hosts. Astro's React-island hydration also requires 'self' module scripts.

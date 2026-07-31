@@ -1,0 +1,42 @@
+---
+/**
+ * RelatedTools.astro — internal cross-links on a tool page.
+ *
+ * Per project decision (#7): the content field `relatedTools` stays a plain
+ * list of tool ids (no nested objects) to keep authoring simple. This
+ * component resolves each id to its localized name + URL at render time via
+ * the router helpers. No hard-coded tool facts.
+ */
+import type { Locale } from '@/i18n/config';
+import { getToolById, getToolUrl } from '@/lib/tools/router';
+
+interface Props {
+  relatedToolIds: string[];
+  locale: Locale;
+}
+
+const { relatedToolIds, locale } = Astro.props;
+
+const items = await Promise.all(
+  relatedToolIds.map(async (id) => {
+    const entry = await getToolById(id);
+    return {
+      id,
+      name: entry ? entry.data.content[locale].h1 : id,
+      url: await getToolUrl(id, locale),
+    };
+  })
+);
+---
+
+<section class="related-tools" aria-label="Related tools">
+  <ul class="related-tools__list">
+    {
+      items.map((it) => (
+        <li>
+          <a href={it.url}>{it.name}</a>
+        </li>
+      ))
+    }
+  </ul>
+</section>

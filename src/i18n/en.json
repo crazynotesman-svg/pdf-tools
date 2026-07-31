@@ -1,0 +1,113 @@
+{
+  "common": {
+    "siteName": "PDF Tools",
+    "tagline": "Free PDF tools in your browser",
+    "upload": "Choose file",
+    "orDrop": "or drop a file here",
+    "download": "Download",
+    "processing": "Processing…",
+    "language": "Language",
+    "free": "Free",
+    "home": "Home",
+    "menu": {
+      "tools": "Tools",
+      "blog": "Blog",
+      "privacy": "Privacy",
+      "imprint": "Imprint",
+      "contact": "Contact"
+    }
+  },
+  "home": {
+    "title": "Free PDF tools online",
+    "subtitle": "Merge, split, rotate and convert to images — fast, secure and with no upload.",
+    "intro": "PDF Tools is a free online platform for the most common PDF tasks. Whether you want to merge, split, rotate or convert documents to images, every tool runs fast and securely right in your browser.",
+    "securityHeading": "Secure and private",
+    "securityNote": "Your files never leave your browser. Everything runs locally on your device.",
+    "categoriesHeading": "Tools by category",
+    "faqHeading": "Frequently asked questions",
+    "cta": "Start tool",
+    "toolsHeading": "Our PDF tools",
+    "toolsSubheading": "All tools run entirely in your browser.",
+    "faq": [
+      {
+        "question": "Are my files secure?",
+        "answer": "Yes. All PDFs are processed locally in your browser only. Files are never uploaded to a server."
+      },
+      {
+        "question": "Is it really free?",
+        "answer": "Yes, every tool is permanently free to use, with no registration."
+      },
+      {
+        "question": "Do I need to sign up?",
+        "answer": "No. You can use any tool instantly, without an account or login."
+      },
+      {
+        "question": "Which operating systems are supported?",
+        "answer": "Because everything runs in the browser, the tools work on Windows, macOS, Linux, Android and iOS."
+      },
+      {
+        "question": "How large can a PDF be?",
+        "answer": "Processing happens on your device. Very large files depend on your available memory; most documents are fine."
+      }
+    ]
+  },
+  "categories": {
+    "merge": "Merge",
+    "split": "Split",
+    "rotate": "Rotate",
+    "toImage": "Convert to image"
+  },
+  "pdfUi": {
+    "title": "Process PDF",
+    "drop": "Drag a file here or click to choose",
+    "selectFiles": "Choose files",
+    "selected": "Selected",
+    "process": "Process",
+    "processing": "Processing…",
+    "download": "Download",
+    "clear": "Reset",
+    "rotateLabel": "Rotation",
+    "formatLabel": "Format",
+    "errorGeneric": "An error occurred while processing the file.",
+    "noFile": "Please select a file first.",
+    "mergeHint": "Select two or more PDFs to merge them into one.",
+    "splitHint": "Select a PDF file to split it into parts.",
+    "rotateHint": "Select a PDF file and the rotation you want.",
+    "toImageHint": "Select a PDF file to convert it to images."
+  },
+  "legal": {
+    "privacy": {
+      "title": "Privacy",
+      "intro": "Protecting your data matters to us. This page explains how we handle your information."
+    },
+    "impressum": {
+      "title": "Imprint",
+      "intro": "Information required by law."
+    },
+    "contact": {
+      "title": "Contact",
+      "intro": "Reach us through the following channels."
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "intro": "Tips, guides and background on PDFs and documents.",
+    "empty": "No articles yet — more soon.",
+    "readMore": "Read more",
+    "publishedOn": "Published on",
+    "updatedOn": "Updated on",
+    "by": "by",
+    "tags": "Tags",
+    "backToBlog": "Back to blog",
+    "rss": "RSS feed"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The page you are looking for does not exist or has moved.",
+    "home": "Back to home"
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "note": "This website processes PDF files exclusively locally in your browser."
+  }
+}

@@ -1,0 +1,35 @@
+---
+/**
+ * Multilingual 404.
+ *
+ * Astro sets `currentLocale` from the URL prefix when i18n is configured
+ * (e.g. /de/... → 'de'). A bare unknown path has no prefix, so we fall back to
+ * the default locale. All copy comes from i18n (notFound.*).
+ */
+import { defaultLocale, isLocale, type Locale } from '@/i18n/config';
+import { t } from '@/i18n/ui';
+import BaseLayout from '@/components/layout/BaseLayout.astro';
+
+const rawLocale = Astro.currentLocale ?? '';
+const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+const tl = (key: Parameters<typeof t>[1]) => t(locale, key);
+const breadcrumb = [{ name: tl('common.home'), url: `/${locale}` }];
+---
+<BaseLayout
+  locale={locale}
+  title={tl('notFound.title')}
+  description={tl('notFound.description')}
+  breadcrumb={breadcrumb}
+>
+  <section class="container-page py-20 text-center">
+    <p class="text-6xl font-semibold text-ink-300">404</p>
+    <h1 class="mt-4 text-3xl font-semibold text-ink-900">{tl('notFound.title')}</h1>
+    <p class="mt-3 text-ink-600">{tl('notFound.description')}</p>
+    <a
+      href={`/${locale}`}
+      class="mt-8 inline-flex items-center rounded-md bg-brand px-5 py-3 text-sm font-semibold text-white hover:opacity-90"
+    >
+      {tl('notFound.home')}
+    </a>
+  </section>
+</BaseLayout>

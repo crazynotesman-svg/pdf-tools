@@ -1,0 +1,30 @@
+---
+/**
+ * SeoContent — renders the long-form SEO article body from a tool MDX entry,
+ * filtered to the active locale.
+ *
+ * The MDX body wraps each language block in <LocaleOnly locale="de|en|zh-CN">.
+ * We inject the active locale via makeLocaleOnly() so only the matching block
+ * is emitted — no hidden duplicate text, which protects SEO. This component is
+ * presentation-only: it knows nothing about which tool it is, only that it
+ * receives a content entry and a locale.
+ */
+import type { Locale } from '@/i18n/config';
+import type { CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
+import { makeLocaleOnly } from '@/components/ui/LocaleOnly';
+
+interface Props {
+  tool: CollectionEntry<'tools'>;
+  locale: Locale;
+}
+
+const { tool, locale } = Astro.props;
+const { Content } = await render(tool);
+const LocaleOnly = makeLocaleOnly(locale);
+---
+<article class="container-page py-8">
+  <div class="max-w-3xl space-y-4 text-ink-700 leading-relaxed">
+    <Content components={{ LocaleOnly }} />
+  </div>
+</article>

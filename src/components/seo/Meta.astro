@@ -1,0 +1,61 @@
+---
+/**
+ * Meta.astro — head-level SEO tags for a tool page.
+ *
+ * Consumes ONLY content-collection data (tool.data) + the current locale.
+ * Nothing about a specific tool is hard-coded here. The caller (BaseLayout /
+ * the tool page) is responsible for passing `tool` and `locale`; this component
+ * only renders title / description / canonical / hreflang / Open Graph.
+ *
+ * No business logic (PDF processing, etc.) is imported — pure presentation.
+ */
+import type { Locale } from '@/i18n/config';
+import type { CollectionEntry } from 'astro:content';
+import { locales } from '@/i18n/config';
+import { getToolPath } from '@/lib/tools/router';
+
+interface Props {
+  tool: CollectionEntry<'tools'>;
+  locale: Locale;
+}
+
+const { tool, locale } = Astro.props;
+const site = Astro.site ?? new URL('https://pdf-tools.example.com');
+
+const seo = tool.data.seo[locale];
+const title = seo.title;
+const description = seo.description;
+
+// Canonical = absolute URL of the current locale's page.
+const canonical = new URL(getToolPath(locale, tool.data.slug[locale]), site).href;
+
+// One alternate URL per locale (slug differs per language), plus x-default.
+const alternates = locales.map((l) => ({
+  locale: l,
+  url: new URL(getToolPath(l, tool.data.slug[l]), site).href,
+}));
+const xDefault = alternates.find((a) => a.locale === 'de')?.url ?? alternates[0].url;
+
+// OG uses underscores for region (e.g. zh_CN), unlike the routing locale.
+const ogLocale = locale === 'zh-CN' ? 'zh_CN' : locale;
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+
+{
+  alternates.map((a) => (
+    <link rel="alternate" hreflang={a.locale} href={a.url} />
+  ))
+}
+<link rel="alternate" hreflang="x-default" href={xDefault} />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:locale" content={ogLocale} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />

@@ -1,0 +1,38 @@
+---
+/**
+ * HowToSchema.astro — HowTo JSON-LD.
+ *
+ * Consumes tool.data.howTo[locale] (step name + text) and the localized H1 as
+ * the recipe name. Renders nothing when there are no steps. No hard-coded
+ * tool facts.
+ */
+import type { Locale } from '@/i18n/config';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  tool: CollectionEntry<'tools'>;
+  locale: Locale;
+}
+
+const { tool, locale } = Astro.props;
+const howTo = tool.data.howTo[locale];
+const name = tool.data.content[locale].h1;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name,
+  step: howTo.map((s, i) => ({
+    '@type': 'HowToStep',
+    position: i + 1,
+    name: s.name,
+    text: s.text,
+  })),
+};
+---
+
+{
+  howTo.length > 0 && (
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+  )
+}

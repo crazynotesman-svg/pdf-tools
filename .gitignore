@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+.astro/
+
+# Local / sandbox temp
+tmp/
+_tmp_*/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# WorkBuddy internal memory (not part of the site)
+.workbuddy/
+
+# Env / secrets
+.env
+.env.*
+!.env.example

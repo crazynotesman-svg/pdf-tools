@@ -1,0 +1,87 @@
+---
+/**
+ * Dynamic tool page — one route generates (locale × tool) = 12 pages.
+ *
+ * Per T6 #3: getStaticPaths enumerates every (locale, slug[locale]) pair so the
+ * URL is correct per language (e.g. /de/pdf-drehen vs /en/pdf-rotate). The page
+ * composition is entirely data-driven from the content entry:
+ *   BaseLayout          → head + Meta/StructuredData/FaqSchema/HowToSchema
+ *   ToolHero            → H1 + intro (from content[locale])
+ *   PdfDropZone island  → browser-side PDF handling (client:visible). The
+ *                         Astro page passes (operation, locale) only; ALL PDF
+ *                         logic lives in src/lib/pdf via the island — none here.
+ *   SeoContent          → long-form MDX article (locale-filtered)
+ *   RelatedTools        → cross-links from tool.data.relatedTools (ids only)
+ *   AdSlot              → top / middle / footer placements
+ */
+import type { GetStaticPaths } from 'astro';
+import { locales, type Locale } from '@/i18n/config';
+import { t } from '@/i18n/ui';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { getToolPath } from '@/lib/tools/router';
+import BaseLayout from '@/components/layout/BaseLayout.astro';
+import ToolHero from '@/components/ui/ToolHero.astro';
+import SeoContent from '@/components/ui/SeoContent.astro';
+import RelatedTools from '@/components/ui/RelatedTools.astro';
+import AdSlot from '@/components/ui/AdSlot.astro';
+import PdfDropZone from '@/components/ui/PdfDropZone.tsx';
+
+export const getStaticPaths = (async () => {
+  const tools = await getCollection('tools');
+  const paths: { params: { lang: string; tool: string }; props: { locale: Locale; tool: CollectionEntry<'tools'> } }[] =
+    [];
+  for (const locale of locales) {
+    for (const tool of tools) {
+      paths.push({
+        params: { lang: locale, tool: tool.data.slug[locale] },
+        props: { locale, tool },
+      });
+    }
+  }
+  return paths;
+}) satisfies GetStaticPaths;
+
+interface Props {
+  locale: Locale;
+  tool: CollectionEntry<'tools'>;
+}
+
+const { locale, tool } = Astro.props;
+const slug = tool.data.slug[locale];
+const toolUrl = getToolPath(locale, slug);
+const tl = (key: Parameters<typeof t>[1]) => t(locale, key);
+
+const breadcrumb = [
+  { name: tl('common.home'), url: `/${locale}` },
+  { name: tl('common.menu.tools'), url: `/${locale}#tools` },
+  { name: tool.data.content[locale].h1, url: toolUrl },
+];
+---
+
+<BaseLayout locale={locale} tool={tool} breadcrumb={breadcrumb}>
+  <ToolHero tool={tool} locale={locale} />
+
+  {/* Ad placement: just below the hero */}
+  <AdSlot position="top" />
+
+  {/* Browser-side PDF handling. The island owns all PDF logic (via
+      src/lib/pdf); this page only supplies which operation + the locale.
+      SSR renders the static shell so the CTA is indexed before hydration. */}
+  <section class="container-page py-6">
+    <PdfDropZone operation={tool.data.toolType} locale={locale} client:visible />
+  </section>
+
+  {/* Long-form SEO article body (locale-filtered) */}
+  <SeoContent tool={tool} locale={locale} />
+
+  {/* Ad placement: inside the content area */}
+  <AdSlot position="middle" />
+
+  {/* Internal cross-links (ids resolved by RelatedTools) */}
+  <section class="container-page py-8">
+    <RelatedTools relatedToolIds={tool.data.relatedTools} locale={locale} />
+  </section>
+
+  {/* Ad placement: near the footer */}
+  <AdSlot position="footer" />
+</BaseLayout>

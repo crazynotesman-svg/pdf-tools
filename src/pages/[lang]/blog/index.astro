@@ -1,0 +1,100 @@
+---
+/**
+ * Blog index — localized list of articles (T7).
+ *
+ * Articles are language-separated files (src/content/blog/{lang}/{slug}.md);
+ * this page filters the `blog` collection to the current locale, sorts by
+ * pubDate desc, and renders cards. An RSS feed link is wired into <head> via
+ * BaseLayout's `feed` prop and shown as a visible link.
+ */
+import type { GetStaticPaths } from 'astro';
+import { locales, type Locale } from '@/i18n/config';
+import { t } from '@/i18n/ui';
+import { getBCP47 } from '@/i18n/utils';
+import BaseLayout from '@/components/layout/BaseLayout.astro';
+import { getBlogPosts, getBlogSlug, getBlogPath } from '@/lib/blog/router';
+
+export const getStaticPaths = (async () =>
+  locales.map((locale) => ({ params: { lang: locale }, props: { locale } }))) satisfies GetStaticPaths;
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const tl = (key: Parameters<typeof t>[1]) => t(locale, key);
+
+const posts = await getBlogPosts(locale);
+const dateFmt = new Intl.DateTimeFormat(getBCP47(locale), {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const breadcrumb = [
+  { name: tl('common.home'), url: `/${locale}` },
+  { name: tl('common.menu.blog'), url: `/${locale}/blog` },
+];
+
+const feed = { title: `${tl('common.siteName')} – ${tl('blog.rss')}`, href: `/${locale}/rss.xml` };
+---
+<BaseLayout
+  locale={locale}
+  title={tl('blog.title')}
+  description={tl('blog.intro')}
+  breadcrumb={breadcrumb}
+  feed={feed}
+>
+  <section class="container-page py-12">
+    <div class="flex flex-wrap items-center justify-between gap-4">
+      <h1 class="text-3xl font-semibold tracking-tight text-ink-900">{tl('blog.title')}</h1>
+      <a
+        href={feed.href}
+        rel="alternate"
+        type="application/rss+xml"
+        class="text-sm font-medium text-brand hover:underline"
+      >
+        {tl('blog.rss')}
+      </a>
+    </div>
+    <p class="mt-4 max-w-3xl text-lg text-ink-600">{tl('blog.intro')}</p>
+
+    {
+      posts.length === 0 ? (
+        <p class="mt-8 rounded-md border border-dashed border-ink-300 bg-ink-50 p-6 text-ink-500">
+          {tl('blog.empty')}
+        </p>
+      ) : (
+        <ul class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {posts.map((post) => {
+            const slug = getBlogSlug(post);
+            const url = getBlogPath(locale, slug);
+            return (
+              <li>
+                <a
+                  href={url}
+                  class="group block h-full rounded-lg border border-ink-200 bg-white p-6 transition hover:border-brand hover:shadow-sm"
+                >
+                  <time datetime={post.data.pubDate.toISOString()} class="text-xs uppercase tracking-wide text-ink-400">
+                    {dateFmt.format(post.data.pubDate)}
+                  </time>
+                  <h2 class="mt-2 text-lg font-semibold text-ink-900 group-hover:text-brand">
+                    {post.data.title}
+                  </h2>
+                  <p class="mt-2 line-clamp-3 text-sm text-ink-600">{post.data.description}</p>
+                  {post.data.tags.length > 0 && (
+                    <div class="mt-4 flex flex-wrap gap-2">
+                      {post.data.tags.map((tag) => (
+                        <span class="rounded-full bg-ink-100 px-2 py-0.5 text-xs text-ink-600">{tag}</span>
+                      ))}
+                    </div>
+                  )}
+                  <span class="mt-4 inline-block text-sm font-medium text-brand">{tl('blog.readMore')} →</span>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      )
+    }
+  </section>
+</BaseLayout>

@@ -1,0 +1,41 @@
+---
+/**
+ * BlogPostSchema.astro — BlogPosting JSON-LD for a blog article page.
+ *
+ * Emits schema.org/BlogPosting with headline, description, publication/update
+ * dates, author, the article's language, and an optional cover image. Pure
+ * presentation — every value derives from the content entry + the current URL;
+ * no hard-coded article text. Mirrors the T4 tool SEO components in spirit
+ * (one concern, no business logic import).
+ */
+import type { Locale } from '@/i18n/config';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+  locale: Locale;
+  /** The article's own canonical path, e.g. /de/blog/warum-pdfs-zusammenfuegen */
+  url: string;
+}
+
+const { post, locale, url } = Astro.props;
+const site = Astro.site ?? new URL('https://pdf-tools.example.com');
+const canonical = new URL(url, site).href;
+const data = post.data;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: data.title,
+  description: data.description,
+  datePublished: data.pubDate.toISOString(),
+  dateModified: (data.updatedDate ?? data.pubDate).toISOString(),
+  inLanguage: locale,
+  author: { '@type': 'Organization', name: data.author },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  keywords: data.tags.join(', '),
+  ...(data.cover ? { image: new URL(data.cover, site).href } : {}),
+};
+---
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />

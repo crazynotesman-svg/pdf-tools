@@ -1,0 +1,8 @@
+# Cloudflare Pages _redirects
+# https://developers.cloudflare.com/pages/configuration/redirects/
+#
+# True HTTP 301 from the root to the default locale. Astro's
+# prefixDefaultLocale:true keeps /de explicit; this edge redirect satisfies the
+# "/ -> /de" 301 requirement (the src/pages/index.astro client-side redirect is
+# just a JS fallback for non-CF hosts).
+/ /de 301

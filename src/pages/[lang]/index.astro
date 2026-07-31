@@ -1,0 +1,158 @@
+---
+/**
+ * Landing page — the SEO entry point for each locale (e.g. /de).
+ *
+ * Per T6 #2 this is a real SEO landing page, NOT a bare tool list:
+ *   Hero · intro · tool grid (dynamic) · category entries (dynamic)
+ *   · security note · FAQ (site-level).
+ *
+ * Nothing about the individual tools is hard-coded: the tool grid and the
+ * category grouping are both derived from getCollection('tools'), so adding a
+ * tool in T3 (content) automatically appears here. The site-level FAQ + copy
+ * live in i18n (home.*).
+ */
+import type { GetStaticPaths } from 'astro';
+import { locales } from '@/i18n/config';
+import { t, getDictionary } from '@/i18n/ui';
+import { getCollection } from 'astro:content';
+import { getToolPath } from '@/lib/tools/router';
+import type { ToolEntry } from '@/lib/tools/router';
+import BaseLayout from '@/components/layout/BaseLayout.astro';
+
+export const getStaticPaths = (async () => {
+  const tools = await getCollection('tools');
+  return locales.map((locale) => ({
+    params: { lang: locale },
+    props: { locale, tools },
+  }));
+}) satisfies GetStaticPaths;
+
+const { locale, tools } = Astro.props;
+const dict = getDictionary(locale);
+const tl = (key: Parameters<typeof t>[1]) => t(locale, key);
+
+// Group tools by their operation family (toolType) for the "category" section.
+// Dynamic: categories come from the data, not from hard-coded markup.
+// Keyed by the toolType enum so `categories.${type}` stays a valid i18n key.
+type ToolType = ToolEntry['data']['toolType'];
+const grouped = tools.reduce<Record<ToolType, ToolEntry[]>>((acc, tool) => {
+  const type = tool.data.toolType;
+  (acc[type] ??= []).push(tool);
+  return acc;
+}, {} as Record<ToolType, ToolEntry[]>);
+const categoryOrder = Object.keys(grouped) as ToolType[];
+
+const breadcrumb = [{ name: tl('common.home'), url: `/${locale}` }];
+---
+
+<BaseLayout
+  locale={locale}
+  title={tl('home.title')}
+  description={tl('home.subtitle')}
+  breadcrumb={breadcrumb}
+>
+  {/* Hero */}
+  <section class="bg-gradient-to-b from-brand/5 to-white">
+    <div class="container-page py-14 sm:py-20">
+      <h1 class="max-w-3xl text-4xl font-semibold tracking-tight text-ink-900 sm:text-5xl">
+        {tl('home.title')}
+      </h1>
+      <p class="mt-5 max-w-2xl text-lg text-ink-600">
+        {tl('home.subtitle')}
+      </p>
+      <a
+        href={`#${'tools'}`}
+        class="mt-8 inline-flex items-center rounded-md bg-brand px-5 py-3 text-sm font-semibold text-white hover:opacity-90"
+      >
+        {tl('home.cta')}
+      </a>
+    </div>
+  </section>
+
+  {/* Intro */}
+  <section class="container-page py-10">
+    <div class="max-w-3xl text-lg leading-relaxed text-ink-700">
+      <p>{tl('home.intro')}</p>
+    </div>
+  </section>
+
+  {/* Tool grid — dynamic from getCollection('tools') */}
+  <section id="tools" class="container-page py-10">
+    <h2 class="text-2xl font-semibold text-ink-900">{tl('home.toolsHeading')}</h2>
+    <p class="mt-2 text-ink-600">{tl('home.toolsSubheading')}</p>
+    <ul class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        tools.map((tool) => {
+          const url = getToolPath(locale, tool.data.slug[locale]);
+          const content = tool.data.content[locale];
+          const seo = tool.data.seo[locale];
+          return (
+            <li>
+              <a
+                href={url}
+                class="group block h-full rounded-lg border border-ink-200 bg-white p-6 transition hover:border-brand hover:shadow-sm"
+              >
+                <h3 class="text-lg font-semibold text-ink-900 group-hover:text-brand">
+                  {content.h1}
+                </h3>
+                <p class="mt-2 text-sm text-ink-600">{seo.description}</p>
+                <span class="mt-4 inline-block text-sm font-medium text-brand">
+                  {tl('home.cta')} →
+                </span>
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </section>
+
+  {/* Category entries — dynamic grouping by toolType */}
+  <section id="categories" class="container-page py-10">
+    <h2 class="text-2xl font-semibold text-ink-900">{tl('home.categoriesHeading')}</h2>
+    <div class="mt-6 space-y-8">
+      {
+        categoryOrder.map((type) => (
+          <div>
+            <h3 class="text-lg font-medium text-ink-800">{t(locale, `categories.${type}`)}</h3>
+            <ul class="mt-3 flex flex-wrap gap-3">
+              {grouped[type].map((tool) => (
+                <li>
+                  <a
+                    href={getToolPath(locale, tool.data.slug[locale])}
+                    class="inline-block rounded-full border border-ink-200 bg-white px-4 py-1.5 text-sm text-ink-700 hover:border-brand hover:text-brand"
+                  >
+                    {tool.data.content[locale].h1}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  {/* Security / privacy note */}
+  <section id="security" class="container-page py-10">
+    <div class="rounded-lg border border-ink-200 bg-ink-50 p-6">
+      <h2 class="text-xl font-semibold text-ink-900">{tl('home.securityHeading')}</h2>
+      <p class="mt-3 text-ink-700">{tl('home.securityNote')}</p>
+    </div>
+  </section>
+
+  {/* Site-level FAQ */}
+  <section id="faq" class="container-page py-10">
+    <h2 class="text-2xl font-semibold text-ink-900">{tl('home.faqHeading')}</h2>
+    <div class="mt-6 max-w-3xl divide-y divide-ink-200 border-y border-ink-200">
+      {
+        dict.home.faq.map((item) => (
+          <details class="py-4">
+            <summary class="cursor-pointer font-medium text-ink-900">{item.question}</summary>
+            <p class="mt-2 text-ink-700">{item.answer}</p>
+          </details>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

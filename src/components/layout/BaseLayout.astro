@@ -1,0 +1,116 @@
+---
+/**
+ * BaseLayout — pure composition root for every page.
+ *
+ * Responsibilities (per T5 #1): HTML document structure, <head>, SEO components,
+ * Header/Footer. It contains NO tool business logic — it only wires together
+ * the pieces handed to it via props.
+ *
+ * - Tool pages pass `tool` + `locale`: we delegate head + structured data to the
+ *   T4 SEO components (Meta / StructuredData / FaqSchema / HowToSchema).
+ * - Generic pages pass `title` + `description`: we emit a minimal head and, for
+ *   locale-invariant static pages, a basic hreflang set via T2's
+ *   getAlternateUrls (a prefix swap is correct there — only tool slugs differ).
+ *
+ * The breadcrumb (T4, generic) is optionally injected by the page.
+ */
+import type { Locale } from '@/i18n/config';
+import type { CollectionEntry } from 'astro:content';
+import { htmlLang, locales } from '@/i18n/config';
+import { t } from '@/i18n/ui';
+import { getAlternateUrls } from '@/i18n/utils';
+import Header from '@/components/layout/Header.astro';
+import Footer from '@/components/layout/Footer.astro';
+import Meta from '@/components/seo/Meta.astro';
+import StructuredData from '@/components/seo/StructuredData.astro';
+import FaqSchema from '@/components/seo/FaqSchema.astro';
+import HowToSchema from '@/components/seo/HowToSchema.astro';
+import Breadcrumb from '@/components/seo/Breadcrumb.astro';
+
+interface Props {
+  locale: Locale;
+  /** Present on tool pages; absent on generic pages (home, blog, legal). */
+  tool?: CollectionEntry<'tools'>;
+  /** Optional breadcrumb trail (e.g. Home > PDF Tools > Current Tool). */
+  breadcrumb?: { name: string; url: string }[];
+  /** Used by generic pages when no `tool` is provided. */
+  title?: string;
+  description?: string;
+  /**
+   * Blog-aware hreflang alternates (paths, no origin). When provided it
+   * overrides the generic getAlternateUrls prefix-swap — needed because blog
+   * post slugs differ per language and must be resolved via translationKey.
+   */
+  alternateUrls?: Partial<Record<Locale, string>>;
+  /** Optional RSS feed link emitted in <head> (used by the blog index). */
+  feed?: { title: string; href: string };
+}
+
+const { locale, tool, breadcrumb, title, description, alternateUrls, feed } = Astro.props;
+const site = Astro.site ?? new URL('https://pdf-tools.example.com');
+const pathname = Astro.url.pathname;
+
+const pageTitle = tool ? tool.data.seo[locale].title : (title ?? t(locale, 'common.siteName'));
+const pageDescription = tool ? tool.data.seo[locale].description : (description ?? '');
+
+// Generic pages: locale-invariant slugs → getAlternateUrls (prefix swap) is the
+// correct hreflang strategy, unless the page supplies its own blog-aware
+// alternate URLs (e.g. blog posts, whose slugs differ per language).
+const altMap: Partial<Record<Locale, string>> | null = alternateUrls ?? (tool ? null : getAlternateUrls(pathname));
+const xDefaultHref = altMap ? (altMap.de ?? Object.values(altMap)[0] ?? pathname) : pathname;
+---
+<!doctype html>
+<html lang={htmlLang[locale]}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    {
+      tool ? (
+        <>
+          <Meta tool={tool} locale={locale} />
+          <StructuredData tool={tool} locale={locale} />
+          <FaqSchema tool={tool} locale={locale} />
+          <HowToSchema tool={tool} locale={locale} />
+        </>
+      ) : (
+        <>
+          <title>{pageTitle}</title>
+          <meta name="description" content={pageDescription} />
+          <link rel="canonical" href={new URL(pathname, site).href} />
+          {altMap &&
+            locales.map((l) =>
+              altMap[l] ? (
+                <link rel="alternate" hreflang={l} href={new URL(altMap[l]!, site).href} />
+              ) : null,
+            )}
+          {altMap && (
+            <link rel="alternate" hreflang="x-default" href={new URL(xDefaultHref, site).href} />
+          )}
+          {feed && (
+            <link
+              rel="alternate"
+              type="application/rss+xml"
+              title={feed.title}
+              href={new URL(feed.href, site).href}
+            />
+          )}
+          <meta property="og:type" content="website" />
+          <meta property="og:title" content={pageTitle} />
+          <meta property="og:description" content={pageDescription} />
+          <meta property="og:url" content={new URL(pathname, site).href} />
+        </>
+      )
+    }
+
+    {breadcrumb && <Breadcrumb items={breadcrumb} />}
+  </head>
+
+  <body class="flex min-h-screen flex-col">
+    <Header locale={locale} currentPath={pathname} />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <Footer locale={locale} />
+  </body>
+</html>

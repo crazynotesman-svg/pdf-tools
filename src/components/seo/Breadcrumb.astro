@@ -1,0 +1,29 @@
+---
+/**
+ * Breadcrumb.astro — BreadcrumbList JSON-LD.
+ *
+ * Deliberately generic: it renders whatever `items` it is handed, so it has
+ * zero coupling to tools or any other content. The caller (tool page) builds
+ * the trail, e.g. Home > PDF Tools > <Current Tool>, localizing the labels via
+ * the i18n layer and resolving URLs via the router. This keeps the SEO
+ * component free of navigation/business structure.
+ */
+interface Props {
+  items: { name: string; url: string }[];
+}
+
+const { items } = Astro.props;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map((item, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: item.name,
+    item: item.url,
+  })),
+};
+---
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />

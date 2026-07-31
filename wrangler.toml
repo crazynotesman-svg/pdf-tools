@@ -1,0 +1,12 @@
+# Cloudflare Pages project config (static Astro SSG output).
+# Deploy with: `wrangler pages deploy dist`
+# (or connect the Git repo in the Cloudflare dashboard — Pages auto-detects
+#  the build command `pnpm build` and output dir `dist`).
+
+name = "pdf-tools"
+pages_build_output_dir = "./dist"
+compatibility_date = "2024-09-23"
+
+# No `compatibility_flags` / Functions needed — this is a pure static site.
+# AdSense (Phase 2) and any future server logic would live in a /functions dir
+# and may need compatibility_flags, added then.

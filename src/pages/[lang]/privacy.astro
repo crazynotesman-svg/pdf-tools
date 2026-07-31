@@ -1,0 +1,39 @@
+---
+/**
+ * Privacy (Datenschutz) — structural placeholder, all copy from i18n.
+ * Real legal text is filled in before launch. Three locales via getStaticPaths.
+ */
+import type { GetStaticPaths } from 'astro';
+import { locales, type Locale } from '@/i18n/config';
+import { t } from '@/i18n/ui';
+import BaseLayout from '@/components/layout/BaseLayout.astro';
+
+export const getStaticPaths = (async () =>
+  locales.map((locale) => ({ params: { lang: locale }, props: { locale } }))) satisfies GetStaticPaths;
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const tl = (key: Parameters<typeof t>[1]) => t(locale, key);
+const breadcrumb = [
+  { name: tl('common.home'), url: `/${locale}` },
+  { name: tl('common.menu.privacy'), url: `/${locale}/privacy` },
+];
+---
+<BaseLayout
+  locale={locale}
+  title={tl('legal.privacy.title')}
+  description={tl('legal.privacy.intro')}
+  breadcrumb={breadcrumb}
+>
+  <section class="container-page py-12">
+    <h1 class="text-3xl font-semibold tracking-tight text-ink-900">
+      {tl('legal.privacy.title')}
+    </h1>
+    <p class="mt-4 max-w-3xl text-lg text-ink-600">{tl('legal.privacy.intro')}</p>
+    <div class="mt-8 max-w-3xl space-y-4 text-ink-700">
+      <p>{tl('home.securityNote')}</p>
+    </div>
+  </section>
+</BaseLayout>

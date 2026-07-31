@@ -1,0 +1,58 @@
+---
+/**
+ * StructuredData.astro — JSON-LD for a tool page.
+ *
+ * Emits either `SoftwareApplication` or `WebApplication` (chosen per-tool via
+ * tool.data.schema.applicationType, defaulting to SoftwareApplication).
+ * All values are derived from the content entry — no hard-coded tool facts.
+ */
+import type { Locale } from '@/i18n/config';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  tool: CollectionEntry<'tools'>;
+  locale: Locale;
+}
+
+const { tool, locale } = Astro.props;
+const site = Astro.site ?? new URL('https://pdf-tools.example.com');
+const data = tool.data;
+const seo = data.seo[locale];
+
+// `schema` is optional in the content model; zod fills defaults at validation
+// time, but the type is `SchemaConfig | undefined`, so we give an explicit
+// fallback object to keep property access type-safe.
+type SchemaConfig = NonNullable<CollectionEntry<'tools'>['data']['schema']>;
+const schemaCfg: SchemaConfig = data.schema ?? {
+  applicationCategory: 'Utilities',
+  operatingSystem: 'Web',
+  offersPrice: '0',
+  offersPriceCurrency: 'EUR',
+  applicationType: 'SoftwareApplication',
+};
+
+const applicationType = schemaCfg.applicationType;
+const canonical = new URL(`/${locale}/${data.slug[locale]}`, site).href;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': applicationType,
+  name: seo.title,
+  description: seo.description,
+  applicationCategory: schemaCfg.applicationCategory,
+  operatingSystem: schemaCfg.operatingSystem,
+  inLanguage: locale,
+  url: canonical,
+  offers: {
+    '@type': 'Offer',
+    price: schemaCfg.offersPrice,
+    priceCurrency: schemaCfg.offersPriceCurrency,
+  },
+};
+---
+
+<script
+  type="application/ld+json"
+  is:inline
+  set:html={JSON.stringify(jsonLd)}
+/>

@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Global base styles.
+ * Design goal: German SaaS aesthetic — clean, professional, fast.
+ * We use a system font stack (no web-font download) to protect
+ * Lighthouse Performance and avoid layout shift.
+ */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white text-ink-800 antialiased;
+    font-family: theme('fontFamily.sans');
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-semibold text-ink-900 tracking-tight;
+  }
+
+  a {
+    @apply text-brand hover:text-brand-dark transition-colors;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand;
+  }
+}
+
+@layer components {
+  /* Shared container used across layout / pages. */
+  .container-page {
+    @apply mx-auto w-full max-w-content px-4 sm:px-6 lg:px-8;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-md bg-brand px-5 py-2.5
+      text-sm font-medium text-white hover:bg-brand-dark transition-colors;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center rounded-md border border-ink-200
+      bg-white px-5 py-2.5 text-sm font-medium text-ink-700 hover:bg-ink-50 transition-colors;
+  }
+
+  /* Rendered Markdown article body (blog posts). We avoid the typography plugin
+     to keep the CSS bundle small; these rules give clean, readable type. */
+  .article-body {
+    @apply text-ink-700 leading-relaxed;
+  }
+  .article-body > * + * {
+    @apply mt-4;
+  }
+  .article-body h2 {
+    @apply mt-8 text-2xl font-semibold text-ink-900 tracking-tight;
+  }
+  .article-body h3 {
+    @apply mt-6 text-xl font-semibold text-ink-900 tracking-tight;
+  }
+  .article-body p {
+    @apply text-base;
+  }
+  .article-body a {
+    @apply text-brand underline underline-offset-2 hover:text-brand-dark;
+  }
+  .article-body ul {
+    @apply list-disc space-y-2 pl-6;
+  }
+  .article-body ol {
+    @apply list-decimal space-y-2 pl-6;
+  }
+  .article-body blockquote {
+    @apply border-l-4 border-ink-200 pl-4 italic text-ink-600;
+  }
+  .article-body code {
+    @apply rounded bg-ink-100 px-1.5 py-0.5 text-sm text-ink-900;
+  }
+  .article-body pre {
+    @apply overflow-x-auto rounded-md bg-ink-900 p-4 text-sm text-ink-50;
+  }
+  .article-body pre code {
+    @apply bg-transparent p-0 text-ink-50;
+  }
+  .article-body img {
+    @apply rounded-md;
+  }
+}

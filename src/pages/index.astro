@@ -1,0 +1,11 @@
+---
+/**
+ * Root redirect → default locale (/de).
+ *
+ * Required by Astro i18n (`prefixDefaultLocale: true` demands a page at this
+ * path) and satisfies the "redirect / to /de" requirement. In static output,
+ * Astro emits a client-side redirect HTML; for a true 301 on Cloudflare Pages
+ * we additionally keep `public/_redirects` (added in T8).
+ */
+return Astro.redirect('/de');
+---

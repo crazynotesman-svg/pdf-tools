@@ -1,0 +1,30 @@
+---
+/**
+ * AdSlot — static placeholder for future ad units (Google AdSense, etc.).
+ *
+ * Deliberately loads NO third-party script and emits NO ad request in this
+ * phase, so it cannot harm SEO or Core Web Vitals. The real ad client is wired
+ * in later via a single env-driven change — every placement already exists:
+ *   - "top": just below the tool hero
+ *   - "middle": inside the SEO content area
+ *   - "footer": near the page footer
+ *
+ * Keeping this as a pure placeholder means the layout reserves ad space today
+ * without any performance or SEO penalty.
+ *
+ * NOTE: the prop is named `position`, NOT `slot` — `slot` is a reserved
+ * attribute in Astro (named-slot projection) and cannot be used as a plain prop.
+ */
+interface Props {
+  position?: 'top' | 'middle' | 'footer';
+}
+
+const { position = 'middle' } = Astro.props;
+---
+<div class="ad-slot container-page my-8" data-ad-slot={position} aria-hidden="true">
+  <div
+    class="flex h-24 items-center justify-center rounded-md border border-dashed border-ink-300 bg-ink-50 text-xs font-medium uppercase tracking-wide text-ink-400"
+  >
+    Ad Slot · {position}
+  </div>
+</div>

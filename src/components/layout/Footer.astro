@@ -1,0 +1,44 @@
+---
+/**
+ * Footer — legal + contact links, all sourced from i18n (no hard-coded text).
+ *
+ * Composition only: every label comes from the UI dictionary; every link is a
+ * locale-prefixed static route. Per T5 #3 the footer exposes Datenschutz,
+ * Impressum and Kontakt (privacy / imprint / contact).
+ */
+import type { Locale } from '@/i18n/config';
+import { t } from '@/i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const year = new Date().getFullYear();
+const links = [
+  { label: t(locale, 'common.menu.privacy'), href: `/${locale}/privacy` },
+  { label: t(locale, 'common.menu.imprint'), href: `/${locale}/impressum` },
+  { label: t(locale, 'common.menu.contact'), href: `/${locale}/contact` },
+];
+---
+<footer class="mt-16 border-t border-ink-200 bg-ink-50">
+  <div
+    class="container-page flex flex-col gap-4 py-8 sm:flex-row sm:items-center sm:justify-between"
+  >
+    <div class="text-sm text-ink-600">
+      © {year} {t(locale, 'common.siteName')}. {t(locale, 'footer.rights')}
+    </div>
+    <nav class="flex flex-wrap gap-4 text-sm" aria-label="Footer">
+      {
+        links.map((l) => (
+          <a href={l.href} class="text-ink-600 hover:text-brand">
+            {l.label}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+  <div class="container-page pb-8 text-xs text-ink-500">
+    {t(locale, 'footer.note')}
+  </div>
+</footer>
