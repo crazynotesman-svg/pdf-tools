@@ -12,9 +12,11 @@ import { locales as i18nLocales, defaultLocale as i18nDefaultLocale } from './sr
 
 // https://astro.build/config
 export default defineConfig({
-  // TODO(launch): replace with the real production domain.
-  // Required for canonical URLs, sitemap and RSS generation.
-  site: 'https://pdf-tools.example.com',
+  // Production domain — required for canonical URLs, sitemap and RSS.
+  // Currently the Cloudflare Pages default subdomain. Replace with the
+  // custom domain (e.g. https://pdf-tools.de) once DNS is wired up, then
+  // re-push so Cloudflare rebuilds.
+  site: 'https://pdf-tools-7q5.pages.dev',
 
   // Static Site Generation — best for SEO, speed and Cloudflare Pages cost.
   output: 'static',
