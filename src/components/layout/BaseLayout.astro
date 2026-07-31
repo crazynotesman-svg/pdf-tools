@@ -67,22 +67,10 @@ const altMap: Partial<Record<Locale, string>> | null = alternateUrls ?? (tool ? 
 const xDefaultHref = altMap ? (altMap.de ?? Object.values(altMap)[0] ?? pathname) : pathname;
 ---
 <!doctype html>
-<html lang={htmlLang[locale]} class="dark">
+<html lang={htmlLang[locale]}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    {/* Fonts + icon font for the futuristic glassmorphism design. */}
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-      rel="stylesheet"
-    />
 
     {
       tool ? (
@@ -126,9 +114,9 @@ const xDefaultHref = altMap ? (altMap.de ?? Object.values(altMap)[0] ?? pathname
   </head>
 
   <body class="flex min-h-screen flex-col">
-    {/* Ambient neon glow behind the content (matches the mockup). */}
+    {/* Subtle light ambient glow at the top (SaaS feel, no JS). */}
     <div
-      class="pointer-events-none fixed left-1/2 top-0 -z-10 h-[600px] w-[1200px] -translate-x-1/2 rounded-full bg-neon-blue/5 blur-[120px]"
+      class="pointer-events-none fixed inset-x-0 top-0 -z-10 h-64 bg-gradient-to-b from-neon-blue/5 to-transparent"
       aria-hidden="true"
     >
     </div>

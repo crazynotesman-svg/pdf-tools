@@ -72,19 +72,19 @@ const feed = { title: `${tl('common.siteName')} – ${tl('blog.rss')}`, href: `/
               <li>
                 <a
                   href={url}
-                  class="glass-panel neon-glow-hover group block h-full rounded-lg border border-border-subtle p-6 transition-all"
+                  class="glass-card group flex h-full flex-col rounded-2xl p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
                 >
-                  <time datetime={post.data.pubDate.toISOString()} class="text-xs uppercase tracking-wide text-on-surface-variant/70">
+                  <span class="inline-flex w-fit items-center rounded-full bg-neon-blue/10 px-2.5 py-1 text-xs font-medium text-neon-blue">
                     {dateFmt.format(post.data.pubDate)}
-                  </time>
-                  <h2 class="mt-2 text-lg font-semibold text-on-surface group-hover:text-neon-blue">
+                  </span>
+                  <h2 class="mt-3 text-lg font-semibold text-on-surface group-hover:text-neon-blue">
                     {post.data.title}
                   </h2>
-                  <p class="mt-2 line-clamp-3 text-sm text-on-surface-variant">{post.data.description}</p>
+                  <p class="mt-2 line-clamp-3 flex-1 text-sm text-on-surface-variant">{post.data.description}</p>
                   {post.data.tags.length > 0 && (
                     <div class="mt-4 flex flex-wrap gap-2">
                       {post.data.tags.map((tag) => (
-                        <span class="rounded-full bg-surface-container-high px-2 py-0.5 text-xs text-on-surface-variant">{tag}</span>
+                        <span class="rounded-full border border-border-subtle bg-surface-container-high px-2 py-0.5 text-xs text-on-surface-variant">{tag}</span>
                       ))}
                     </div>
                   )}

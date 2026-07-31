@@ -6,7 +6,7 @@
  * locale-prefixed static route. Per T5 #3 the footer exposes Datenschutz,
  * Impressum and Kontakt (privacy / imprint / contact).
  *
- * Restyled to the dark glass language.
+ * Restyled to a premium SaaS footer: dark slate surface, soft gray text.
  */
 import type { Locale } from '@/i18n/config';
 import { t } from '@/i18n/ui';
@@ -23,28 +23,30 @@ const links = [
   { label: t(locale, 'common.menu.contact'), href: `/${locale}/contact` },
 ];
 ---
-<footer class="mt-20 border-t border-border-subtle bg-surface-container-lowest">
+<footer class="mt-20 border-t border-white/10 bg-slate-950">
   <div
-    class="container-page flex flex-col gap-6 py-10 sm:flex-row sm:items-center sm:justify-between"
+    class="container-page flex flex-col gap-6 py-10 sm:flex-row sm:items-start sm:justify-between"
   >
-    <div class="flex items-center gap-2">
-      <span class="grid h-7 w-7 place-items-center rounded bg-neon-blue/10 text-xs font-bold text-neon-blue">PDF</span>
-      <span class="font-semibold tracking-tight text-on-surface">{t(locale, 'common.siteName')}</span>
+    <div class="flex flex-col gap-2">
+      <div class="flex items-center gap-2">
+        <span class="grid h-7 w-7 place-items-center rounded-xl bg-gradient-to-br from-neon-blue to-electric-purple text-sm font-bold text-white">✦</span>
+        <span class="font-semibold tracking-tight text-white">{t(locale, 'common.siteName')}</span>
+      </div>
+      <p class="max-w-xs text-sm text-slate-400">{t(locale, 'common.tagline')}</p>
     </div>
-    <p class="text-sm text-on-surface-variant">
-      © {year} {t(locale, 'common.siteName')}. {t(locale, 'footer.rights')}
-    </p>
+
     <nav class="flex flex-wrap gap-5 text-sm" aria-label="Footer">
       {
         links.map((l) => (
-          <a href={l.href} class="text-on-surface-variant transition-colors hover:text-electric-purple">
+          <a href={l.href} class="text-slate-400 transition-colors hover:text-white">
             {l.label}
           </a>
         ))
       }
     </nav>
   </div>
-  <div class="container-page pb-8 text-xs text-on-surface-variant/60">
-    {t(locale, 'footer.note')}
+  <div class="container-page flex flex-col gap-1 pb-8 text-xs text-slate-500">
+    <span>© {year} {t(locale, 'common.siteName')}. {t(locale, 'footer.rights')}</span>
+    <span>{t(locale, 'footer.note')}</span>
   </div>
 </footer>

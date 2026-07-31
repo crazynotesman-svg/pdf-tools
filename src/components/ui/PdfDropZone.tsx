@@ -36,6 +36,23 @@ interface DownloadItem {
 
 const PDF_MIME = 'application/pdf';
 
+// Inline upload glyph (no external icon font).
+const UploadIcon = (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={2}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="h-10 w-10"
+  >
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+    <path d="M17 8l-5-5-5 5" />
+    <path d="M12 3v12" />
+  </svg>
+);
+
 export default function PdfDropZone({ operation, locale }: Props) {
   const tl = (k: Parameters<typeof t>[1]) => t(locale, k);
 
@@ -145,25 +162,24 @@ export default function PdfDropZone({ operation, locale }: Props) {
   }
 
   return (
-    <div className="rounded-lg">
+    <div className="glass-card rounded-2xl p-6">
       <h2 className="text-lg font-semibold text-on-surface">{tl('pdfUi.title')}</h2>
       <p className="mt-1 text-sm text-on-surface-variant">{hint}</p>
 
       <label
         onDrop={onDrop}
         onDragOver={(e) => e.preventDefault()}
-        className="group relative mt-4 flex cursor-pointer flex-col items-center justify-center overflow-hidden rounded-lg border-2 border-dashed border-neon-blue/40 bg-surface-container-low px-6 py-10 text-center transition-colors hover:border-neon-blue"
+        className="group relative mt-4 flex cursor-pointer flex-col items-center justify-center overflow-hidden rounded-2xl border-2 border-dashed border-neon-blue/50 bg-gradient-to-br from-neon-blue/5 to-electric-purple/5 px-6 py-12 text-center transition-transform duration-300 hover:scale-[1.01] hover:border-neon-blue"
       >
-        <div className="scan-line" />
-        <div className="dashed-grid-mask pointer-events-none absolute inset-0 -z-10" />
         <div className="relative z-10 flex flex-col items-center">
-          <div className="mb-4 grid h-16 w-16 place-items-center rounded-full bg-neon-blue/10">
-            <span className="material-symbols-outlined text-[40px] text-neon-blue">upload_file</span>
+          <div className="mb-4 grid h-16 w-16 place-items-center rounded-full bg-gradient-to-br from-neon-blue to-electric-purple text-white">
+            {UploadIcon}
           </div>
           <span className="text-base font-medium text-on-surface">{tl('pdfUi.drop')}</span>
-          <span className="mt-3 inline-flex items-center rounded-sm bg-neon-blue px-4 py-2 text-sm font-semibold text-white">
+          <span className="mt-3 inline-flex items-center rounded-lg bg-neon-blue px-4 py-2 text-sm font-semibold text-white transition-colors">
             {tl('pdfUi.selectFiles')}
           </span>
+          <span className="mt-3 text-xs text-on-surface-variant">PDF · Max 50MB</span>
         </div>
         <input
           ref={inputRef}
@@ -231,7 +247,7 @@ export default function PdfDropZone({ operation, locale }: Props) {
         )}
       </div>
 
-      {status === 'error' && <p className="mt-3 text-sm text-red-400">{errorMsg}</p>}
+      {status === 'error' && <p className="mt-3 text-sm text-red-600">{errorMsg}</p>}
 
       {results.length > 0 && (
         <div className="mt-5">
@@ -242,7 +258,7 @@ export default function PdfDropZone({ operation, locale }: Props) {
                 <a
                   href={r.url}
                   download={r.name}
-                  className="glass-panel inline-flex items-center rounded-sm border border-border-subtle bg-surface-container-low px-4 py-2 text-sm font-medium text-neon-blue transition-colors hover:text-electric-purple"
+                  className="glass-card inline-flex items-center rounded-lg border border-border-subtle bg-white px-4 py-2 text-sm font-medium text-neon-blue transition-colors hover:text-electric-purple"
                 >
                   {r.name}
                 </a>

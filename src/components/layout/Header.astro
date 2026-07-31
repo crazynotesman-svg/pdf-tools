@@ -26,10 +26,10 @@ const nav = [
   { label: t(locale, 'common.menu.blog'), href: `/${locale}/blog` },
 ];
 ---
-<header class="sticky top-0 z-50 border-b border-border-subtle bg-background/80 backdrop-blur-md">
+<header class="sticky top-0 z-50 border-b border-border-subtle bg-white/80 backdrop-blur-md">
   <div class="container-page flex h-20 items-center justify-between gap-4">
     <a href={homeHref} class="flex items-center gap-2 font-semibold text-on-surface">
-      <span class="grid h-8 w-8 place-items-center rounded bg-neon-blue/10 text-xs font-bold text-neon-blue">PDF</span>
+      <span class="grid h-8 w-8 place-items-center rounded-xl bg-gradient-to-br from-neon-blue to-electric-purple text-sm font-bold text-white">✦</span>
       <span class="tracking-tight">{t(locale, 'common.siteName')}</span>
     </a>
 
@@ -50,7 +50,7 @@ const nav = [
       <LanguageSwitcher locale={locale} currentPath={currentPath} />
       <a
         href={`${homeHref}#tools`}
-        class="cyber-gradient-btn hidden rounded-sm px-5 py-2 text-sm font-semibold text-white sm:inline-block"
+        class="btn-primary-modern hidden rounded-xl px-5 py-2 text-sm font-semibold text-white sm:inline-block"
       >
         {t(locale, 'home.cta')}
       </a>

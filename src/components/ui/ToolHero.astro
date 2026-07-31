@@ -3,8 +3,10 @@
  * ToolHero — hero section for a tool page.
  *
  * Consumes ONLY tool.data.content[locale] (H1 + intro). No tool logic, no
- * hard-coded copy. The interactive upload area is added in a later phase
- * (T6 / Phase 2-3); this is the static, SEO-relevant heading + lead paragraph.
+ * hard-coded copy. The interactive upload area is added by the parent page via
+ * the PdfDropZone island; this is the static, SEO-relevant heading + lead.
+ *
+ * Restyled to a light SaaS system: gradient heading + subtle top glow.
  */
 import type { Locale } from '@/i18n/config';
 import type { CollectionEntry } from 'astro:content';
@@ -17,10 +19,15 @@ interface Props {
 const { tool, locale } = Astro.props;
 const content = tool.data.content[locale];
 ---
-<section class="py-10 sm:py-14">
-  <div class="container-page">
-    <h1 class="font-headline-lg text-headline-lg text-on-surface sm:text-4xl">
-      {content.h1}
+<section class="relative overflow-hidden py-16 sm:py-20">
+  <div
+    class="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-neon-blue/5 to-transparent"
+    aria-hidden="true"
+  >
+  </div>
+  <div class="container-page relative">
+    <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">
+      <span class="text-gradient">{content.h1}</span>
     </h1>
     <p class="mt-4 max-w-2xl text-lg text-on-surface-variant">
       {content.intro}
