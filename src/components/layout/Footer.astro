@@ -5,6 +5,8 @@
  * Composition only: every label comes from the UI dictionary; every link is a
  * locale-prefixed static route. Per T5 #3 the footer exposes Datenschutz,
  * Impressum and Kontakt (privacy / imprint / contact).
+ *
+ * Restyled to the dark glass language.
  */
 import type { Locale } from '@/i18n/config';
 import { t } from '@/i18n/ui';
@@ -21,24 +23,28 @@ const links = [
   { label: t(locale, 'common.menu.contact'), href: `/${locale}/contact` },
 ];
 ---
-<footer class="mt-16 border-t border-ink-200 bg-ink-50">
+<footer class="mt-20 border-t border-border-subtle bg-surface-container-lowest">
   <div
-    class="container-page flex flex-col gap-4 py-8 sm:flex-row sm:items-center sm:justify-between"
+    class="container-page flex flex-col gap-6 py-10 sm:flex-row sm:items-center sm:justify-between"
   >
-    <div class="text-sm text-ink-600">
-      © {year} {t(locale, 'common.siteName')}. {t(locale, 'footer.rights')}
+    <div class="flex items-center gap-2">
+      <span class="grid h-7 w-7 place-items-center rounded bg-neon-blue/10 text-xs font-bold text-neon-blue">PDF</span>
+      <span class="font-semibold tracking-tight text-on-surface">{t(locale, 'common.siteName')}</span>
     </div>
-    <nav class="flex flex-wrap gap-4 text-sm" aria-label="Footer">
+    <p class="text-sm text-on-surface-variant">
+      © {year} {t(locale, 'common.siteName')}. {t(locale, 'footer.rights')}
+    </p>
+    <nav class="flex flex-wrap gap-5 text-sm" aria-label="Footer">
       {
         links.map((l) => (
-          <a href={l.href} class="text-ink-600 hover:text-brand">
+          <a href={l.href} class="text-on-surface-variant transition-colors hover:text-electric-purple">
             {l.label}
           </a>
         ))
       }
     </nav>
   </div>
-  <div class="container-page pb-8 text-xs text-ink-500">
+  <div class="container-page pb-8 text-xs text-on-surface-variant/60">
     {t(locale, 'footer.note')}
   </div>
 </footer>

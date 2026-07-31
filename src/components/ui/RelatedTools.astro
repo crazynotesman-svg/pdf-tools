@@ -8,6 +8,7 @@
  * the router helpers. No hard-coded tool facts.
  */
 import type { Locale } from '@/i18n/config';
+import { t } from '@/i18n/ui';
 import { getToolById, getToolUrl } from '@/lib/tools/router';
 
 interface Props {
@@ -30,11 +31,17 @@ const items = await Promise.all(
 ---
 
 <section class="related-tools" aria-label="Related tools">
-  <ul class="related-tools__list">
+  <h2 class="mb-4 font-headline-lg text-headline-lg text-on-surface">{t(locale, 'home.toolsHeading')}</h2>
+  <ul class="related-tools__list flex flex-wrap gap-3">
     {
       items.map((it) => (
         <li>
-          <a href={it.url}>{it.name}</a>
+          <a
+            href={it.url}
+            class="glass-panel inline-flex items-center gap-1 rounded-full border border-border-subtle px-4 py-1.5 text-sm text-on-surface-variant transition-colors hover:text-neon-blue"
+          >
+            {it.name}
+          </a>
         </li>
       ))
     }

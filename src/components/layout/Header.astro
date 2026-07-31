@@ -6,6 +6,9 @@
  * the current locale. It contains NO tool business logic (no PDF code, no
  * hard-coded tool names). The logo and "Tools" link both point to the localized
  * home/landing page; "Blog" to the localized blog index.
+ *
+ * Restyled to the futuristic dark-glass language: frosted sticky bar, neon
+ * nav, gradient CTA.
  */
 import type { Locale } from '@/i18n/config';
 import { t } from '@/i18n/ui';
@@ -19,27 +22,38 @@ interface Props {
 const { locale, currentPath } = Astro.props;
 const homeHref = `/${locale}`;
 const nav = [
-  { label: t(locale, 'common.menu.tools'), href: homeHref },
+  { label: t(locale, 'common.menu.tools'), href: `${homeHref}#tools` },
   { label: t(locale, 'common.menu.blog'), href: `/${locale}/blog` },
 ];
 ---
-<header class="border-b border-ink-200 bg-white">
-  <div class="container-page flex h-16 items-center justify-between gap-4">
-    <a href={homeHref} class="flex items-center gap-2 font-semibold text-ink-900">
-      <span class="grid h-8 w-8 place-items-center rounded-md bg-brand text-xs font-bold text-white">PDF</span>
-      <span>{t(locale, 'common.siteName')}</span>
+<header class="sticky top-0 z-50 border-b border-border-subtle bg-background/80 backdrop-blur-md">
+  <div class="container-page flex h-20 items-center justify-between gap-4">
+    <a href={homeHref} class="flex items-center gap-2 font-semibold text-on-surface">
+      <span class="grid h-8 w-8 place-items-center rounded bg-neon-blue/10 text-xs font-bold text-neon-blue">PDF</span>
+      <span class="tracking-tight">{t(locale, 'common.siteName')}</span>
     </a>
 
-    <nav class="hidden items-center gap-6 sm:flex" aria-label="Primary">
+    <nav class="hidden items-center gap-8 sm:flex" aria-label="Primary">
       {
         nav.map((item) => (
-          <a href={item.href} class="text-sm font-medium text-ink-700 hover:text-brand">
+          <a
+            href={item.href}
+            class="text-sm font-medium text-on-surface-variant transition-colors duration-300 hover:text-neon-blue"
+          >
             {item.label}
           </a>
         ))
       }
     </nav>
 
-    <LanguageSwitcher locale={locale} currentPath={currentPath} />
+    <div class="flex items-center gap-3">
+      <LanguageSwitcher locale={locale} currentPath={currentPath} />
+      <a
+        href={`${homeHref}#tools`}
+        class="cyber-gradient-btn hidden rounded-sm px-5 py-2 text-sm font-semibold text-white sm:inline-block"
+      >
+        {t(locale, 'home.cta')}
+      </a>
+    </div>
   </div>
 </header>

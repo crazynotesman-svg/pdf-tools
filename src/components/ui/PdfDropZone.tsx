@@ -145,15 +145,26 @@ export default function PdfDropZone({ operation, locale }: Props) {
   }
 
   return (
-    <div className="rounded-lg border border-ink-200 bg-white p-6 shadow-sm">
-      <h2 className="text-lg font-semibold text-ink-900">{tl('pdfUi.title')}</h2>
-      <p className="mt-1 text-sm text-ink-500">{hint}</p>
+    <div className="rounded-lg">
+      <h2 className="text-lg font-semibold text-on-surface">{tl('pdfUi.title')}</h2>
+      <p className="mt-1 text-sm text-on-surface-variant">{hint}</p>
 
       <label
         onDrop={onDrop}
         onDragOver={(e) => e.preventDefault()}
-        className="mt-4 flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-ink-300 bg-ink-50 px-6 py-10 text-center transition-colors hover:border-brand"
+        className="group relative mt-4 flex cursor-pointer flex-col items-center justify-center overflow-hidden rounded-lg border-2 border-dashed border-neon-blue/40 bg-surface-container-low px-6 py-10 text-center transition-colors hover:border-neon-blue"
       >
+        <div className="scan-line" />
+        <div className="dashed-grid-mask pointer-events-none absolute inset-0 -z-10" />
+        <div className="relative z-10 flex flex-col items-center">
+          <div className="mb-4 grid h-16 w-16 place-items-center rounded-full bg-neon-blue/10">
+            <span className="material-symbols-outlined text-[40px] text-neon-blue">upload_file</span>
+          </div>
+          <span className="text-base font-medium text-on-surface">{tl('pdfUi.drop')}</span>
+          <span className="mt-3 inline-flex items-center rounded-sm bg-neon-blue px-4 py-2 text-sm font-semibold text-white">
+            {tl('pdfUi.selectFiles')}
+          </span>
+        </div>
         <input
           ref={inputRef}
           type="file"
@@ -162,15 +173,11 @@ export default function PdfDropZone({ operation, locale }: Props) {
           onChange={onFiles}
           className="hidden"
         />
-        <span className="text-base font-medium text-ink-800">{tl('pdfUi.drop')}</span>
-        <span className="mt-3 inline-flex items-center rounded-md bg-brand px-4 py-2 text-sm font-semibold text-white">
-          {tl('pdfUi.selectFiles')}
-        </span>
       </label>
 
       {files.length > 0 && (
-        <ul className="mt-4 space-y-1 text-sm text-ink-700">
-          <li className="font-medium text-ink-900">{tl('pdfUi.selected')}:</li>
+        <ul className="mt-4 space-y-1 text-sm text-on-surface-variant">
+          <li className="font-medium text-on-surface">{tl('pdfUi.selected')}:</li>
           {files.map((f, i) => (
             <li key={i} className="truncate">
               {f.name}
@@ -181,11 +188,11 @@ export default function PdfDropZone({ operation, locale }: Props) {
 
       {operation === 'rotate' && (
         <div className="mt-4 flex items-center gap-3 text-sm">
-          <span className="font-medium text-ink-700">{tl('pdfUi.rotateLabel')}:</span>
+          <span className="font-medium text-on-surface-variant">{tl('pdfUi.rotateLabel')}:</span>
           <select
             value={degrees}
             onChange={(e) => setDegrees(Number(e.target.value) as 90 | 180 | 270)}
-            className="rounded-md border border-ink-200 bg-white px-2 py-1 text-ink-800"
+            className="rounded-sm border border-border-subtle bg-surface-container-high px-2 py-1 text-on-surface"
           >
             <option value={90}>90°</option>
             <option value={180}>180°</option>
@@ -196,11 +203,11 @@ export default function PdfDropZone({ operation, locale }: Props) {
 
       {operation === 'toImage' && (
         <div className="mt-4 flex items-center gap-3 text-sm">
-          <span className="font-medium text-ink-700">{tl('pdfUi.formatLabel')}:</span>
+          <span className="font-medium text-on-surface-variant">{tl('pdfUi.formatLabel')}:</span>
           <select
             value={format}
             onChange={(e) => setFormat(e.target.value as 'image/jpeg' | 'image/png')}
-            className="rounded-md border border-ink-200 bg-white px-2 py-1 text-ink-800"
+            className="rounded-sm border border-border-subtle bg-surface-container-high px-2 py-1 text-on-surface"
           >
             <option value="image/jpeg">JPG</option>
             <option value="image/png">PNG</option>
@@ -224,18 +231,18 @@ export default function PdfDropZone({ operation, locale }: Props) {
         )}
       </div>
 
-      {status === 'error' && <p className="mt-3 text-sm text-red-600">{errorMsg}</p>}
+      {status === 'error' && <p className="mt-3 text-sm text-red-400">{errorMsg}</p>}
 
       {results.length > 0 && (
         <div className="mt-5">
-          <p className="mb-2 text-sm font-medium text-ink-900">{tl('pdfUi.download')}:</p>
+          <p className="mb-2 text-sm font-medium text-on-surface">{tl('pdfUi.download')}:</p>
           <ul className="space-y-2">
             {results.map((r, i) => (
               <li key={i}>
                 <a
                   href={r.url}
                   download={r.name}
-                  className="inline-flex items-center rounded-md border border-ink-200 bg-white px-4 py-2 text-sm font-medium text-brand hover:bg-ink-50"
+                  className="glass-panel inline-flex items-center rounded-sm border border-border-subtle bg-surface-container-low px-4 py-2 text-sm font-medium text-neon-blue transition-colors hover:text-electric-purple"
                 >
                   {r.name}
                 </a>

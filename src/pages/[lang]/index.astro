@@ -10,6 +10,8 @@
  * category grouping are both derived from getCollection('tools'), so adding a
  * tool in T3 (content) automatically appears here. The site-level FAQ + copy
  * live in i18n (home.*).
+ *
+ * Restyled to the futuristic dark-glass language.
  */
 import type { GetStaticPaths } from 'astro';
 import { locales } from '@/i18n/config';
@@ -42,9 +44,16 @@ const grouped = tools.reduce<Record<ToolType, ToolEntry[]>>((acc, tool) => {
 }, {} as Record<ToolType, ToolEntry[]>);
 const categoryOrder = Object.keys(grouped) as ToolType[];
 
+// Material Symbols icon per operation family (matches the mockup's icon set).
+const ICON: Record<ToolType, string> = {
+  merge: 'merge_type',
+  split: 'call_split',
+  rotate: 'rotate_right',
+  toImage: 'image',
+};
+
 const breadcrumb = [{ name: tl('common.home'), url: `/${locale}` }];
 ---
-
 <BaseLayout
   locale={locale}
   title={tl('home.title')}
@@ -52,35 +61,52 @@ const breadcrumb = [{ name: tl('common.home'), url: `/${locale}` }];
   breadcrumb={breadcrumb}
 >
   {/* Hero */}
-  <section class="bg-gradient-to-b from-brand/5 to-white">
-    <div class="container-page py-14 sm:py-20">
-      <h1 class="max-w-3xl text-4xl font-semibold tracking-tight text-ink-900 sm:text-5xl">
-        {tl('home.title')}
-      </h1>
-      <p class="mt-5 max-w-2xl text-lg text-ink-600">
-        {tl('home.subtitle')}
-      </p>
+  <section class="container-page pb-16 pt-20 text-center sm:pt-28">
+    <div
+      class="mb-8 inline-flex items-center gap-2 rounded-full border border-border-subtle bg-surface-container-low px-4 py-1.5"
+    >
+      <span class="material-symbols-outlined text-[16px] text-neon-blue">verified_user</span>
+      <span class="text-label-caps uppercase text-on-surface-variant">{tl('home.securityHeading')}</span>
+    </div>
+    <h1
+      class="mx-auto max-w-4xl bg-gradient-to-r from-neon-blue to-electric-purple bg-clip-text text-transparent font-headline-xl text-headline-xl leading-tight"
+    >
+      {tl('home.title')}
+    </h1>
+    <p class="mx-auto mt-6 max-w-2xl text-body-lg text-on-surface-variant">
+      {tl('home.subtitle')}
+    </p>
+    <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
       <a
         href={`#${'tools'}`}
-        class="mt-8 inline-flex items-center rounded-md bg-brand px-5 py-3 text-sm font-semibold text-white hover:opacity-90"
+        class="cyber-gradient-btn inline-flex items-center gap-2 rounded-sm px-10 py-4 text-lg font-semibold text-white"
       >
         {tl('home.cta')}
+        <span class="material-symbols-outlined">arrow_forward</span>
+      </a>
+      <a
+        href={`#${'security'}`}
+        class="glass-panel inline-flex items-center gap-2 rounded-sm border border-border-subtle px-10 py-4 text-lg font-medium text-on-surface transition-colors hover:bg-surface-container-high"
+      >
+        {tl('home.securityHeading')}
       </a>
     </div>
   </section>
 
   {/* Intro */}
-  <section class="container-page py-10">
-    <div class="max-w-3xl text-lg leading-relaxed text-ink-700">
+  <section class="container-page py-8">
+    <div class="mx-auto max-w-3xl text-body-lg leading-relaxed text-on-surface-variant">
       <p>{tl('home.intro')}</p>
     </div>
   </section>
 
   {/* Tool grid — dynamic from getCollection('tools') */}
-  <section id="tools" class="container-page py-10">
-    <h2 class="text-2xl font-semibold text-ink-900">{tl('home.toolsHeading')}</h2>
-    <p class="mt-2 text-ink-600">{tl('home.toolsSubheading')}</p>
-    <ul class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+  <section id="tools" class="container-page py-12">
+    <div class="mb-10 flex flex-col gap-2 text-left">
+      <h2 class="font-headline-lg text-headline-lg text-on-surface">{tl('home.toolsHeading')}</h2>
+      <p class="text-on-surface-variant">{tl('home.toolsSubheading')}</p>
+    </div>
+    <ul class="grid gap-gutter sm:grid-cols-2 lg:grid-cols-4">
       {
         tools.map((tool) => {
           const url = getToolPath(locale, tool.data.slug[locale]);
@@ -90,14 +116,16 @@ const breadcrumb = [{ name: tl('common.home'), url: `/${locale}` }];
             <li>
               <a
                 href={url}
-                class="group block h-full rounded-lg border border-ink-200 bg-white p-6 transition hover:border-brand hover:shadow-sm"
+                class="glass-panel neon-glow-hover group flex h-full flex-col rounded-lg border border-border-subtle p-8 transition-all"
               >
-                <h3 class="text-lg font-semibold text-ink-900 group-hover:text-brand">
-                  {content.h1}
-                </h3>
-                <p class="mt-2 text-sm text-ink-600">{seo.description}</p>
-                <span class="mt-4 inline-block text-sm font-medium text-brand">
-                  {tl('home.cta')} →
+                <div class="mb-6 grid h-12 w-12 place-items-center rounded bg-neon-blue/10 text-neon-blue transition-all group-hover:bg-neon-blue group-hover:text-white">
+                  <span class="material-symbols-outlined">{ICON[tool.data.toolType]}</span>
+                </div>
+                <h3 class="mb-3 font-title-md text-title-md text-on-surface">{content.h1}</h3>
+                <p class="mb-6 flex-1 text-sm leading-relaxed text-on-surface-variant">{seo.description}</p>
+                <span class="inline-flex items-center gap-1 font-code-sm text-xs uppercase tracking-wider text-neon-blue transition-all group-hover:gap-2">
+                  {tl('home.cta')}
+                  <span class="material-symbols-outlined text-sm">arrow_forward</span>
                 </span>
               </a>
             </li>
@@ -108,19 +136,19 @@ const breadcrumb = [{ name: tl('common.home'), url: `/${locale}` }];
   </section>
 
   {/* Category entries — dynamic grouping by toolType */}
-  <section id="categories" class="container-page py-10">
-    <h2 class="text-2xl font-semibold text-ink-900">{tl('home.categoriesHeading')}</h2>
+  <section id="categories" class="container-page py-12">
+    <h2 class="font-headline-lg text-headline-lg text-on-surface">{tl('home.categoriesHeading')}</h2>
     <div class="mt-6 space-y-8">
       {
         categoryOrder.map((type) => (
           <div>
-            <h3 class="text-lg font-medium text-ink-800">{t(locale, `categories.${type}`)}</h3>
+            <h3 class="font-medium text-on-surface">{t(locale, `categories.${type}`)}</h3>
             <ul class="mt-3 flex flex-wrap gap-3">
               {grouped[type].map((tool) => (
                 <li>
                   <a
                     href={getToolPath(locale, tool.data.slug[locale])}
-                    class="inline-block rounded-full border border-ink-200 bg-white px-4 py-1.5 text-sm text-ink-700 hover:border-brand hover:text-brand"
+                    class="glass-panel inline-block rounded-full border border-border-subtle px-4 py-1.5 text-sm text-on-surface-variant transition-colors hover:text-neon-blue"
                   >
                     {tool.data.content[locale].h1}
                   </a>
@@ -134,22 +162,34 @@ const breadcrumb = [{ name: tl('common.home'), url: `/${locale}` }];
   </section>
 
   {/* Security / privacy note */}
-  <section id="security" class="container-page py-10">
-    <div class="rounded-lg border border-ink-200 bg-ink-50 p-6">
-      <h2 class="text-xl font-semibold text-ink-900">{tl('home.securityHeading')}</h2>
-      <p class="mt-3 text-ink-700">{tl('home.securityNote')}</p>
+  <section id="security" class="container-page py-12">
+    <div class="glass-panel rounded-lg border border-border-subtle p-8">
+      <div class="mb-4 flex items-center gap-2 text-neon-blue">
+        <span class="material-symbols-outlined">shield</span>
+        <h2 class="font-headline-lg text-headline-lg text-on-surface">{tl('home.securityHeading')}</h2>
+      </div>
+      <p class="text-on-surface-variant">{tl('home.securityNote')}</p>
     </div>
   </section>
 
   {/* Site-level FAQ */}
-  <section id="faq" class="container-page py-10">
-    <h2 class="text-2xl font-semibold text-ink-900">{tl('home.faqHeading')}</h2>
-    <div class="mt-6 max-w-3xl divide-y divide-ink-200 border-y border-ink-200">
+  <section id="faq" class="container-page py-12">
+    <h2 class="mb-10 text-center font-headline-lg text-headline-lg text-on-surface">
+      {tl('home.faqHeading')}
+    </h2>
+    <div class="mx-auto max-w-4xl space-y-4">
       {
         dict.home.faq.map((item) => (
-          <details class="py-4">
-            <summary class="cursor-pointer font-medium text-ink-900">{item.question}</summary>
-            <p class="mt-2 text-ink-700">{item.answer}</p>
+          <details class="glass-panel group overflow-hidden rounded-lg border border-border-subtle" open>
+            <summary class="flex cursor-pointer list-none items-center justify-between p-6 font-medium text-on-surface">
+              {item.question}
+              <span class="material-symbols-outlined text-on-surface-variant transition-transform group-open:rotate-180">
+                expand_more
+              </span>
+            </summary>
+            <div class="border-t border-white/5 p-6 pt-0 text-on-surface-variant">
+              {item.answer}
+            </div>
           </details>
         ))
       }

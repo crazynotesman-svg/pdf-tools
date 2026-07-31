@@ -3,10 +3,10 @@
 @tailwind utilities;
 
 /*
- * Global base styles.
- * Design goal: German SaaS aesthetic — clean, professional, fast.
- * We use a system font stack (no web-font download) to protect
- * Lighthouse Performance and avoid layout shift.
+ * Global base styles — futuristic dark glassmorphism (see the reference mockup).
+ * Dark surface, subtle grid, neon-blue / electric-purple accents, frosted glass
+ * panels. System font stack is avoided here in favour of the reference's Sora /
+ * Inter / JetBrains Mono (loaded via <link> in BaseLayout) for the intended look.
  */
 @layer base {
   html {
@@ -15,61 +15,151 @@
   }
 
   body {
-    @apply bg-white text-ink-800 antialiased;
-    font-family: theme('fontFamily.sans');
+    @apply bg-background text-on-surface antialiased;
+    font-family: theme('fontFamily.body-md');
+    /* Reference grid texture: faint blueprint lines over the deep navy. */
+    background-color: #0c1322;
+    background-image:
+      linear-gradient(rgba(30, 41, 59, 0.2) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(30, 41, 59, 0.2) 1px, transparent 1px);
+    background-size: 32px 32px;
   }
 
   h1,
   h2,
   h3,
   h4 {
-    @apply font-semibold text-ink-900 tracking-tight;
+    @apply font-semibold tracking-tight text-on-surface;
+    font-family: theme('fontFamily.headline-lg');
   }
 
   a {
-    @apply text-brand hover:text-brand-dark transition-colors;
+    @apply text-neon-blue transition-colors;
   }
 
   :focus-visible {
-    @apply outline-2 outline-offset-2 outline-brand;
+    @apply outline-2 outline-offset-2 outline-neon-blue;
+  }
+
+  /* Keep form controls legible on the dark surface. */
+  select,
+  input,
+  textarea {
+    color-scheme: dark;
   }
 }
 
 @layer components {
-  /* Shared container used across layout / pages. */
+  /* Shared container used across layout / pages — matches the mockup width. */
   .container-page {
-    @apply mx-auto w-full max-w-content px-4 sm:px-6 lg:px-8;
+    @apply mx-auto w-full px-margin-mobile sm:px-margin-desktop;
+    max-width: 1280px;
   }
 
+  /* Frosted glass panel — the core surface of the design language. */
+  .glass-panel {
+    background: rgba(30, 41, 59, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  /* Neon outline that lights up on hover (tool cards, etc.). */
+  .neon-glow-hover {
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+  .neon-glow-hover:hover {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.15);
+    border-color: #3b82f6;
+  }
+
+  /* Primary call-to-action: blue → purple gradient with a lift on hover. */
+  .cyber-gradient-btn {
+    background: linear-gradient(135deg, #3b82f6 0%, #a855f7 100%);
+    transition: all 0.3s ease;
+  }
+  .cyber-gradient-btn:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+    box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.4);
+  }
+
+  /* Diagonal neon hatch used behind the dropzone. */
+  .dashed-grid-mask {
+    background-image: repeating-linear-gradient(
+      45deg,
+      rgba(59, 130, 246, 0.05) 0px,
+      rgba(59, 130, 246, 0.05) 2px,
+      transparent 2px,
+      transparent 4px
+    );
+  }
+
+  /* Animated scan line sweeping the dropzone. */
+  .scan-line {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #3b82f6, transparent);
+    top: 0;
+    animation: scan 3s linear infinite;
+    pointer-events: none;
+  }
+  @keyframes scan {
+    0% {
+      top: 0;
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      top: 100%;
+      opacity: 0;
+    }
+  }
+
+  /* Primary / secondary buttons (used by the PdfDropZone island). */
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded-md bg-brand px-5 py-2.5
-      text-sm font-medium text-white hover:bg-brand-dark transition-colors;
+    @apply inline-flex items-center justify-center rounded-sm bg-neon-blue px-5 py-2.5
+      text-sm font-semibold text-white transition-colors;
+    background-image: linear-gradient(135deg, #3b82f6 0%, #a855f7 100%);
   }
-
+  .btn-primary:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.4);
+  }
   .btn-secondary {
-    @apply inline-flex items-center justify-center rounded-md border border-ink-200
-      bg-white px-5 py-2.5 text-sm font-medium text-ink-700 hover:bg-ink-50 transition-colors;
+    @apply inline-flex items-center justify-center rounded-sm border border-border-subtle
+      bg-surface-container-low px-5 py-2.5 text-sm font-medium text-on-surface transition-colors;
+  }
+  .btn-secondary:hover {
+    @apply bg-surface-container-high;
   }
 
   /* Rendered Markdown article body (blog posts). We avoid the typography plugin
      to keep the CSS bundle small; these rules give clean, readable type. */
   .article-body {
-    @apply text-ink-700 leading-relaxed;
+    @apply text-on-surface-variant leading-relaxed;
   }
   .article-body > * + * {
     @apply mt-4;
   }
   .article-body h2 {
-    @apply mt-8 text-2xl font-semibold text-ink-900 tracking-tight;
+    @apply mt-8 text-2xl font-semibold text-on-surface tracking-tight;
   }
   .article-body h3 {
-    @apply mt-6 text-xl font-semibold text-ink-900 tracking-tight;
+    @apply mt-6 text-xl font-semibold text-on-surface tracking-tight;
   }
   .article-body p {
     @apply text-base;
   }
   .article-body a {
-    @apply text-brand underline underline-offset-2 hover:text-brand-dark;
+    @apply text-neon-blue underline underline-offset-2 hover:text-electric-purple;
   }
   .article-body ul {
     @apply list-disc space-y-2 pl-6;
@@ -78,16 +168,16 @@
     @apply list-decimal space-y-2 pl-6;
   }
   .article-body blockquote {
-    @apply border-l-4 border-ink-200 pl-4 italic text-ink-600;
+    @apply border-l-4 border-neon-blue pl-4 italic text-on-surface-variant;
   }
   .article-body code {
-    @apply rounded bg-ink-100 px-1.5 py-0.5 text-sm text-ink-900;
+    @apply rounded bg-surface-container-high px-1.5 py-0.5 text-sm text-on-surface;
   }
   .article-body pre {
-    @apply overflow-x-auto rounded-md bg-ink-900 p-4 text-sm text-ink-50;
+    @apply overflow-x-auto rounded-md bg-surface-container-lowest p-4 text-sm text-on-surface;
   }
   .article-body pre code {
-    @apply bg-transparent p-0 text-ink-50;
+    @apply bg-transparent p-0 text-on-surface;
   }
   .article-body img {
     @apply rounded-md;
