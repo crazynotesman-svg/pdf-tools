@@ -27,6 +27,13 @@ import FaqSchema from '@/components/seo/FaqSchema.astro';
 import HowToSchema from '@/components/seo/HowToSchema.astro';
 import Breadcrumb from '@/components/seo/Breadcrumb.astro';
 
+// Global stylesheet — Tailwind base/components/utilities + site theme.
+// The @astrojs/tailwind integration is configured with applyBaseStyles:false,
+// so we MUST import it explicitly here; otherwise no CSS is bundled and the
+// pages render as unstyled text. BaseLayout wraps every page, so one import
+// covers the whole site.
+import '@/styles/global.css';
+
 interface Props {
   locale: Locale;
   /** Present on tool pages; absent on generic pages (home, blog, legal). */
