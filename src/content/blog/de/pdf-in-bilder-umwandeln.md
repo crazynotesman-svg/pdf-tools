@@ -27,3 +27,8 @@ einen Beitrag in den sozialen Medien. Die Umwandlung in JPG ist unkompliziert.
 
 Der Vorgang läuft vollständig lokal, sodass Ihre Dokumente nicht hochgeladen
 werden.
+
+## Weiterlesen
+
+- [PDF komprimieren ohne Qualitätsverlust](/de/blog/pdf-komprimieren-ohne-qualitaetsverlust/) – große Dateien verkleinern
+- [PDF Wasserzeichen hinzufügen](/de/blog/pdf-wasserzeichen-hinzufuegen/) – Dokumente kennzeichnen

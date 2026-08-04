@@ -10,8 +10,16 @@
  * island all agree on the same four values without importing `astro:content`.
  */
 
-/** The four browser-side PDF operations, matching `toolType` in the schema. */
-export type ToolType = 'merge' | 'split' | 'rotate' | 'toImage';
+/** The eight browser-side PDF operations, matching `toolType` in the schema. */
+export type ToolType =
+  | 'merge'
+  | 'split'
+  | 'rotate'
+  | 'toImage'
+  | 'compress'
+  | 'protect'
+  | 'unlock'
+  | 'watermark';
 
 /** One input document: original file name + raw bytes. */
 export interface PdfInput {

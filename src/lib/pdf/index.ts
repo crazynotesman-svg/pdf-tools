@@ -17,3 +17,7 @@ export { mergePdfs, mergePdfsToOutput } from './merge';
 export { splitPdf, type SplitMode } from './split';
 export { rotatePdf, rotatePdfToOutput, type RotationStep } from './rotate';
 export { pdfToImages, type ToImageOptions } from './toImage';
+export { compressPdf, type CompressMode, type CompressOptions } from './compress';
+export { protectPdf, type ProtectOptions } from './protect';
+export { unlockPdf } from './unlock';
+export { watermarkPdf, type WatermarkOptions } from './watermark';

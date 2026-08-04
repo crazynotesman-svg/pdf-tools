@@ -25,3 +25,8 @@ draft: false
 4. 下载 JPG 文件。
 
 整个过程完全在本地运行，您的文档不会被上传。
+
+## 延伸阅读
+
+- [如何在保证质量的前提下压缩 PDF 文件](/zh-CN/blog/compress-pdf-without-losing-quality/)
+- [如何给 PDF 添加水印](/zh-CN/blog/pdf-shui-yin-zhi-nan/)

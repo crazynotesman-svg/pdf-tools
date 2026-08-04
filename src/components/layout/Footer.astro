@@ -4,9 +4,11 @@
  *
  * Composition only: every label comes from the UI dictionary; every link is a
  * locale-prefixed static route. Per T5 #3 the footer exposes Datenschutz,
- * Impressum and Kontakt (privacy / imprint / contact).
+ * Impressum and Kontakt (privacy / imprint / contact). The contact email is
+ * surfaced here too (Task 3.6 — visual emphasis on contact info).
  *
- * Restyled to a premium SaaS footer: dark slate surface, soft gray text.
+ * Restyled to a premium SaaS footer: dark slate surface, fine gradient divider,
+ * soft gray text, contact email highlighted.
  */
 import type { Locale } from '@/i18n/config';
 import { t } from '@/i18n/ui';
@@ -14,7 +16,6 @@ import { t } from '@/i18n/ui';
 interface Props {
   locale: Locale;
 }
-
 const { locale } = Astro.props;
 const year = new Date().getFullYear();
 const links = [
@@ -23,19 +24,21 @@ const links = [
   { label: t(locale, 'common.menu.contact'), href: `/${locale}/contact` },
 ];
 ---
-<footer class="mt-20 border-t border-white/10 bg-slate-950">
+<footer class="mt-20 bg-slate-950">
+  {/* Fine gradient hairline divider. */}
+  <div class="h-px w-full bg-gradient-to-r from-transparent via-white/15 to-transparent" aria-hidden="true"></div>
   <div
-    class="container-page flex flex-col gap-6 py-10 sm:flex-row sm:items-start sm:justify-between"
+    class="container-page flex flex-col gap-8 py-12 sm:flex-row sm:items-start sm:justify-between"
   >
-    <div class="flex flex-col gap-2">
+    <div class="flex flex-col gap-3">
       <div class="flex items-center gap-2">
         <span class="grid h-7 w-7 place-items-center rounded-xl bg-gradient-to-br from-neon-blue to-electric-purple text-sm font-bold text-white">✦</span>
         <span class="font-semibold tracking-tight text-white">{t(locale, 'common.siteName')}</span>
       </div>
-      <p class="max-w-xs text-sm text-slate-400">{t(locale, 'common.tagline')}</p>
+      <p class="max-w-xs text-sm leading-relaxed text-slate-400">{t(locale, 'common.tagline')}</p>
     </div>
 
-    <nav class="flex flex-wrap gap-5 text-sm" aria-label="Footer">
+    <nav class="flex flex-wrap gap-6 text-sm" aria-label="Footer">
       {
         links.map((l) => (
           <a href={l.href} class="text-slate-400 transition-colors hover:text-white">
@@ -45,8 +48,25 @@ const links = [
       }
     </nav>
   </div>
-  <div class="container-page flex flex-col gap-1 pb-8 text-xs text-slate-500">
+  <div
+    class="container-page flex flex-col gap-3 border-t border-white/10 pb-10 pt-6 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between"
+  >
     <span>© {year} {t(locale, 'common.siteName')}. {t(locale, 'footer.rights')}</span>
-    <span>{t(locale, 'footer.note')}</span>
+    <a
+      href={`mailto:${t(locale, 'legal.contact.email')}`}
+      class="inline-flex items-center gap-1.5 text-slate-400 transition-colors hover:text-white"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="h-4 w-4"
+        ><rect width="20" height="16" x="2" y="4" rx="2" /><path d="m22 7-10 5L2 7" /></svg
+      >
+      {t(locale, 'legal.contact.email')}
+    </a>
   </div>
 </footer>

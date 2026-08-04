@@ -1,0 +1,42 @@
+---
+/**
+ * ToolIcon — data-driven dispatcher for the four PDF tool icons.
+ *
+ * Maps a tool's `toolType` to its icon component via a lookup table (NOT a
+ * chain of `if (tool.id === 'merge')`). Adding a fifth tool means adding one
+ * entry to `IconMap` + one icon component — no branching to maintain.
+ *
+ * The icon uses `currentColor`, so the caller controls its color with a
+ * Tailwind `text-*` class and its size with `class="h-… w-…"`.
+ */
+import type { ToolType } from '@/lib/pdf';
+import PdfMergeIcon from '@/components/icons/PdfMergeIcon.astro';
+import PdfSplitIcon from '@/components/icons/PdfSplitIcon.astro';
+import PdfRotateIcon from '@/components/icons/PdfRotateIcon.astro';
+import PdfToJpgIcon from '@/components/icons/PdfToJpgIcon.astro';
+import PdfCompressIcon from '@/components/icons/PdfCompressIcon.astro';
+import PdfProtectIcon from '@/components/icons/PdfProtectIcon.astro';
+import PdfUnlockIcon from '@/components/icons/PdfUnlockIcon.astro';
+import PdfWatermarkIcon from '@/components/icons/PdfWatermarkIcon.astro';
+
+interface Props {
+  toolType: ToolType;
+  class?: string;
+}
+
+const { toolType, class: className } = Astro.props;
+
+const IconMap = {
+  merge: PdfMergeIcon,
+  split: PdfSplitIcon,
+  rotate: PdfRotateIcon,
+  toImage: PdfToJpgIcon,
+  compress: PdfCompressIcon,
+  protect: PdfProtectIcon,
+  unlock: PdfUnlockIcon,
+  watermark: PdfWatermarkIcon,
+} as const;
+
+const Icon = IconMap[toolType];
+---
+<Icon class={className} />

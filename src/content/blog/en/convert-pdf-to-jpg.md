@@ -26,3 +26,8 @@ Converting to JPG is straightforward.
 4. Download the JPG files.
 
 The process runs entirely locally, so your documents are never uploaded.
+
+## Read more
+
+- [How to compress a PDF without losing quality](/en/blog/compress-pdf-without-losing-quality/)
+- [PDF watermark guide](/en/blog/pdf-watermark-guide/)

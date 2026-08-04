@@ -47,6 +47,12 @@ const howToStep = z.object({
   text: z.string(),
 });
 
+/** One feature / benefit / limitation bullet (rendered as a list on tool pages). */
+const listItem = z.object({
+  title: z.string(),
+  text: z.string(),
+});
+
 /**
  * Fine-grained JSON-LD controls. Most tools can rely on the defaults; a tool
  * can override `applicationType` to emit WebApplication instead of
@@ -81,11 +87,25 @@ const tools = defineCollection({
     /** Stable identifier, also used by the router + relatedTools cross-links. */
     id: z.string(),
 
+    /** Optional content update date — rendered as "Updated: <Month Year>" on
+     *  the tool page and emitted as `dateModified` in structured data. */
+    updatedDate: z.coerce.date().optional(),
+
     /**
      * Operation family — drives which lib function runs in Phase 2/3
-     * (merge / split / rotate / toImage) and groups tools for SEO categories.
+     * (merge / split / rotate / toImage / compress / protect / unlock /
+     * watermark) and groups tools for SEO categories.
      */
-    toolType: z.enum(['merge', 'split', 'rotate', 'toImage']),
+    toolType: z.enum([
+      'merge',
+      'split',
+      'rotate',
+      'toImage',
+      'compress',
+      'protect',
+      'unlock',
+      'watermark',
+    ]),
 
     /** Per-locale URL slug. The router maps (id, locale) -> /{locale}/{slug}. */
     slug: z.object({
@@ -124,6 +144,90 @@ const tools = defineCollection({
 
     /** Cross-links to other tool ids (rendered by RelatedTools in T6). */
     relatedTools: z.array(z.string()),
+
+    /**
+     * Additional cross-links for the internal-link authority pass (Phase 2.2):
+     * a wider recommendation set, rendered together with relatedTools.
+     */
+    recommendedTools: z.array(z.string()).default([]),
+
+    /**
+     * Semantic cluster id used to group tools for internal-linking sections
+     * (e.g. 'organize' | 'convert' | 'optimize' | 'secure'). Free-form string.
+     */
+    toolCluster: z.string().default('organize'),
+
+    /**
+     * Structured feature highlights (Phase 2.2). Rendered as a "feature
+     * highlights" section and mined for long-tail SEO terms. Multilingual.
+     */
+    features: z.object({
+      de: z.array(listItem),
+      en: z.array(listItem),
+      'zh-CN': z.array(listItem),
+    }),
+
+    /** User-facing benefits — what the user gains. Multilingual. */
+    benefits: z.object({
+      de: z.array(listItem),
+      en: z.array(listItem),
+      'zh-CN': z.array(listItem),
+    }),
+
+    /** Honest limitations (e.g. browser-side constraints). Multilingual. */
+    limitations: z.object({
+      de: z.array(listItem),
+      en: z.array(listItem),
+      'zh-CN': z.array(listItem),
+    }),
+
+    /**
+     * Head search keywords per locale (Phase 2.3.9). Not rendered directly —
+     * reserved for future programmatic SEO: FAQ expansion, meta variants and
+     * internal-link generation. Multilingual.
+     */
+    searchKeywords: z.object({
+      de: z.array(z.string()),
+      en: z.array(z.string()),
+      'zh-CN': z.array(z.string()),
+    }),
+
+    /** Primary target keyword per locale (Phase 3.2.2) — base for title/H1/meta
+     *  optimization and future programmatic pages. Multilingual. */
+    primaryKeyword: z.object({
+      de: z.string(),
+      en: z.string(),
+      'zh-CN': z.string(),
+    }),
+
+    /**
+     * Long-tail keywords per locale (>=5 recommended): mix of transactional,
+     * question and use-case terms. Reserved for FAQ expansion, content matrix
+     * and programmatic SEO. Multilingual.
+     */
+    longTailKeywords: z.object({
+      de: z.array(z.string()),
+      en: z.array(z.string()),
+      'zh-CN': z.array(z.string()),
+    }),
+
+    /** Search intent of the tool's primary keyword (single value, language-agnostic). */
+    searchIntent: z.enum(['informational', 'transactional', 'navigational']),
+
+    /** Whether the tool is highlighted on the landing page ("Popular" badge). */
+    popular: z.boolean().default(false),
+
+    /** Landing ordering — lower number first. Default 99 (not featured). */
+    priority: z.number().default(99),
+
+    /**
+     * Related blog article translationKeys (Phase 3.2.5). Rendered as a
+     * "Related articles" section on the tool page (ToolBlogLinks). Values are
+     * blog `translationKey`s (one key maps the article across all three
+     * locales), NOT slugs. Empty by default — old MDX without the field still
+     * builds and simply renders no section.
+     */
+    relatedBlogPosts: z.array(z.string()).default([]),
 
     /** Optional JSON-LD overrides; falls back to defaults when omitted. */
     schema: schemaConfig.optional(),

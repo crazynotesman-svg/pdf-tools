@@ -2,16 +2,14 @@
 /**
  * Landing page — the SEO entry point for each locale (e.g. /de).
  *
- * Per T6 #2 this is a real SEO landing page, NOT a bare tool list:
- *   Hero · intro · tool grid (dynamic) · category entries (dynamic)
- *   · security note · FAQ (site-level).
+ * Phase 2.2.1 SaaS structure:
+ *   Hero (badge · H1 · subtitle · CTA) → Trust (TrustPanel) → Popular tools
+ *   (collection-driven grid) → Categories → How it works → Security → FAQ →
+ *   CTA footer.
  *
  * Nothing about the individual tools is hard-coded: the tool grid and the
- * category grouping are both derived from getCollection('tools'), so adding a
- * tool in T3 (content) automatically appears here. The site-level FAQ + copy
- * live in i18n (home.*).
- *
- * Restyled to a light SaaS system (Linear / Vercel / Raycast inspired).
+ * category grouping are both derived from getCollection('tools'). All visible
+ * copy comes from i18n (home.*).
  */
 import type { GetStaticPaths } from 'astro';
 import { locales } from '@/i18n/config';
@@ -20,6 +18,9 @@ import { getCollection } from 'astro:content';
 import { getToolPath } from '@/lib/tools/router';
 import type { ToolEntry } from '@/lib/tools/router';
 import BaseLayout from '@/components/layout/BaseLayout.astro';
+import ToolIcon from '@/components/ui/ToolIcon.astro';
+import TrustPanel from '@/components/ui/TrustPanel.astro';
+import HowItWorks from '@/components/ui/HowItWorks.astro';
 
 export const getStaticPaths = (async () => {
   const tools = await getCollection('tools');
@@ -33,9 +34,10 @@ const { locale, tools } = Astro.props;
 const dict = getDictionary(locale);
 const tl = (key: Parameters<typeof t>[1]) => t(locale, key);
 
+// Featured-first ordering (Phase 3.2.2): `priority` ASC, `popular` flagged.
+const sortedTools = [...tools].sort((a, b) => (a.data.priority ?? 99) - (b.data.priority ?? 99));
+
 // Group tools by their operation family (toolType) for the "category" section.
-// Dynamic: categories come from the data, not from hard-coded markup.
-// Keyed by the toolType enum so `categories.${type}` stays a valid i18n key.
 type ToolType = ToolEntry['data']['toolType'];
 const grouped = tools.reduce<Record<ToolType, ToolEntry[]>>((acc, tool) => {
   const type = tool.data.toolType;
@@ -43,18 +45,6 @@ const grouped = tools.reduce<Record<ToolType, ToolEntry[]>>((acc, tool) => {
   return acc;
 }, {} as Record<ToolType, ToolEntry[]>);
 const categoryOrder = Object.keys(grouped) as ToolType[];
-
-// Inline SVG icons per operation family (no external icon font — SaaS clean look).
-const ICON: Record<ToolType, string> = {
-  merge:
-    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 3 4 4-4 4"/><path d="M12 7h5a3 3 0 0 1 3 3v1"/><path d="m16 13 4 4-4 4"/><path d="M20 17h-5a3 3 0 0 1-3-3v-1"/></svg>',
-  split:
-    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="m7 8 5-5 5 5"/><path d="m7 16 5 5 5-5"/></svg>',
-  rotate:
-    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>',
-  toImage:
-    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.09-3.09a2 2 0 0 0-2.82 0L6 21"/></svg>',
-};
 
 const tagline = categoryOrder.map((type) => t(locale, `categories.${type}`)).join(' · ');
 const breadcrumb = [{ name: tl('common.home'), url: `/${locale}` }];
@@ -65,20 +55,18 @@ const breadcrumb = [{ name: tl('common.home'), url: `/${locale}` }];
   description={tl('home.subtitle')}
   breadcrumb={breadcrumb}
 >
-  {/* Hero */}
-  <section class="bg-tech relative flex min-h-[700px] items-center justify-center overflow-hidden">
-    {/* Floating decorations (CSS-only, no JS) */}
+  {/* ===== Hero ===== */}
+  <section class="bg-tech relative flex min-h-[680px] items-center justify-center overflow-hidden">
+    <div class="hero-glow pointer-events-none absolute inset-0" aria-hidden="true"></div>
     <div
       class="float pointer-events-none absolute -right-16 top-24 -z-0 h-64 w-64 rounded-full bg-gradient-to-br from-neon-blue/20 to-electric-purple/20 blur-3xl"
       aria-hidden="true"
-    >
-    </div>
+    ></div>
     <div
       class="float pointer-events-none absolute -left-16 bottom-16 -z-0 h-48 w-48 rounded-full bg-gradient-to-br from-accent/20 to-neon-blue/20 blur-3xl"
       style="animation-delay:-3s"
       aria-hidden="true"
-    >
-    </div>
+    ></div>
     <div class="container-page relative z-10 py-24 text-center">
       <div
         class="mb-6 inline-flex items-center gap-2 rounded-full border border-border-subtle bg-white/70 px-4 py-1.5 text-label-caps uppercase text-on-surface-variant backdrop-blur"
@@ -86,9 +74,7 @@ const breadcrumb = [{ name: tl('common.home'), url: `/${locale}` }];
         <span class="text-neon-blue">✨</span>
         <span>{tl('home.eyebrow')}</span>
       </div>
-      <h1
-        class="mx-auto max-w-4xl text-5xl font-bold tracking-tight md:text-7xl"
-      >
+      <h1 class="mx-auto max-w-4xl text-5xl font-bold tracking-tight md:text-7xl">
         <span class="text-gradient">{tl('home.title')}</span>
       </h1>
       <p class="mx-auto mt-6 max-w-2xl text-lg text-on-surface-variant md:text-xl">
@@ -98,10 +84,7 @@ const breadcrumb = [{ name: tl('common.home'), url: `/${locale}` }];
         {tagline}
       </p>
       <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-        <a
-          href={`#${'tools'}`}
-          class="btn-primary-modern inline-flex items-center gap-2 px-8 py-4 text-lg"
-        >
+        <a href={`#tools`} class="btn-primary-modern inline-flex items-center gap-2 px-8 py-4 text-lg">
           {tl('home.cta')}
           <span>→</span>
         </a>
@@ -112,22 +95,20 @@ const breadcrumb = [{ name: tl('common.home'), url: `/${locale}` }];
     </div>
   </section>
 
-  {/* Intro */}
-  <section class="container-page py-8">
-    <div class="mx-auto max-w-3xl text-body-lg leading-relaxed text-on-surface-variant">
-      <p>{tl('home.intro')}</p>
-    </div>
-  </section>
+  {/* ===== Trust ===== */}
+  <div class="relative z-10 -mt-10">
+    <TrustPanel locale={locale} />
+  </div>
 
-  {/* Tool grid — dynamic from getCollection('tools') */}
-  <section id="tools" class="container-page py-12">
+  {/* ===== Popular tools (collection-driven) ===== */}
+  <section id="tools" class="container-page py-16">
     <div class="mb-10 flex flex-col gap-2 text-left">
-      <h2 class="font-headline-lg text-headline-lg text-on-surface">{tl('home.toolsHeading')}</h2>
-      <p class="text-on-surface-variant">{tl('home.toolsSubheading')}</p>
+      <h2 class="font-headline-lg text-headline-lg text-on-surface">{tl('home.popularHeading')}</h2>
+      <p class="text-on-surface-variant">{tl('home.popularSubheading')}</p>
     </div>
     <ul class="grid gap-gutter sm:grid-cols-2 lg:grid-cols-4">
       {
-        tools.map((tool) => {
+        sortedTools.map((tool) => {
           const url = getToolPath(locale, tool.data.slug[locale]);
           const content = tool.data.content[locale];
           const seo = tool.data.seo[locale];
@@ -135,10 +116,17 @@ const breadcrumb = [{ name: tl('common.home'), url: `/${locale}` }];
             <li>
               <a
                 href={url}
-                class="glass-card group flex h-full flex-col rounded-3xl p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:ring-2 hover:ring-neon-blue/30"
+                data-analytics="tool_card"
+                data-tool={tool.data.toolType}
+                class="tool-card group relative flex h-full flex-col p-8"
               >
-                <div class="mb-6 grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br from-neon-blue/10 to-electric-purple/10 text-neon-blue transition-transform duration-300 group-hover:scale-105">
-                  <span class="text-neon-blue" set:html={ICON[tool.data.toolType]} />
+                {tool.data.popular && (
+                  <span class="absolute right-5 top-5 inline-flex items-center rounded-full bg-gradient-to-r from-neon-blue to-electric-purple px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-white">
+                    {tl('popular.badge')}
+                  </span>
+                )}
+                <div class="icon-box mb-6 transition-transform duration-300 group-hover:scale-105">
+                  <ToolIcon toolType={tool.data.toolType} class="h-8 w-8" />
                 </div>
                 <h3 class="mb-3 font-title-md text-title-md text-on-surface">{content.h1}</h3>
                 <p class="mb-6 flex-1 text-sm leading-relaxed text-on-surface-variant">{seo.description}</p>
@@ -154,8 +142,8 @@ const breadcrumb = [{ name: tl('common.home'), url: `/${locale}` }];
     </ul>
   </section>
 
-  {/* Category entries — dynamic grouping by toolType */}
-  <section id="categories" class="container-page py-12">
+  {/* ===== Categories (dynamic grouping by toolType) ===== */}
+  <section id="categories" class="container-page py-16">
     <h2 class="font-headline-lg text-headline-lg text-on-surface">{tl('home.categoriesHeading')}</h2>
     <div class="mt-6 space-y-8">
       {
@@ -167,6 +155,8 @@ const breadcrumb = [{ name: tl('common.home'), url: `/${locale}` }];
                 <li>
                   <a
                     href={getToolPath(locale, tool.data.slug[locale])}
+                    data-analytics="category"
+                    data-category={type}
                     class="glass-card inline-block rounded-full border border-border-subtle px-4 py-1.5 text-sm text-on-surface-variant transition-colors hover:text-neon-blue"
                   >
                     {tool.data.content[locale].h1}
@@ -180,8 +170,13 @@ const breadcrumb = [{ name: tl('common.home'), url: `/${locale}` }];
     </div>
   </section>
 
-  {/* Security / privacy note */}
-  <section id="security" class="container-page py-12">
+  {/* ===== How it works ===== */}
+  <div class="py-16">
+    <HowItWorks locale={locale} />
+  </div>
+
+  {/* ===== Security / privacy note ===== */}
+  <section id="security" class="container-page py-16">
     <div class="glass-card rounded-3xl border border-border-subtle p-8">
       <div class="mb-4 flex items-center gap-2 text-neon-blue">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"
@@ -193,8 +188,8 @@ const breadcrumb = [{ name: tl('common.home'), url: `/${locale}` }];
     </div>
   </section>
 
-  {/* Site-level FAQ */}
-  <section id="faq" class="container-page py-12">
+  {/* ===== Site-level FAQ ===== */}
+  <section id="faq" class="container-page py-16">
     <h2 class="mb-10 text-center font-headline-lg text-headline-lg text-on-surface">
       {tl('home.faqHeading')}
     </h2>
@@ -224,4 +219,38 @@ const breadcrumb = [{ name: tl('common.home'), url: `/${locale}` }];
       }
     </div>
   </section>
+
+  {/* ===== CTA footer ===== */}
+  <section class="container-page pb-20 pt-8">
+    <div class="bg-tech relative overflow-hidden rounded-3xl border border-border-subtle px-8 py-16 text-center">
+      <div class="hero-glow pointer-events-none absolute inset-0" aria-hidden="true"></div>
+      <h2 class="relative font-headline-lg text-headline-lg text-on-surface">{tl('home.ctaFooterHeading')}</h2>
+      <p class="relative mx-auto mt-3 max-w-xl text-on-surface-variant">{tl('home.ctaFooterText')}</p>
+      <div class="relative mt-8">
+        <a href={`#tools`} class="btn-primary-modern inline-flex items-center gap-2 px-8 py-4 text-lg">
+          {tl('home.cta')}
+          <span>→</span>
+        </a>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
+
+{/* Delegated click instrumentation for tool cards + categories (3.1.1).
+    Client-only; aggregate params only (locale, tool type / category). */}
+<script>
+  import { trackEvent, EVENTS } from '@/lib/analytics';
+
+  const locale = window.location.pathname.split('/')[1] || 'de';
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    const el = target.closest('[data-analytics]') as HTMLElement | null;
+    if (!el) return;
+    const kind = el.getAttribute('data-analytics');
+    if (kind === 'tool_card') {
+      trackEvent(EVENTS.clickToolCard, { locale, tool: el.getAttribute('data-tool') ?? '' });
+    } else if (kind === 'category') {
+      trackEvent(EVENTS.clickCategory, { locale, category: el.getAttribute('data-category') ?? '' });
+    }
+  });
+</script>

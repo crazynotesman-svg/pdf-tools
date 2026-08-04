@@ -1,0 +1,50 @@
+---
+/**
+ * SiteSchema.astro — site-level JSON-LD for generic pages (WebSite +
+ * Organization). Rendered by BaseLayout on non-tool pages.
+ *
+ *   WebSite:      name / url / inLanguage
+ *   Organization: name / url / logo / contactPoint (Ron, babong@163.com)
+ *
+ * All copy comes from i18n; nothing is hard-coded.
+ */
+import type { Locale } from '@/i18n/config';
+import { t } from '@/i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const site = Astro.site ?? new URL('https://pdf-tools.example.com');
+const siteName = t(locale, 'common.siteName');
+const contactEmail = t(locale, 'legal.contact.email');
+const contactName = t(locale, 'legal.contact.personName');
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      name: siteName,
+      url: site.href,
+      inLanguage: locale,
+      description: t(locale, 'home.subtitle'),
+    },
+    {
+      '@type': 'Organization',
+      name: siteName,
+      url: site.href,
+      logo: new URL('/og/pdf-tools.png', site).href,
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'customer support',
+        name: contactName,
+        email: contactEmail,
+      },
+    },
+  ],
+};
+---
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />

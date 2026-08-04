@@ -12,7 +12,7 @@
  * No PDF or other business logic is imported — pure content presentation.
  */
 import type { GetStaticPaths } from 'astro';
-import { render, type CollectionEntry } from 'astro:content';
+import { render, getCollection, type CollectionEntry } from 'astro:content';
 import { locales, type Locale } from '@/i18n/config';
 import { t } from '@/i18n/ui';
 import { getBCP47 } from '@/i18n/utils';
@@ -61,6 +61,14 @@ const dateFmt = new Intl.DateTimeFormat(getBCP47(locale), {
   month: 'long',
   day: 'numeric',
 });
+
+// Locale-scoped tool path → toolType map (build-time, data-driven) used by the
+// delegated CTA instrumentation below (Phase 3.2.3.8).
+const tools = await getCollection('tools');
+const toolPathMap: Record<string, string> = {};
+for (const tool of tools) {
+  toolPathMap[`/${locale}/${tool.data.slug[locale]}`] = tool.data.toolType;
+}
 
 const breadcrumb = [
   { name: t(locale, 'common.home'), url: `/${locale}` },
@@ -123,3 +131,31 @@ const breadcrumb = [
     </a>
   </article>
 </BaseLayout>
+
+{/* Build-time tool path → toolType map for the CTA instrumentation below.
+    Plain JSON payload (not a JS script) — no client processing, no escaping
+    surprises. Read at runtime by the bundled script. */}
+<script type="application/json" id="blog-cta-map" is:inline set:html={JSON.stringify(toolPathMap)} />
+
+{/* Delegated CTA instrumentation for tool links inside the article body
+    (Phase 3.2.3.8). Data-driven: the path→toolType map is built from the tools
+    collection at build time. Aggregate params only (article slug, tool type,
+    locale) — never file names or content. */}
+<script>
+  import { trackEvent, EVENTS } from '@/lib/analytics';
+
+  const locale = window.location.pathname.split('/')[1] || 'de';
+  const article = window.location.pathname.split('/')[3] || '';
+  const payload = document.getElementById('blog-cta-map');
+  const toolPathMap: Record<string, string> = payload ? JSON.parse(payload.textContent ?? '{}') : {};
+
+  document.querySelector('.article-body')?.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    const anchor = target.closest('a') as HTMLAnchorElement | null;
+    if (!anchor) return;
+    const path = anchor.pathname.replace(/\/$/, '');
+    const tool = toolPathMap[path];
+    if (!tool) return;
+    trackEvent(EVENTS.clickBlogToolCta, { article, tool, locale });
+  });
+</script>

@@ -26,3 +26,8 @@ sie zu einer einzigen Datei zusammenzuführen.
 
 Unser Werkzeug erledigt das vollständig in Ihrem Browser – ohne Upload auf einen
 Server. So bleiben sensible Dokumente privat.
+
+## Weiterlesen
+
+- [PDF komprimieren ohne Qualitätsverlust](/de/blog/pdf-komprimieren-ohne-qualitaetsverlust/) – so reduzieren Sie die Dateigröße
+- [PDF Wasserzeichen hinzufügen](/de/blog/pdf-wasserzeichen-hinzufuegen/) – Dokumente markieren und schützen

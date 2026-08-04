@@ -25,3 +25,8 @@ Glück lässt sich ein PDF problemlos drehen.
 4. Speichern Sie das gedrehte Dokument.
 
 Da alles lokal im Browser abläuft, bleiben Ihre Unterlagen auf Ihrem Gerät.
+
+## Weiterlesen
+
+- [PDF in JPG umwandeln](/de/blog/pdf-in-bilder-umwandeln/) – Seiten als Bilder speichern
+- [PDF komprimieren ohne Qualitätsverlust](/de/blog/pdf-komprimieren-ohne-qualitaetsverlust/) – Dateigröße reduzieren

@@ -26,3 +26,8 @@ combine them into a single file.
 
 Our tool does all of this entirely in your browser – with no upload to a server.
 That keeps sensitive documents private.
+
+## Read more
+
+- [How to compress a PDF without losing quality](/en/blog/compress-pdf-without-losing-quality/)
+- [PDF watermark guide](/en/blog/pdf-watermark-guide/)

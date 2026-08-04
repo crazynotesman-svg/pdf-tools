@@ -1,0 +1,16 @@
+---
+/**
+ * PdfUnlockIcon — an open padlock (remove password protection).
+ * Extends PdfIconBase; `class` is forwarded for size/color control.
+ */
+import PdfIconBase from './PdfIconBase.astro';
+
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+<PdfIconBase class={className}>
+  <rect width="18" height="11" x="3" y="11" rx="2" />
+  <path d="M7 11V7a5 5 0 0 1 9.9-1" />
+</PdfIconBase>

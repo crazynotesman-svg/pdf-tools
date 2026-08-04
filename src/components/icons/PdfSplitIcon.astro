@@ -1,0 +1,17 @@
+---
+/**
+ * PdfSplitIcon — a document splitting into separate pages.
+ * Extends PdfIconBase; `class` is forwarded for size/color control.
+ */
+import PdfIconBase from './PdfIconBase.astro';
+
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+<PdfIconBase class={className}>
+  <path d="M12 3v18" />
+  <path d="m7 8 5-5 5 5" />
+  <path d="m7 16 5 5 5-5" />
+</PdfIconBase>

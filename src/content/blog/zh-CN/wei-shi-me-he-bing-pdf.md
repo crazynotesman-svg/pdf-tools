@@ -24,3 +24,8 @@ draft: false
 3. 合并文件并下载结果。
 
 我们的工具完全在浏览器中运行——无需上传到任何服务器，因此敏感文档始终私密。
+
+## 延伸阅读
+
+- [如何在保证质量的前提下压缩 PDF 文件](/zh-CN/blog/compress-pdf-without-losing-quality/)
+- [如何给 PDF 添加水印](/zh-CN/blog/pdf-shui-yin-zhi-nan/)

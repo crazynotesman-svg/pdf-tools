@@ -25,3 +25,8 @@ that a PDF can be rotated without trouble.
 4. Save the rotated document.
 
 Because everything runs locally in your browser, your files stay on your device.
+
+## Read more
+
+- [How to convert PDF to JPG](/en/blog/convert-pdf-to-jpg/)
+- [How to compress a PDF without losing quality](/en/blog/compress-pdf-without-losing-quality/)

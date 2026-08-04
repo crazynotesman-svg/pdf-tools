@@ -13,6 +13,8 @@
     "preview": "astro preview",
     "check": "astro check",
     "check:i18n": "node scripts/check-i18n.mjs",
+    "og": "node scripts/generate-og.mjs",
+    "icons": "node scripts/generate-icons.mjs",
     "astro": "astro"
   },
   "dependencies": {
@@ -22,6 +24,7 @@
     "@astrojs/tailwind": "^6.0.0",
     "astro": "^5.0.0",
     "browser-image-compression": "^2.0.2",
+    "jspdf": "^2.5.2",
     "pdf-lib": "^1.17.1",
     "pdfjs-dist": "^4.0.0",
     "react": "^18.3.1",

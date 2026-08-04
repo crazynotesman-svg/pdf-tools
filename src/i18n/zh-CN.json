@@ -29,6 +29,26 @@
     "cta": "开始使用",
     "toolsHeading": "我们的 PDF 工具",
     "toolsSubheading": "所有工具完全在您的浏览器中运行。",
+    "popularHeading": "热门 PDF 工具",
+    "popularSubheading": "最常用的工具——直接在您的浏览器中使用。",
+    "howWorksHeading": "使用方法",
+    "howWorksSubheading": "三步完成 PDF 处理——无需注册。",
+    "step1Title": "选择文件",
+    "step1Text": "将 PDF 文件拖拽到方框中，或从设备中选择。",
+    "step2Title": "运行工具",
+    "step2Text": "调整选项并点击“开始处理”——一切都在您的浏览器本地运行。",
+    "step3Title": "下载",
+    "step3Text": "将处理完成的 PDF 直接保存到您的设备。",
+    "ctaFooterHeading": "准备好处理您的第一个文件了吗？",
+    "ctaFooterText": "所有工具均免费、私密，无需注册。",
+    "trust": {
+      "browserTitle": "100% 浏览器内运行",
+      "browserText": "您的文件永远不会离开您的设备。",
+      "noRegTitle": "无需注册",
+      "noRegText": "立即开始——无需账号，无需登录。",
+      "privacyTitle": "隐私优先",
+      "privacyText": "不上传，不在服务器存储任何内容。"
+    },
     "faq": [
       {
         "question": "我的文件安全吗？",
@@ -56,7 +76,33 @@
     "merge": "合并",
     "split": "拆分",
     "rotate": "旋转",
-    "toImage": "转为图片"
+    "toImage": "转为图片",
+    "compress": "压缩",
+    "protect": "加密保护",
+    "unlock": "解锁",
+    "watermark": "水印"
+  },
+  "toolPage": {
+    "faqHeading": "常见问题",
+    "featuresHeading": "主要功能",
+    "limitationsHeading": "说明与限制",
+    "relatedHeading": "相关工具",
+    "moreHeading": "更多工具",
+    "blogHeading": "相关文章",
+    "updated": "更新"
+  },
+  "toolCluster": {
+    "title": "分类",
+    "moreTools": "该分类下的更多工具",
+    "categories": {
+      "organize": "整理 PDF",
+      "convert": "转换 PDF",
+      "optimize": "优化 PDF",
+      "secure": "保护与加密 PDF"
+    }
+  },
+  "popular": {
+    "badge": "热门"
   },
   "pdfUi": {
     "title": "处理 PDF",
@@ -74,7 +120,35 @@
     "mergeHint": "选择两个或更多 PDF 以合并为一个。",
     "splitHint": "选择一个 PDF 文件以将其拆分。",
     "rotateHint": "选择一个 PDF 文件并指定旋转角度。",
-    "toImageHint": "选择一个 PDF 文件以转换为图片。"
+    "toImageHint": "选择一个 PDF 文件以转换为图片。",
+    "compressHint": "选择一个 PDF 文件以进行压缩。",
+    "protectHint": "选择一个 PDF 文件并设置密码。",
+    "unlockHint": "选择受密码保护的 PDF 并输入文档密码。",
+    "watermarkHint": "选择 PDF 并输入水印文字。",
+    "uploading": "正在读取文件…",
+    "completed": "完成——结果已就绪。",
+    "formatHint": "PDF · 最大 50MB",
+    "files": "个文件",
+    "dropActive": "松开即可上传",
+    "pages": "页",
+    "processAnother": "继续处理其他文件",
+    "compressModeLabel": "压缩模式",
+    "compressStandard": "标准压缩（保留可搜索文本）",
+    "compressStandardDesc": "保留质量和文本内容。",
+    "compressStrong": "强力压缩（最大限度减小体积）",
+    "compressStrongDesc": "最大程度减小体积，可能有质量损失。",
+    "qualityLabel": "质量",
+    "passwordLabel": "密码",
+    "unlockPasswordLabel": "文档密码",
+    "watermarkTextLabel": "水印文字",
+    "opacityLabel": "不透明度",
+    "passwordPlaceholder": "输入密码",
+    "watermarkPlaceholder": "例如：机密",
+    "wrongPassword": "密码错误，请重试。",
+    "feedbackTitle": "这个工具对你有帮助吗？",
+    "feedbackYes": "有帮助",
+    "feedbackNo": "没帮助",
+    "feedbackThanks": "感谢你的反馈！"
   },
   "legal": {
     "privacy": {
@@ -87,7 +161,11 @@
     },
     "contact": {
       "title": "联系我们",
-      "intro": "您可通过以下方式联系我们。"
+      "intro": "您可通过以下方式联系我们。",
+      "name": "联系人",
+      "personName": "Ron",
+      "emailLabel": "邮箱",
+      "email": "babong@163.com"
     }
   },
   "blog": {

@@ -1,0 +1,64 @@
+---
+/**
+ * TrustPanel — E-E-A-T / trust signals (Phase 2.2.6).
+ *
+ * Three fixed value props (100% browser-based / No registration / Privacy
+ * first), all copy from i18n (home.trust.*). Rendered on the landing page and
+ * inside tool pages. No hard-coded text, no business logic.
+ */
+import type { Locale } from '@/i18n/config';
+import { t } from '@/i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const tl = (key: Parameters<typeof t>[1]) => t(locale, key);
+
+const items = [
+  {
+    icon: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z',
+    title: tl('home.trust.browserTitle'),
+    text: tl('home.trust.browserText'),
+  },
+  {
+    icon: 'M22 11.08V12a10 10 0 1 1-5.93-9.14M22 4 12 14.01l-3-3',
+    title: tl('home.trust.noRegTitle'),
+    text: tl('home.trust.noRegText'),
+  },
+  {
+    icon: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10zM9 12l2 2 4-4',
+    title: tl('home.trust.privacyTitle'),
+    text: tl('home.trust.privacyText'),
+  },
+];
+---
+<section class="container-page" aria-label={tl('home.trust.privacyTitle')}>
+  <ul class="grid gap-4 sm:grid-cols-3">
+    {
+      items.map((item) => (
+        <li class="glass-card flex items-start gap-3 rounded-2xl border border-border-subtle p-5">
+          <span class="mt-0.5 grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-neon-blue/10 to-electric-purple/10 text-neon-blue">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="h-5 w-5"
+              aria-hidden="true"
+            >
+              <path d={item.icon} />
+            </svg>
+          </span>
+          <span>
+            <span class="block text-sm font-semibold text-on-surface">{item.title}</span>
+            <span class="mt-0.5 block text-sm leading-relaxed text-on-surface-variant">{item.text}</span>
+          </span>
+        </li>
+      ))
+    }
+  </ul>
+</section>

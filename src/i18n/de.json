@@ -29,6 +29,26 @@
     "cta": "Tool starten",
     "toolsHeading": "Unsere PDF-Werkzeuge",
     "toolsSubheading": "Alle Tools laufen vollständig in Ihrem Browser.",
+    "popularHeading": "Beliebte PDF-Werkzeuge",
+    "popularSubheading": "Die am häufigsten genutzten Werkzeuge – direkt in Ihrem Browser.",
+    "howWorksHeading": "So funktioniert es",
+    "howWorksSubheading": "In drei Schritten zum fertigen PDF – ohne Anmeldung.",
+    "step1Title": "Datei auswählen",
+    "step1Text": "Ziehen Sie Ihre PDF-Datei in das Feld oder wählen Sie sie von Ihrem Gerät.",
+    "step2Title": "Werkzeug ausführen",
+    "step2Text": "Passen Sie Optionen an und klicken Sie auf Verarbeiten – alles läuft lokal in Ihrem Browser.",
+    "step3Title": "Herunterladen",
+    "step3Text": "Speichern Sie das fertige PDF direkt auf Ihrem Gerät.",
+    "ctaFooterHeading": "Bereit für Ihre erste Datei?",
+    "ctaFooterText": "Alle Werkzeuge sind kostenlos, privat und benötigen keine Registrierung.",
+    "trust": {
+      "browserTitle": "100 % Browser-basiert",
+      "browserText": "Ihre Dateien verlassen niemals Ihr Gerät.",
+      "noRegTitle": "Ohne Registrierung",
+      "noRegText": "Sofort starten – kein Konto, kein Login.",
+      "privacyTitle": "Datenschutz zuerst",
+      "privacyText": "Kein Upload, keine Speicherung auf Servern."
+    },
     "faq": [
       {
         "question": "Sind meine Dateien sicher?",
@@ -56,7 +76,33 @@
     "merge": "Zusammenfügen",
     "split": "Teilen",
     "rotate": "Drehen",
-    "toImage": "In Bilder umwandeln"
+    "toImage": "In Bilder umwandeln",
+    "compress": "Komprimieren",
+    "protect": "Schützen",
+    "unlock": "Entsperren",
+    "watermark": "Wasserzeichen"
+  },
+  "toolPage": {
+    "faqHeading": "Häufige Fragen",
+    "featuresHeading": "Wichtige Funktionen",
+    "limitationsHeading": "Hinweise und Grenzen",
+    "relatedHeading": "Ähnliche Werkzeuge",
+    "moreHeading": "Weitere Werkzeuge",
+    "blogHeading": "Passende Artikel",
+    "updated": "Aktualisiert"
+  },
+  "toolCluster": {
+    "title": "Kategorie",
+    "moreTools": "Mehr in dieser Kategorie",
+    "categories": {
+      "organize": "PDF organisieren",
+      "convert": "PDF konvertieren",
+      "optimize": "PDF optimieren",
+      "secure": "PDF schützen & sichern"
+    }
+  },
+  "popular": {
+    "badge": "Beliebt"
   },
   "pdfUi": {
     "title": "PDF verarbeiten",
@@ -74,7 +120,35 @@
     "mergeHint": "Wählen Sie zwei oder mehr PDFs, um sie zusammenzuführen.",
     "splitHint": "Wählen Sie eine PDF-Datei, um sie zu teilen.",
     "rotateHint": "Wählen Sie eine PDF-Datei und die gewünschte Drehung.",
-    "toImageHint": "Wählen Sie eine PDF-Datei, um sie in Bilder umzuwandeln."
+    "toImageHint": "Wählen Sie eine PDF-Datei, um sie in Bilder umzuwandeln.",
+    "compressHint": "Wählen Sie eine PDF-Datei, um sie zu komprimieren.",
+    "protectHint": "Wählen Sie eine PDF-Datei und vergeben Sie ein Passwort.",
+    "unlockHint": "Wählen Sie eine passwortgeschützte PDF-Datei und geben Sie das Passwort ein.",
+    "watermarkHint": "Wählen Sie eine PDF-Datei und geben Sie den Wasserzeichentext ein.",
+    "uploading": "Dateien werden gelesen…",
+    "completed": "Fertig – Ihr Ergebnis ist bereit.",
+    "formatHint": "PDF · Max 50MB",
+    "files": "Dateien",
+    "dropActive": "Loslassen zum Hochladen",
+    "pages": "Seiten",
+    "processAnother": "Weitere Datei verarbeiten",
+    "compressModeLabel": "Komprimierungsmodus",
+    "compressStandard": "Standard (Text bleibt durchsuchbar)",
+    "compressStandardDesc": "Qualität und Text bleiben erhalten.",
+    "compressStrong": "Stark (maximale Größenreduzierung)",
+    "compressStrongDesc": "Maximale Reduzierung, mögliche Qualitätseinbußen.",
+    "qualityLabel": "Qualität",
+    "passwordLabel": "Passwort",
+    "unlockPasswordLabel": "Dokument-Passwort",
+    "watermarkTextLabel": "Wasserzeichentext",
+    "opacityLabel": "Deckkraft",
+    "passwordPlaceholder": "Passwort eingeben",
+    "watermarkPlaceholder": "z. B. VERTRAULICH",
+    "wrongPassword": "Passwort falsch – bitte erneut versuchen.",
+    "feedbackTitle": "War dieses Werkzeug hilfreich?",
+    "feedbackYes": "Ja",
+    "feedbackNo": "Nein",
+    "feedbackThanks": "Danke für Ihr Feedback!"
   },
   "legal": {
     "privacy": {
@@ -87,7 +161,11 @@
     },
     "contact": {
       "title": "Kontakt",
-      "intro": "Sie erreichen uns über die folgenden Kanäle."
+      "intro": "Sie erreichen uns über die folgenden Kanäle.",
+      "name": "Kontaktperson",
+      "personName": "Ron",
+      "emailLabel": "E-Mail",
+      "email": "babong@163.com"
     }
   },
   "blog": {

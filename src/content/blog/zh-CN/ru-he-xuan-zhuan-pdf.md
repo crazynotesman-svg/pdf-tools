@@ -24,3 +24,8 @@ draft: false
 4. 保存旋转后的文档。
 
 由于一切都在浏览器本地完成，您的文件始终保留在设备上。
+
+## 延伸阅读
+
+- [如何将 PDF 转换为 JPG](/zh-CN/blog/jiang-pdf-zhuan-huan-wei-jpg/)
+- [如何在保证质量的前提下压缩 PDF 文件](/zh-CN/blog/compress-pdf-without-losing-quality/)

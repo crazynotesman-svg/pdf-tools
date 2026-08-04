@@ -1,7 +1,10 @@
 ---
 /**
- * Contact (Kontakt) — structural placeholder, all copy from i18n.
- * Three locales via getStaticPaths. Real channels added before launch.
+ * Contact (Kontakt) — real channel info, all copy from i18n.
+ *
+ * Three locales via getStaticPaths. The contact person + email come from
+ * `legal.contact.*` so the page stays fully translated (no hard-coded Chinese)
+ * and SEO-clean (title / description / canonical / hreflang via BaseLayout).
  */
 import type { GetStaticPaths } from 'astro';
 import { locales, type Locale } from '@/i18n/config';
@@ -27,10 +30,72 @@ const breadcrumb = [
   description={tl('legal.contact.intro')}
   breadcrumb={breadcrumb}
 >
-  <section class="container-page py-12">
-    <h1 class="text-3xl font-semibold tracking-tight text-ink-900">
-      {tl('legal.contact.title')}
-    </h1>
-    <p class="mt-4 max-w-3xl text-lg text-ink-600">{tl('legal.contact.intro')}</p>
+  <section class="container-page py-16 sm:py-20">
+    <div class="mx-auto max-w-2xl">
+      <div
+        class="mb-4 inline-flex items-center gap-2 rounded-full border border-border-subtle bg-white/70 px-4 py-1.5 text-label-caps uppercase tracking-wider text-on-surface-variant backdrop-blur"
+      >
+        <span class="text-neon-blue">✉</span>
+        <span>{tl('common.menu.contact')}</span>
+      </div>
+      <h1 class="text-4xl font-bold tracking-tight text-on-surface sm:text-5xl">
+        {tl('legal.contact.title')}
+      </h1>
+      <p class="mt-4 text-lg leading-relaxed text-on-surface-variant">{tl('legal.contact.intro')}</p>
+
+      <div class="glass-card mt-10 rounded-3xl border border-border-subtle p-8">
+        <ul class="space-y-6">
+          <li class="flex items-start gap-4">
+            <div
+              class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-neon-blue/10 to-electric-purple/10 text-neon-blue"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="h-5 w-5"
+                ><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg
+              >
+            </div>
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-on-surface-variant">
+                {tl('legal.contact.name')}
+              </p>
+              <p class="mt-1 text-lg font-semibold text-on-surface">{tl('legal.contact.personName')}</p>
+            </div>
+          </li>
+          <li class="flex items-start gap-4">
+            <div
+              class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-neon-blue/10 to-electric-purple/10 text-neon-blue"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="h-5 w-5"
+                ><rect width="20" height="16" x="2" y="4" rx="2" /><path d="m22 7-10 5L2 7" /></svg
+              >
+            </div>
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-on-surface-variant">
+                {tl('legal.contact.emailLabel')}
+              </p>
+              <a
+                href={`mailto:${tl('legal.contact.email')}`}
+                class="mt-1 inline-block text-lg font-semibold text-neon-blue transition-colors hover:text-electric-purple"
+              >
+                {tl('legal.contact.email')}
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
   </section>
 </BaseLayout>

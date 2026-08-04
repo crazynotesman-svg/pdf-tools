@@ -1,0 +1,67 @@
+---
+/**
+ * HowItWorks — three-step explainer (Upload / Process / Download).
+ * All copy from i18n (home.step*). Reused on the landing page and tool pages.
+ */
+import type { Locale } from '@/i18n/config';
+import { t } from '@/i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const tl = (key: Parameters<typeof t>[1]) => t(locale, key);
+
+const steps = [
+  {
+    n: '01',
+    icon: 'M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12',
+    title: tl('home.step1Title'),
+    text: tl('home.step1Text'),
+  },
+  {
+    n: '02',
+    icon: 'M13 2 3 14h9l-1 8 10-12h-9l1-8z',
+    title: tl('home.step2Title'),
+    text: tl('home.step2Text'),
+  },
+  {
+    n: '03',
+    icon: 'M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3',
+    title: tl('home.step3Title'),
+    text: tl('home.step3Text'),
+  },
+];
+---
+<section class="container-page" aria-label={tl('home.howWorksHeading')}>
+  <div class="mx-auto max-w-2xl text-center">
+    <h2 class="font-headline-lg text-headline-lg text-on-surface">{tl('home.howWorksHeading')}</h2>
+    <p class="mt-2 text-on-surface-variant">{tl('home.howWorksSubheading')}</p>
+  </div>
+  <ol class="mt-12 grid gap-6 sm:grid-cols-3">
+    {
+      steps.map((s) => (
+        <li class="relative rounded-2xl border border-border-subtle bg-surface-container-low p-6">
+          <span class="font-code-sm text-xs font-semibold tracking-widest text-neon-blue">{s.n}</span>
+          <span class="mt-4 grid h-11 w-11 place-items-center rounded-xl bg-gradient-to-br from-neon-blue/10 to-electric-purple/10 text-neon-blue">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="h-5 w-5"
+              aria-hidden="true"
+            >
+              <path d={s.icon} />
+            </svg>
+          </span>
+          <h3 class="mt-4 font-title-md text-title-md text-on-surface">{s.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-on-surface-variant">{s.text}</p>
+        </li>
+      ))
+    }
+  </ol>
+</section>

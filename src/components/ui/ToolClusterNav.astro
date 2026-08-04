@@ -1,0 +1,85 @@
+---
+/**
+ * ToolClusterNav — renders the tools that share the current tool's
+ * `toolCluster` (semantic topic group), excluding the current tool.
+ *
+ * Phase 3.2.2.4: makes the data-layer `toolCluster` visible as internal links,
+ * complementing (not duplicating) RelatedTools:
+ *   - RelatedTools: hand-curated related/recommended tools
+ *   - ToolClusterNav: automatic same-cluster group ("More in <category>")
+ *
+ * Click instrumentation: `data-analytics-cluster` + `data-tool` attributes are
+ * picked up by the bundled client script → `click_cluster_tool` event.
+ */
+import type { Locale } from '@/i18n/config';
+import type { TranslationKey } from '@/i18n/ui';
+import { getCollection } from 'astro:content';
+import { getToolPath } from '@/lib/tools/router';
+import { t } from '@/i18n/ui';
+import ToolIcon from '@/components/ui/ToolIcon.astro';
+
+interface Props {
+  /** Current tool's cluster id (e.g. 'optimize'). */
+  cluster: string;
+  /** Current tool id — excluded from the list. */
+  currentTool: string;
+  locale: Locale;
+}
+
+const { cluster, currentTool, locale } = Astro.props;
+const tl = (key: Parameters<typeof t>[1]) => t(locale, key);
+
+const all = await getCollection('tools');
+const sameCluster = all.filter((tool) => tool.data.toolCluster === cluster && tool.data.id !== currentTool);
+const clusterKey = `toolCluster.categories.${cluster}` as TranslationKey;
+const clusterLabel = t(locale, clusterKey);
+---
+
+{
+  sameCluster.length > 0 && (
+    <section class="container-page" aria-label={tl('toolCluster.moreTools')}>
+      <h2 class="mb-4 font-headline-lg text-headline-lg text-on-surface">
+        {tl('toolCluster.moreTools')}
+        <span class="ml-2 text-base font-medium text-on-surface-variant">{clusterLabel}</span>
+      </h2>
+      <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          sameCluster.map((tool) => (
+            <li>
+              <a
+                href={getToolPath(locale, tool.data.slug[locale])}
+                data-analytics-cluster={cluster}
+                data-tool={tool.data.id}
+                class="glass-card group flex items-center gap-3 rounded-xl border border-border-subtle p-4 transition-colors hover:border-neon-blue/40"
+              >
+                <span class="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-gradient-to-br from-neon-blue/10 to-electric-purple/10 text-neon-blue">
+                  <ToolIcon toolType={tool.data.toolType} class="h-5 w-5" />
+                </span>
+                <span class="text-sm font-medium text-on-surface group-hover:text-neon-blue">
+                  {tool.data.content[locale].h1}
+                </span>
+                <span class="ml-auto text-on-surface-variant transition-transform group-hover:translate-x-0.5" aria-hidden="true">→</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  )
+}
+
+<script>
+  import { trackEvent, EVENTS } from '@/lib/analytics';
+
+  const locale = window.location.pathname.split('/')[1] || 'de';
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    const el = target.closest('[data-analytics-cluster]') as HTMLElement | null;
+    if (!el) return;
+    trackEvent(EVENTS.clickClusterTool, {
+      locale,
+      tool: el.getAttribute('data-tool') ?? '',
+      cluster: el.getAttribute('data-analytics-cluster') ?? '',
+    });
+  });
+</script>

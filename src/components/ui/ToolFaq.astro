@@ -1,0 +1,47 @@
+---
+/**
+ * ToolFaq — renders the tool's per-locale FAQ from the MDX as an accordion.
+ * Complements the FAQPage JSON-LD emitted by BaseLayout (visible content
+ * matches the structured data). Presentation only.
+ */
+import type { Locale } from '@/i18n/config';
+import type { CollectionEntry } from 'astro:content';
+import { t } from '@/i18n/ui';
+
+interface Props {
+  tool: CollectionEntry<'tools'>;
+  locale: Locale;
+}
+
+const { tool, locale } = Astro.props;
+const tl = (key: Parameters<typeof t>[1]) => t(locale, key);
+const faqs = tool.data.faq[locale];
+---
+<section id="faq" class="container-page py-8" aria-label={tl('toolPage.faqHeading')}>
+  <h2 class="mb-6 font-headline-lg text-headline-lg text-on-surface">{tl('toolPage.faqHeading')}</h2>
+  <div class="mx-auto max-w-4xl space-y-4">
+    {
+      faqs.map((item) => (
+        <details class="glass-card group overflow-hidden rounded-2xl border border-border-subtle" open>
+          <summary class="flex cursor-pointer list-none items-center justify-between p-6 font-medium text-on-surface">
+            {item.question}
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="h-5 w-5 text-on-surface-variant transition-transform group-open:rotate-180"
+            >
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </summary>
+          <div class="border-t border-border-subtle p-6 pt-0 text-on-surface-variant">
+            {item.answer}
+          </div>
+        </details>
+      ))
+    }
+  </div>
+</section>

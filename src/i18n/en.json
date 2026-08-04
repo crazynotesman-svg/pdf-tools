@@ -29,6 +29,26 @@
     "cta": "Start tool",
     "toolsHeading": "Our PDF tools",
     "toolsSubheading": "All tools run entirely in your browser.",
+    "popularHeading": "Popular PDF tools",
+    "popularSubheading": "The most-used tools – right in your browser.",
+    "howWorksHeading": "How it works",
+    "howWorksSubheading": "Three steps to a finished PDF – no sign-up.",
+    "step1Title": "Choose a file",
+    "step1Text": "Drag & drop your PDF into the field or pick it from your device.",
+    "step2Title": "Run the tool",
+    "step2Text": "Adjust options and click Process – everything runs locally in your browser.",
+    "step3Title": "Download",
+    "step3Text": "Save the finished PDF straight to your device.",
+    "ctaFooterHeading": "Ready for your first file?",
+    "ctaFooterText": "Every tool is free, private and requires no registration.",
+    "trust": {
+      "browserTitle": "100% browser-based",
+      "browserText": "Your files never leave your device.",
+      "noRegTitle": "No registration",
+      "noRegText": "Start instantly – no account, no login.",
+      "privacyTitle": "Privacy first",
+      "privacyText": "No upload, no storage on servers."
+    },
     "faq": [
       {
         "question": "Are my files secure?",
@@ -56,7 +76,33 @@
     "merge": "Merge",
     "split": "Split",
     "rotate": "Rotate",
-    "toImage": "Convert to image"
+    "toImage": "Convert to images",
+    "compress": "Compress",
+    "protect": "Protect",
+    "unlock": "Unlock",
+    "watermark": "Watermark"
+  },
+  "toolPage": {
+    "faqHeading": "Frequently asked questions",
+    "featuresHeading": "Key features",
+    "limitationsHeading": "Notes & limitations",
+    "relatedHeading": "Related tools",
+    "moreHeading": "More tools",
+    "blogHeading": "Related articles",
+    "updated": "Updated"
+  },
+  "toolCluster": {
+    "title": "Category",
+    "moreTools": "More in this category",
+    "categories": {
+      "organize": "Organize PDF",
+      "convert": "Convert PDF",
+      "optimize": "Optimize PDF",
+      "secure": "Protect & secure PDF"
+    }
+  },
+  "popular": {
+    "badge": "Popular"
   },
   "pdfUi": {
     "title": "Process PDF",
@@ -74,7 +120,35 @@
     "mergeHint": "Select two or more PDFs to merge them into one.",
     "splitHint": "Select a PDF file to split it into parts.",
     "rotateHint": "Select a PDF file and the rotation you want.",
-    "toImageHint": "Select a PDF file to convert it to images."
+    "toImageHint": "Select a PDF file to convert it to images.",
+    "compressHint": "Select a PDF file to compress it.",
+    "protectHint": "Select a PDF file and set a password.",
+    "unlockHint": "Select a password-protected PDF and enter its password.",
+    "watermarkHint": "Select a PDF and enter your watermark text.",
+    "uploading": "Reading files…",
+    "completed": "Done – your result is ready.",
+    "formatHint": "PDF · Max 50MB",
+    "files": "files",
+    "dropActive": "Release to upload",
+    "pages": "pages",
+    "processAnother": "Process another file",
+    "compressModeLabel": "Compression mode",
+    "compressStandard": "Standard (keeps searchable text)",
+    "compressStandardDesc": "Quality and text are preserved.",
+    "compressStrong": "Strong (maximum size reduction)",
+    "compressStrongDesc": "Maximum reduction, possible quality loss.",
+    "qualityLabel": "Quality",
+    "passwordLabel": "Password",
+    "unlockPasswordLabel": "Document password",
+    "watermarkTextLabel": "Watermark text",
+    "opacityLabel": "Opacity",
+    "passwordPlaceholder": "Enter password",
+    "watermarkPlaceholder": "e.g. CONFIDENTIAL",
+    "wrongPassword": "Wrong password – please try again.",
+    "feedbackTitle": "Was this tool helpful?",
+    "feedbackYes": "Yes",
+    "feedbackNo": "No",
+    "feedbackThanks": "Thanks for your feedback!"
   },
   "legal": {
     "privacy": {
@@ -87,7 +161,11 @@
     },
     "contact": {
       "title": "Contact",
-      "intro": "Reach us through the following channels."
+      "intro": "Reach us through the following channels.",
+      "name": "Contact Person",
+      "personName": "Ron",
+      "emailLabel": "Email",
+      "email": "babong@163.com"
     }
   },
   "blog": {

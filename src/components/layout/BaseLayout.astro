@@ -26,6 +26,8 @@ import StructuredData from '@/components/seo/StructuredData.astro';
 import FaqSchema from '@/components/seo/FaqSchema.astro';
 import HowToSchema from '@/components/seo/HowToSchema.astro';
 import Breadcrumb from '@/components/seo/Breadcrumb.astro';
+import SiteSchema from '@/components/seo/SiteSchema.astro';
+import Analytics from '@/components/analytics/Analytics.astro';
 
 // Global stylesheet — Tailwind base/components/utilities + site theme.
 // The @astrojs/tailwind integration is configured with applyBaseStyles:false,
@@ -72,6 +74,17 @@ const xDefaultHref = altMap ? (altMap.de ?? Object.values(altMap)[0] ?? pathname
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    {/* PWA-ready assets (no service worker) — Phase 2.3.6 */}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="/favicon-16.png" sizes="16x16" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#2563EB" />
+
+    {/* Analytics script injection — renders nothing unless PUBLIC_ANALYTICS_PROVIDER is set */}
+    <Analytics />
+
     {
       tool ? (
         <>
@@ -102,6 +115,8 @@ const xDefaultHref = altMap ? (altMap.de ?? Object.values(altMap)[0] ?? pathname
               href={new URL(feed.href, site).href}
             />
           )}
+          {/* Site-level WebSite + Organization schema (2.3.1 / 2.3.2) */}
+          <SiteSchema locale={locale} />
           <meta property="og:type" content="website" />
           <meta property="og:title" content={pageTitle} />
           <meta property="og:description" content={pageDescription} />
@@ -125,5 +140,21 @@ const xDefaultHref = altMap ? (altMap.de ?? Object.values(altMap)[0] ?? pathname
       <slot />
     </main>
     <Footer locale={locale} />
+
+    {/* Page-view with context — client-only, SSR safe (runs in the browser).
+        pageType is inferred from the URL; never blocks rendering. */}
+    <script>
+      import { trackPageView } from '@/lib/analytics';
+
+      const pathname = window.location.pathname;
+      const locale = pathname.split('/')[1] || 'de';
+      const pageType = (() => {
+        if (/\/blog(\/|$)/.test(pathname)) return 'blog';
+        if (/\/(contact|privacy|impressum)(\/|$)/.test(pathname)) return 'legal';
+        if (pathname === '/404.html') return 'other';
+        return pathname.split('/').filter(Boolean).length >= 2 ? 'tool' : 'home';
+      })();
+      trackPageView({ locale, pathname, pageType });
+    </script>
   </body>
 </html>

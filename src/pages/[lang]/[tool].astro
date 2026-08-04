@@ -1,18 +1,15 @@
 ---
 /**
- * Dynamic tool page — one route generates (locale × tool) = 12 pages.
+ * Dynamic tool page — one route generates (locale × tool) = 24 pages.
  *
- * Per T6 #3: getStaticPaths enumerates every (locale, slug[locale]) pair so the
- * URL is correct per language (e.g. /de/pdf-drehen vs /en/pdf-rotate). The page
- * composition is entirely data-driven from the content entry:
- *   BaseLayout          → head + Meta/StructuredData/FaqSchema/HowToSchema
- *   ToolHero            → H1 + intro (from content[locale])
- *   PdfDropZone island  → browser-side PDF handling (client:visible). The
- *                         Astro page passes (operation, locale) only; ALL PDF
- *                         logic lives in src/lib/pdf via the island — none here.
- *   SeoContent          → long-form MDX article (locale-filtered)
- *   RelatedTools        → cross-links from tool.data.relatedTools (ids only)
- *   AdSlot              → top / middle / footer placements
+ * Phase 2.2.2 conversion-optimized order:
+ *   ToolHero → TrustPanel → Large upload panel (PdfDropZone) → AdSlot(top)
+ *   → Feature highlights (ToolFeatures) → How it works (HowItWorks)
+ *   → SEO article (SeoContent) → AdSlot(middle) → Related tools
+ *   → Tool FAQ (ToolFaq) → AdSlot(footer)
+ *
+ * Everything is data-driven from the content entry; the Astro page only
+ * passes (operation, locale) to the island. No PDF logic lives here.
  */
 import type { GetStaticPaths } from 'astro';
 import { locales, type Locale } from '@/i18n/config';
@@ -21,8 +18,14 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import { getToolPath } from '@/lib/tools/router';
 import BaseLayout from '@/components/layout/BaseLayout.astro';
 import ToolHero from '@/components/ui/ToolHero.astro';
+import TrustPanel from '@/components/ui/TrustPanel.astro';
 import SeoContent from '@/components/ui/SeoContent.astro';
 import RelatedTools from '@/components/ui/RelatedTools.astro';
+import ToolClusterNav from '@/components/ui/ToolClusterNav.astro';
+import ToolFeatures from '@/components/ui/ToolFeatures.astro';
+import ToolFaq from '@/components/ui/ToolFaq.astro';
+import ToolBlogLinks from '@/components/ui/ToolBlogLinks.astro';
+import HowItWorks from '@/components/ui/HowItWorks.astro';
 import AdSlot from '@/components/ui/AdSlot.astro';
 import PdfDropZone from '@/components/ui/PdfDropZone.tsx';
 
@@ -61,15 +64,28 @@ const breadcrumb = [
 <BaseLayout locale={locale} tool={tool} breadcrumb={breadcrumb}>
   <ToolHero tool={tool} locale={locale} />
 
-  {/* Ad placement: just below the hero */}
-  <AdSlot position="top" />
+  {/* Trust signals right under the hero */}
+  <div class="py-4">
+    <TrustPanel locale={locale} />
+  </div>
 
-  {/* Browser-side PDF handling. The island owns all PDF logic (via
-      src/lib/pdf); this page only supplies which operation + the locale.
-      SSR renders the static shell so the CTA is indexed before hydration. */}
-  <section class="container-page py-6">
+  {/* ===== Large upload panel (browser-side PDF handling) ===== */}
+  <section class="container-page py-8">
     <PdfDropZone operation={tool.data.toolType} locale={locale} client:visible />
   </section>
+
+  {/* Ad placement: below the upload panel */}
+  <AdSlot position="top" />
+
+  {/* Feature highlights + benefits + limitations (Phase 2.2 schema) */}
+  <div class="py-8">
+    <ToolFeatures tool={tool} locale={locale} />
+  </div>
+
+  {/* How it works */}
+  <div class="py-8">
+    <HowItWorks locale={locale} />
+  </div>
 
   {/* Long-form SEO article body (locale-filtered) */}
   <SeoContent tool={tool} locale={locale} />
@@ -77,11 +93,49 @@ const breadcrumb = [
   {/* Ad placement: inside the content area */}
   <AdSlot position="middle" />
 
+  {/* Same-cluster group (data-driven via toolCluster) — Phase 3.2.2 */}
+  <div class="py-8">
+    <ToolClusterNav cluster={tool.data.toolCluster} currentTool={tool.data.id} locale={locale} />
+  </div>
+
   {/* Internal cross-links (ids resolved by RelatedTools) */}
   <section class="container-page py-8">
-    <RelatedTools relatedToolIds={tool.data.relatedTools} locale={locale} />
+    <RelatedTools
+      relatedToolIds={tool.data.relatedTools}
+      recommendedToolIds={tool.data.recommendedTools}
+      locale={locale}
+    />
   </section>
+
+  {/* Related blog articles (content loop: Tool → Blog) — Phase 3.2.5 */}
+  <ToolBlogLinks
+    relatedBlogPosts={tool.data.relatedBlogPosts}
+    toolType={tool.data.toolType}
+    locale={locale}
+  />
+
+  {/* Visible FAQ (mirrors FAQPage JSON-LD) */}
+  <ToolFaq tool={tool} locale={locale} />
 
   {/* Ad placement: near the footer */}
   <AdSlot position="footer" />
 </BaseLayout>
+
+{/* Delegated click instrumentation for the Tool → Blog article cards
+    (Phase 3.2.5.1). Aggregate params only (toolType, article slug, locale) —
+    never file names or content. noop provider short-circuits everything. */}
+<script>
+  import { trackEvent, EVENTS } from '@/lib/analytics';
+
+  const locale = window.location.pathname.split('/')[1] || 'de';
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    const el = target.closest('[data-analytics="tool_blog_article"]') as HTMLElement | null;
+    if (!el) return;
+    trackEvent(EVENTS.clickToolBlogArticle, {
+      tool: el.getAttribute('data-tool') ?? '',
+      article: el.getAttribute('data-article') ?? '',
+      locale,
+    });
+  });
+</script>

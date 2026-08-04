@@ -2,10 +2,11 @@
 /**
  * RelatedTools.astro — internal cross-links on a tool page.
  *
- * Per project decision (#7): the content field `relatedTools` stays a plain
- * list of tool ids (no nested objects) to keep authoring simple. This
- * component resolves each id to its localized name + URL at render time via
- * the router helpers. No hard-coded tool facts.
+ * Phase 2.2.5: renders two tiers:
+ *   - "relatedTools" (primary) as pill links
+ *   - "recommendedTools" (wider authority set, optional) as a "More tools"
+ *     list. IDs are resolved to localized names + URLs via the router at
+ *     render time. No hard-coded tool facts.
  */
 import type { Locale } from '@/i18n/config';
 import { t } from '@/i18n/ui';
@@ -13,37 +14,69 @@ import { getToolById, getToolUrl } from '@/lib/tools/router';
 
 interface Props {
   relatedToolIds: string[];
+  recommendedToolIds?: string[];
   locale: Locale;
 }
 
-const { relatedToolIds, locale } = Astro.props;
+const { relatedToolIds, recommendedToolIds = [], locale } = Astro.props;
+const tl = (key: Parameters<typeof t>[1]) => t(locale, key);
 
-const items = await Promise.all(
-  relatedToolIds.map(async (id) => {
-    const entry = await getToolById(id);
-    return {
-      id,
-      name: entry ? entry.data.content[locale].h1 : id,
-      url: await getToolUrl(id, locale),
-    };
-  })
-);
+async function resolve(ids: string[]) {
+  return Promise.all(
+    ids.map(async (id) => {
+      const entry = await getToolById(id);
+      return {
+        id,
+        name: entry ? entry.data.content[locale].h1 : id,
+        url: await getToolUrl(id, locale),
+      };
+    }),
+  );
+}
+
+const related = await resolve(relatedToolIds);
+// De-duplicate: recommended set may overlap with related.
+const seen = new Set(relatedToolIds);
+const recommended = (await resolve(recommendedToolIds)).filter((r) => !seen.has(r.id));
 ---
 
-<section class="related-tools" aria-label="Related tools">
-  <h2 class="mb-4 font-headline-lg text-headline-lg text-on-surface">{t(locale, 'home.toolsHeading')}</h2>
-  <ul class="related-tools__list flex flex-wrap gap-3">
-    {
-      items.map((it) => (
-        <li>
-          <a
-            href={it.url}
-            class="glass-panel inline-flex items-center gap-1 rounded-full border border-border-subtle px-4 py-1.5 text-sm text-on-surface-variant transition-colors hover:text-neon-blue"
-          >
-            {it.name}
-          </a>
-        </li>
-      ))
-    }
-  </ul>
-</section>
+{related.length > 0 && (
+  <section class="related-tools" aria-label="Related tools">
+    <h2 class="mb-4 font-headline-lg text-headline-lg text-on-surface">{tl('toolPage.relatedHeading')}</h2>
+    <ul class="flex flex-wrap gap-3">
+      {
+        related.map((it) => (
+          <li>
+            <a
+              href={it.url}
+              class="glass-panel inline-flex items-center gap-1 rounded-full border border-border-subtle px-4 py-1.5 text-sm text-on-surface-variant transition-colors hover:text-neon-blue"
+            >
+              {it.name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+)}
+
+{recommended.length > 0 && (
+  <section class="mt-10" aria-label="More tools">
+    <h2 class="mb-4 font-headline-lg text-headline-lg text-on-surface">{tl('toolPage.moreHeading')}</h2>
+    <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        recommended.map((it) => (
+          <li>
+            <a
+              href={it.url}
+              class="glass-card flex items-center justify-between gap-2 rounded-xl border border-border-subtle px-4 py-3 text-sm font-medium text-on-surface transition-colors hover:border-neon-blue/40 hover:text-neon-blue"
+            >
+              {it.name}
+              <span aria-hidden="true">→</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+)}
