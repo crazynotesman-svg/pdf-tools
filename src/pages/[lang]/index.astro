@@ -37,7 +37,7 @@ const tl = (key: Parameters<typeof t>[1]) => t(locale, key);
 // Featured-first ordering (Phase 3.2.2): `priority` ASC, `popular` flagged.
 const sortedTools = [...tools].sort((a, b) => (a.data.priority ?? 99) - (b.data.priority ?? 99));
 
-// Group tools by their operation family (toolType) for the "category" section.
+// Group tools by their operation family (toolType) for the hero tagline.
 type ToolType = ToolEntry['data']['toolType'];
 const grouped = tools.reduce<Record<ToolType, ToolEntry[]>>((acc, tool) => {
   const type = tool.data.toolType;
@@ -45,6 +45,13 @@ const grouped = tools.reduce<Record<ToolType, ToolEntry[]>>((acc, tool) => {
   return acc;
 }, {} as Record<ToolType, ToolEntry[]>);
 const categoryOrder = Object.keys(grouped) as ToolType[];
+
+// Semantic cluster grouping for the "browse by category" section (Phase 3.4.0):
+// four horizontal category cards (organize/convert/optimize/secure) instead of
+// eight stacked single-tool rows. Labels come from toolCluster.categories.*.
+type ClusterId = 'organize' | 'convert' | 'optimize' | 'secure';
+const CLUSTER_ORDER: ClusterId[] = ['organize', 'convert', 'optimize', 'secure'];
+const clusterTools = (cluster: string) => tools.filter((tool) => tool.data.toolCluster === cluster);
 
 const tagline = categoryOrder.map((type) => t(locale, `categories.${type}`)).join(' · ');
 const breadcrumb = [{ name: tl('common.home'), url: `/${locale}` }];
@@ -142,30 +149,42 @@ const breadcrumb = [{ name: tl('common.home'), url: `/${locale}` }];
     </ul>
   </section>
 
-  {/* ===== Categories (dynamic grouping by toolType) ===== */}
+  {/* ===== Categories (semantic clusters, horizontal cards — Phase 3.4.0) ===== */}
   <section id="categories" class="container-page py-16">
     <h2 class="font-headline-lg text-headline-lg text-on-surface">{tl('home.categoriesHeading')}</h2>
-    <div class="mt-6 space-y-8">
+    <div class="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
       {
-        categoryOrder.map((type) => (
-          <div>
-            <h3 class="font-medium text-on-surface">{t(locale, `categories.${type}`)}</h3>
-            <ul class="mt-3 flex flex-wrap gap-3">
-              {grouped[type].map((tool) => (
-                <li>
-                  <a
-                    href={getToolPath(locale, tool.data.slug[locale])}
-                    data-analytics="category"
-                    data-category={type}
-                    class="glass-card inline-block rounded-full border border-border-subtle px-4 py-1.5 text-sm text-on-surface-variant transition-colors hover:text-neon-blue"
-                  >
-                    {tool.data.content[locale].h1}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))
+        CLUSTER_ORDER.map((cluster) => {
+          const items = clusterTools(cluster);
+          if (items.length === 0) return null;
+          return (
+            <div class="glass-card flex flex-col rounded-2xl border border-border-subtle p-5">
+              <h3 class="text-xs font-semibold uppercase tracking-wider text-on-surface-variant">
+                {t(locale, `toolCluster.categories.${cluster}`)}
+              </h3>
+              <ul class="mt-3 flex-1 space-y-1">
+                {items.map((tool) => (
+                  <li>
+                    <a
+                      href={getToolPath(locale, tool.data.slug[locale])}
+                      data-analytics="category"
+                      data-category={tool.data.toolType}
+                      class="group flex items-center justify-between gap-2 rounded-lg px-3 py-2 text-sm font-medium text-on-surface transition-colors hover:bg-neon-blue/5 hover:text-neon-blue"
+                    >
+                      {tool.data.content[locale].h1}
+                      <span
+                        aria-hidden="true"
+                        class="text-on-surface-variant/50 transition-transform group-hover:translate-x-0.5 group-hover:text-neon-blue"
+                      >
+                        →
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          );
+        })
       }
     </div>
   </section>
