@@ -5,9 +5,13 @@
  * into the correct, localized URL. The slug-per-locale lives in the MDX
  * frontmatter (single source of truth) — we never hardcode slugs here.
  *
+ * All tool URLs carry a TRAILING SLASH (2026-08-12): Cloudflare Pages
+ * redirects slash-less directory paths with 308 to the slash form, so
+ * canonical/hreflang/sitemap/links stay consistent with the final URL.
+ *
  * Example:
- *   getToolUrl('merge', 'en')  -> '/en/pdf-merge'
- *   getToolUrl('merge', 'de')  -> '/de/pdf-zusammenfuegen'
+ *   getToolUrl('merge', 'en')  -> '/en/pdf-merge/'
+ *   getToolUrl('merge', 'de')  -> '/de/pdf-zusammenfuegen/'
  */
 
 import type { Locale } from '@/i18n/config';
@@ -20,9 +24,10 @@ export type ToolEntry = CollectionEntry<'tools'>;
 /**
  * Pure, synchronous path builder from an already-known slug.
  * Safe to call inside templates, hreflang maps and <a href> attributes.
+ * Always returns the trailing-slash form (see header note).
  */
 export function getToolPath(locale: Locale, slug: string): string {
-  return `/${locale}/${slug}`;
+  return `/${locale}/${slug}/`;
 }
 
 /**

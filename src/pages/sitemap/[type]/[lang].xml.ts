@@ -5,7 +5,7 @@
  *   type ∈ tools | blog | pages ;  lang ∈ de | en | zh-TW | es
  *
  * URLs mirror the exact canonical paths the site emits:
- *   - tools : getToolPath(locale, slug)            -> /{lang}/{slug}        (no trailing slash)
+ *   - tools : getToolPath(locale, slug)            -> /{lang}/{slug}/  (trailing slash)
  *   - blog  : getBlogPath(locale, slug)            -> /{lang}/blog/{slug}/  (trailing slash)
  *   - pages : static per-language list             (home + blog index + legal)
  *
