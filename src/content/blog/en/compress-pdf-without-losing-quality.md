@@ -30,7 +30,7 @@ Compression doesn't have to happen on a server. Modern PDF tools that run entire
 
 **Strong compression:** Every page is re-created as an image and stored with stronger compression. This yields the biggest reduction – but the text becomes a picture, so it can no longer be selected or searched.
 
-With the [Compress PDF](https://pdf-tools-7q5.pages.dev/en/pdf-compress/) tool you choose the approach that fits: Standard is preselected and preserves your text, while the strong variant is one click away.
+With the [Compress PDF](https://pdf.100ideas.net/en/pdf-compress/) tool you choose the approach that fits: Standard is preselected and preserves your text, while the strong variant is one click away.
 
 ## How to compress a PDF in three steps
 
@@ -79,8 +79,8 @@ Yes. Because processing runs in the browser, the tool works on Android, iOS, Win
 
 ## Related tools
 
-After shrinking, you might want to bundle several documents or save pages as images: [Merge PDF](https://pdf-tools-7q5.pages.dev/en/pdf-merge/) and [PDF to JPG](https://pdf-tools-7q5.pages.dev/en/pdf-to-jpg/) complement compression perfectly. Our guides [Why and how to merge PDFs](https://pdf-tools-7q5.pages.dev/en/blog/why-merge-pdfs/) and [Convert PDF to JPG](https://pdf-tools-7q5.pages.dev/en/blog/convert-pdf-to-jpg/) are also worth a look.
+After shrinking, you might want to bundle several documents or save pages as images: [Merge PDF](https://pdf.100ideas.net/en/pdf-merge/) and [PDF to JPG](https://pdf.100ideas.net/en/pdf-to-jpg/) complement compression perfectly. Our guides [Why and how to merge PDFs](https://pdf.100ideas.net/en/blog/why-merge-pdfs/) and [Convert PDF to JPG](https://pdf.100ideas.net/en/blog/convert-pdf-to-jpg/) are also worth a look.
 
 ## Wrap-up
 
-A large PDF is no reason to recreate the document. With the right method – standard for text documents, strong for maximum savings – you can shrink your file in seconds, locally and securely. Try the [Compress PDF](https://pdf-tools-7q5.pages.dev/en/pdf-compress/) tool right now.
+A large PDF is no reason to recreate the document. With the right method – standard for text documents, strong for maximum savings – you can shrink your file in seconds, locally and securely. Try the [Compress PDF](https://pdf.100ideas.net/en/pdf-compress/) tool right now.

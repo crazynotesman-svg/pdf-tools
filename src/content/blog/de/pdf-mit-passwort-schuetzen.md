@@ -19,7 +19,7 @@ PDF-Schutz wird in zwei Ebenen angeboten, und es lohnt sich, sie auseinanderzuha
 
 **Berechtigungspasswort:** Die Datei öffnet sich ohne Passwort, aber bestimmte Aktionen sind eingeschränkt – etwa Drucken, Kopieren oder Bearbeiten.
 
-Für die meisten privaten und geschäftlichen Fälle reicht das Öffnungspasswort: Es verhindert, dass Unbefugte überhaupt an den Inhalt gelangen. Genau das setzt das [PDF Schützen](https://pdf-tools-7q5.pages.dev/de/pdf-schuetzen/) Werkzeug um.
+Für die meisten privaten und geschäftlichen Fälle reicht das Öffnungspasswort: Es verhindert, dass Unbefugte überhaupt an den Inhalt gelangen. Genau das setzt das [PDF Schützen](https://pdf.100ideas.net/de/pdf-schuetzen/) Werkzeug um.
 
 ## Passwortschutz lokal im Browser
 
@@ -49,7 +49,7 @@ Gut zu wissen: Beim Hinzufügen eines Passworts werden die Seiten als hochwertig
 - **Archivierung sensibler Unterlagen:** Die Datei bleibt auch auf geteilten Geräten geschützt.
 - **Befristete Freigaben:** Sie entscheiden, wem Sie das Passwort wann geben – und können es später ändern.
 
-Möchten Sie den Schutz später wieder entfernen? Dafür gibt es das [PDF Entsperren](https://pdf-tools-7q5.pages.dev/de/pdf-entsperren/) Werkzeug – vorausgesetzt, Sie kennen das Passwort. Eine ergänzende Maßnahme für Dokumente, die weitergegeben werden: ein [Wasserzeichen hinzufügen](https://pdf-tools-7q5.pages.dev/de/pdf-wasserzeichen/), etwa mit dem Namen des Empfängers.
+Möchten Sie den Schutz später wieder entfernen? Dafür gibt es das [PDF Entsperren](https://pdf.100ideas.net/de/pdf-entsperren/) Werkzeug – vorausgesetzt, Sie kennen das Passwort. Eine ergänzende Maßnahme für Dokumente, die weitergegeben werden: ein [Wasserzeichen hinzufügen](https://pdf.100ideas.net/de/pdf-wasserzeichen/), etwa mit dem Namen des Empfängers.
 
 ## Datenschutz und DSGVO
 
@@ -83,4 +83,4 @@ Ja. Da alles im Browser läuft, funktioniert der Schutz auf Desktop und Mobilger
 
 ## Fazit
 
-Wer vertrauliche PDFs verschickt oder archiviert, sollte sie mit einem Passwort schützen. Mit dem [PDF Schützen](https://pdf-tools-7q5.pages.dev/de/pdf-schuetzen/) Werkzeug geht das in Sekunden, komplett lokal im Browser und ohne Upload. Ergänzen lässt sich der Schutz durch ein [Wasserzeichen](https://pdf-tools-7q5.pages.dev/de/pdf-wasserzeichen/) für Dokumente, die weitergegeben werden.
+Wer vertrauliche PDFs verschickt oder archiviert, sollte sie mit einem Passwort schützen. Mit dem [PDF Schützen](https://pdf.100ideas.net/de/pdf-schuetzen/) Werkzeug geht das in Sekunden, komplett lokal im Browser und ohne Upload. Ergänzen lässt sich der Schutz durch ein [Wasserzeichen](https://pdf.100ideas.net/de/pdf-wasserzeichen/) für Dokumente, die weitergegeben werden.

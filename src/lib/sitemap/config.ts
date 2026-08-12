@@ -4,9 +4,9 @@
  * The site publishes a SPLIT sitemap, never one giant file:
  *   - one `sitemapindex` at /sitemap.xml lists every sub-sitemap
  *   - one sub-sitemap per (content type × language):
- *       /sitemap/tools/de.xml, /sitemap/tools/en.xml, /sitemap/tools/zh-CN.xml
- *       /sitemap/blog/de.xml,  /sitemap/blog/en.xml,  /sitemap/blog/zh-CN.xml
- *       /sitemap/pages/de.xml, /sitemap/pages/en.xml, /sitemap/pages/zh-CN.xml
+ *       /sitemap/tools/de.xml, /sitemap/tools/en.xml, /sitemap/tools/zh-TW.xml, /sitemap/tools/es.xml
+ *       /sitemap/blog/de.xml,  /sitemap/blog/en.xml,  /sitemap/blog/zh-TW.xml,  /sitemap/blog/es.xml
+ *       /sitemap/pages/de.xml, /sitemap/pages/en.xml, /sitemap/pages/zh-TW.xml, /sitemap/pages/es.xml
  *
  * Content types:
  *   - tools : the PDF tool pages (slugs from the tools collection)

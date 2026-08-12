@@ -25,7 +25,7 @@ const tl = (key: Parameters<typeof t>[1]) => t(locale, key);
 // "Updated: August 2026" — localized month/year (Phase 2.3.3).
 let updatedLabel = '';
 if (tool.data.updatedDate) {
-  const fmt = new Intl.DateTimeFormat(locale === 'zh-CN' ? 'zh-CN' : locale, {
+  const fmt = new Intl.DateTimeFormat(locale === 'zh-TW' ? 'zh-TW' : locale, {
     month: 'long',
     year: 'numeric',
   });

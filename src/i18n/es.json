@@ -1,0 +1,192 @@
+{
+  "common": {
+    "siteName": "Herramientas PDF",
+    "tagline": "Herramientas PDF gratuitas en tu navegador",
+    "upload": "Seleccionar archivo",
+    "orDrop": "o arrastra el archivo aquí",
+    "download": "Descargar",
+    "processing": "Procesando…",
+    "language": "Idioma",
+    "free": "Gratis",
+    "home": "Inicio",
+    "menu": {
+      "tools": "Herramientas",
+      "blog": "Blog",
+      "privacy": "Política de privacidad",
+      "imprint": "Aviso legal",
+      "contact": "Contacto"
+    }
+  },
+  "home": {
+    "eyebrow": "Gratis y privado",
+    "title": "Herramientas PDF gratuitas en línea",
+    "subtitle": "Unir, dividir, rotar y convertir a imágenes: rápido, seguro y sin subir archivos.",
+    "intro": "Herramientas PDF es una plataforma en línea gratuita para las tareas PDF más habituales. Ya sea unir, dividir, rotar documentos o convertirlos a imágenes, todas las herramientas funcionan de forma rápida y segura en tu navegador.",
+    "securityHeading": "Seguridad y privacidad",
+    "securityNote": "Tus archivos nunca salen de tu navegador. Todo se procesa localmente en tu dispositivo.",
+    "categoriesHeading": "Explorar herramientas por categoría",
+    "faqHeading": "Preguntas frecuentes",
+    "cta": "Empezar",
+    "toolsHeading": "Nuestras herramientas PDF",
+    "toolsSubheading": "Todas las herramientas funcionan totalmente en tu navegador.",
+    "popularHeading": "Herramientas PDF populares",
+    "popularSubheading": "Las más usadas, directamente en tu navegador.",
+    "howWorksHeading": "Cómo funciona",
+    "howWorksSubheading": "Procesa tu PDF en tres pasos, sin registro.",
+    "step1Title": "Selecciona el archivo",
+    "step1Text": "Arrastra tu PDF al recuadro o elígelo desde tu dispositivo.",
+    "step2Title": "Ejecuta la herramienta",
+    "step2Text": "Ajusta las opciones y pulsa Procesar: todo se ejecuta localmente en tu navegador.",
+    "step3Title": "Descarga",
+    "step3Text": "Guarda el PDF resultante directamente en tu dispositivo.",
+    "ctaFooterHeading": "¿Listo para tu primer archivo?",
+    "ctaFooterText": "Todas las herramientas son gratuitas, privadas y no requieren registro.",
+    "trust": {
+      "browserTitle": "100 % en el navegador",
+      "browserText": "Tus archivos nunca salen de tu dispositivo.",
+      "noRegTitle": "Sin registro",
+      "noRegText": "Empieza al instante: sin cuenta, sin inicio de sesión.",
+      "privacyTitle": "Privacidad primero",
+      "privacyText": "Sin subidas, sin almacenamiento en servidores."
+    },
+    "faq": [
+      {
+        "question": "¿Son seguros mis archivos?",
+        "answer": "Sí. Todos los PDF se procesan solo localmente en tu navegador; los archivos nunca se suben a un servidor."
+      },
+      {
+        "question": "¿Es realmente gratis?",
+        "answer": "Sí. Todas las herramientas son gratuitas para siempre y no requieren registro."
+      },
+      {
+        "question": "¿Necesito registrarme?",
+        "answer": "No. Puedes usar cualquier herramienta directamente, sin cuenta ni inicio de sesión."
+      },
+      {
+        "question": "¿Qué sistemas operativos se admiten?",
+        "answer": "Como todo funciona en el navegador, las herramientas funcionan en Windows, macOS, Linux, Android e iOS."
+      },
+      {
+        "question": "¿Qué tamaño de PDF se admite?",
+        "answer": "El procesamiento se realiza en tu dispositivo. Los archivos muy grandes dependen de tu memoria; la mayoría de los documentos no tienen problema."
+      }
+    ]
+  },
+  "categories": {
+    "merge": "Unir",
+    "split": "Dividir",
+    "rotate": "Rotar",
+    "toImage": "Convertir a imagen",
+    "compress": "Comprimir",
+    "protect": "Proteger",
+    "unlock": "Desbloquear",
+    "watermark": "Marca de agua"
+  },
+  "toolPage": {
+    "faqHeading": "Preguntas frecuentes",
+    "featuresHeading": "Características principales",
+    "limitationsHeading": "Notas y limitaciones",
+    "relatedHeading": "Herramientas relacionadas",
+    "moreHeading": "Más herramientas",
+    "blogHeading": "Artículos relacionados",
+    "updated": "Actualizado"
+  },
+  "toolCluster": {
+    "title": "Categoría",
+    "moreTools": "Más de esta categoría",
+    "categories": {
+      "organize": "Organizar PDF",
+      "convert": "Convertir PDF",
+      "optimize": "Optimizar PDF",
+      "secure": "Proteger y asegurar PDF"
+    }
+  },
+  "popular": {
+    "badge": "Popular"
+  },
+  "pdfUi": {
+    "title": "Procesar PDF",
+    "drop": "Arrastra el archivo aquí o haz clic para seleccionar",
+    "selectFiles": "Seleccionar archivos",
+    "selected": "Seleccionado",
+    "process": "Procesar",
+    "processing": "Procesando…",
+    "download": "Descargar",
+    "clear": "Reiniciar",
+    "rotateLabel": "Ángulo de rotación",
+    "formatLabel": "Formato de imagen",
+    "errorGeneric": "Se produjo un error al procesar el archivo.",
+    "noFile": "Selecciona un archivo primero.",
+    "mergeHint": "Selecciona dos o más PDF para unirlos en uno.",
+    "splitHint": "Selecciona un PDF para dividirlo.",
+    "rotateHint": "Selecciona un PDF y especifica el ángulo de rotación.",
+    "toImageHint": "Selecciona un PDF para convertirlo a imágenes.",
+    "compressHint": "Selecciona un PDF para comprimirlo.",
+    "protectHint": "Selecciona un PDF y define una contraseña.",
+    "unlockHint": "Selecciona un PDF protegido e introduce la contraseña del documento.",
+    "watermarkHint": "Selecciona un PDF e introduce el texto de la marca de agua.",
+    "uploading": "Leyendo archivo…",
+    "completed": "Listo: el resultado está preparado.",
+    "formatHint": "PDF · máx. 50MB",
+    "files": "archivos",
+    "dropActive": "Suelta para subir",
+    "pages": "páginas",
+    "processAnother": "Procesar otro archivo",
+    "compressModeLabel": "Modo de compresión",
+    "compressStandard": "Estándar (el texto sigue siendo buscable)",
+    "compressStandardDesc": "Conserva calidad y texto.",
+    "compressStrong": "Fuerte (reducción máxima de tamaño)",
+    "compressStrongDesc": "Máxima reducción, posible pérdida de calidad.",
+    "qualityLabel": "Calidad",
+    "passwordLabel": "Contraseña",
+    "unlockPasswordLabel": "Contraseña del documento",
+    "watermarkTextLabel": "Texto de la marca de agua",
+    "opacityLabel": "Opacidad",
+    "passwordPlaceholder": "Introduce la contraseña",
+    "watermarkPlaceholder": "Ej.: Confidencial",
+    "wrongPassword": "Contraseña incorrecta. Inténtalo de nuevo.",
+    "feedbackTitle": "¿Te ha resultado útil esta herramienta?",
+    "feedbackYes": "Sí",
+    "feedbackNo": "No",
+    "feedbackThanks": "¡Gracias por tu comentario!"
+  },
+  "legal": {
+    "privacy": {
+      "title": "Política de privacidad",
+      "intro": "Nos tomamos en serio la protección de tus datos. Esta página explica cómo tratamos tu información."
+    },
+    "impressum": {
+      "title": "Aviso legal",
+      "intro": "Información obligatoria según la ley."
+    },
+    "contact": {
+      "title": "Contacto",
+      "intro": "Puedes contactarnos de las siguientes formas.",
+      "name": "Contacto",
+      "personName": "Ron",
+      "emailLabel": "Correo electrónico",
+      "email": "babong@163.com"
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "intro": "Consejos, guías y contexto sobre PDF y documentos.",
+    "empty": "Aún no hay artículos. Vuelve pronto.",
+    "readMore": "Leer más",
+    "publishedOn": "Publicado el",
+    "updatedOn": "Actualizado el",
+    "by": "Por",
+    "tags": "Etiquetas",
+    "backToBlog": "Volver al blog",
+    "rss": "Suscripción RSS"
+  },
+  "notFound": {
+    "title": "Página no encontrada",
+    "description": "La página que buscas no existe o se ha movido.",
+    "home": "Volver al inicio"
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados.",
+    "note": "Este sitio procesa los PDF completamente en tu navegador."
+  }
+}

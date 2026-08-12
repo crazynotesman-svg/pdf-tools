@@ -19,7 +19,7 @@ PDF protection comes in two levels, and it's worth telling them apart:
 
 **Permissions password:** The file opens without a password, but certain actions are restricted – printing, copying, or editing, for example.
 
-For most personal and business cases, the open password is enough: it prevents unauthorized people from accessing the content at all. That's exactly what the [Protect PDF](https://pdf-tools-7q5.pages.dev/en/pdf-protect/) tool does.
+For most personal and business cases, the open password is enough: it prevents unauthorized people from accessing the content at all. That's exactly what the [Protect PDF](https://pdf.100ideas.net/en/pdf-protect/) tool does.
 
 ## Password protect PDF locally in your browser
 
@@ -49,7 +49,7 @@ Good to know: when a password is added, the pages are embedded into the new file
 - **Archiving sensitive records:** the file stays protected even on shared devices.
 - **Time-limited access:** you decide who gets the password when – and can change it later.
 
-Want to remove the protection later? Use the [Unlock PDF](https://pdf-tools-7q5.pages.dev/en/pdf-unlock/) tool – provided you know the password. A complementary measure for documents that get passed around is adding a [watermark](https://pdf-tools-7q5.pages.dev/en/pdf-watermark/), for example with the recipient's name.
+Want to remove the protection later? Use the [Unlock PDF](https://pdf.100ideas.net/en/pdf-unlock/) tool – provided you know the password. A complementary measure for documents that get passed around is adding a [watermark](https://pdf.100ideas.net/en/pdf-watermark/), for example with the recipient's name.
 
 ## Privacy and GDPR
 
@@ -83,4 +83,4 @@ Yes. Because everything runs in the browser, protection works on desktop and mob
 
 ## Wrap-up
 
-If you send or archive confidential PDFs, protect them with a password. With [Protect PDF](https://pdf-tools-7q5.pages.dev/en/pdf-protect/) it takes seconds, fully local in your browser and without upload. You can complement the protection with a [watermark](https://pdf-tools-7q5.pages.dev/en/pdf-watermark/) for documents that get shared.
+If you send or archive confidential PDFs, protect them with a password. With [Protect PDF](https://pdf.100ideas.net/en/pdf-protect/) it takes seconds, fully local in your browser and without upload. You can complement the protection with a [watermark](https://pdf.100ideas.net/en/pdf-watermark/) for documents that get shared.

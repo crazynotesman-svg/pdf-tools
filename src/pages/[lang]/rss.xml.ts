@@ -1,7 +1,7 @@
 /**
  * Per-language RSS feed (T7).
  *
- * One feed per locale: /de/rss.xml, /en/rss.xml, /zh-CN/rss.xml. Each contains
+ * One feed per locale: /de/rss.xml, /en/rss.xml, /zh-TW/rss.xml, /es/rss.xml. Each contains
  * only that locale's (non-draft) blog posts, sorted by pubDate desc, with
  * localized titles/descriptions and correct absolute links built from the
  * configured `site` URL.

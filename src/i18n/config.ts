@@ -12,7 +12,7 @@
  * automatically.
  */
 
-export const locales = ['de', 'en', 'zh-CN'] as const;
+export const locales = ['de', 'en', 'zh-TW', 'es'] as const;
 export type Locale = (typeof locales)[number];
 
 export const defaultLocale: Locale = 'de';
@@ -21,14 +21,16 @@ export const defaultLocale: Locale = 'de';
 export const htmlLang: Record<Locale, string> = {
   de: 'de',
   en: 'en',
-  'zh-CN': 'zh-CN',
+  'zh-TW': 'zh-TW',
+  es: 'es',
 };
 
 /** Human-readable names for the language switcher UI. */
 export const localeNames: Record<Locale, string> = {
   de: 'Deutsch',
   en: 'English',
-  'zh-CN': '中文',
+  'zh-TW': '繁體中文',
+  es: 'Español',
 };
 
 export function isLocale(value: string): value is Locale {

@@ -25,7 +25,7 @@ When unlocking, it depends on how the file is protected:
 
 **Open password:** The file asks for a password when opened. After entering it, the file is rebuilt with its content. The visual content is preserved; depending on the original protection, text selection may no longer be possible.
 
-Both paths run entirely in your browser with the [Unlock PDF](https://pdf-tools-7q5.pages.dev/en/pdf-unlock/) tool.
+Both paths run entirely in your browser with the [Unlock PDF](https://pdf.100ideas.net/en/pdf-unlock/) tool.
 
 ## How to remove the password in three steps
 
@@ -45,7 +45,7 @@ As with all our tools: the file is not uploaded. Processing runs exclusively on 
 - **Further processing:** You want to print, edit, or merge the document with other PDFs.
 - **Archiving:** For your own storage, the password prompt is often unnecessary – after all, you created the file.
 
-Keep in mind: an unlocked file can be opened by anyone who receives it. Remove the protection only when that's acceptable for your purpose. If the file should be protected again, use the [Protect PDF](https://pdf-tools-7q5.pages.dev/en/pdf-protect/) tool to set a new password. A [watermark](https://pdf-tools-7q5.pages.dev/en/pdf-watermark/) tool is also available to label documents you share.
+Keep in mind: an unlocked file can be opened by anyone who receives it. Remove the protection only when that's acceptable for your purpose. If the file should be protected again, use the [Protect PDF](https://pdf.100ideas.net/en/pdf-protect/) tool to set a new password. A [watermark](https://pdf.100ideas.net/en/pdf-watermark/) tool is also available to label documents you share.
 
 ## Frequently asked questions
 
@@ -75,4 +75,4 @@ Yes. Because processing runs in the browser, it works on desktop and mobile alik
 
 ## Wrap-up
 
-If you know a PDF's password, you can remove the protection in a few clicks – locally, safely, and free. The limit is intentional: without the password there is no way in. Unlock with the [Unlock PDF](https://pdf-tools-7q5.pages.dev/en/pdf-unlock/) tool, and if needed, protect the file again afterwards with the [Protect PDF](https://pdf-tools-7q5.pages.dev/en/pdf-protect/) tool.
+If you know a PDF's password, you can remove the protection in a few clicks – locally, safely, and free. The limit is intentional: without the password there is no way in. Unlock with the [Unlock PDF](https://pdf.100ideas.net/en/pdf-unlock/) tool, and if needed, protect the file again afterwards with the [Protect PDF](https://pdf.100ideas.net/en/pdf-protect/) tool.

@@ -25,7 +25,7 @@ Beim Entsperren kommt es darauf an, wie die Datei geschützt ist:
 
 **Öffnungspasswort:** Die Datei fragt beim Öffnen nach einem Passwort. Nach Eingabe des Passworts wird die Datei mit dem Inhalt neu aufgebaut. Der visuelle Inhalt bleibt erhalten; bei manchen Dateitypen ist die Textauswahl danach nicht mehr möglich – das hängt vom ursprünglichen Schutz ab.
 
-Beide Wege laufen mit dem [PDF Entsperren](https://pdf-tools-7q5.pages.dev/de/pdf-entsperren/) Werkzeug vollständig in Ihrem Browser ab.
+Beide Wege laufen mit dem [PDF Entsperren](https://pdf.100ideas.net/de/pdf-entsperren/) Werkzeug vollständig in Ihrem Browser ab.
 
 ## So entfernen Sie das Passwort in drei Schritten
 
@@ -45,7 +45,7 @@ Genau wie bei allen unseren Werkzeugen gilt: Die Datei wird nicht hochgeladen. D
 - **Weiterverarbeitung:** Sie möchten das Dokument drucken, bearbeiten oder mit anderen PDFs zusammenführen.
 - **Archivierung:** Für die eigene Ablage ist die Passwortabfrage oft unnötig – Sie haben die Datei ja selbst erstellt.
 
-Denken Sie daran: Eine entsperrte Datei kann jeder öffnen, der sie erhält. Entfernen Sie den Schutz nur, wenn das für Ihren Zweck vertretbar ist. Falls die Datei wieder geschützt werden soll, nutzen Sie das [PDF Schützen](https://pdf-tools-7q5.pages.dev/de/pdf-schuetzen/) Werkzeug, um ein neues Passwort zu setzen. Eine zusätzliche Kennzeichnung für weitergegebene Dokumente bietet das [Wasserzeichen](https://pdf-tools-7q5.pages.dev/de/pdf-wasserzeichen/) Werkzeug.
+Denken Sie daran: Eine entsperrte Datei kann jeder öffnen, der sie erhält. Entfernen Sie den Schutz nur, wenn das für Ihren Zweck vertretbar ist. Falls die Datei wieder geschützt werden soll, nutzen Sie das [PDF Schützen](https://pdf.100ideas.net/de/pdf-schuetzen/) Werkzeug, um ein neues Passwort zu setzen. Eine zusätzliche Kennzeichnung für weitergegebene Dokumente bietet das [Wasserzeichen](https://pdf.100ideas.net/de/pdf-wasserzeichen/) Werkzeug.
 
 ## Häufige Fragen
 
@@ -75,4 +75,4 @@ Ja. Da die Verarbeitung im Browser läuft, funktioniert es auf Desktop und Mobil
 
 ## Fazit
 
-Wer das Passwort einer PDF kennt, kann den Schutz mit wenigen Klicks entfernen – lokal, sicher und kostenlos. Grenze eingebaut: Ohne Passwort gibt es keinen Weg, und das ist gewollt. Entsperren Sie mit dem [PDF Entsperren](https://pdf-tools-7q5.pages.dev/de/pdf-entsperren/) Werkzeug und schützen Sie die Datei bei Bedarf anschließend wieder mit dem [PDF Schützen](https://pdf-tools-7q5.pages.dev/de/pdf-schuetzen/) Werkzeug.
+Wer das Passwort einer PDF kennt, kann den Schutz mit wenigen Klicks entfernen – lokal, sicher und kostenlos. Grenze eingebaut: Ohne Passwort gibt es keinen Weg, und das ist gewollt. Entsperren Sie mit dem [PDF Entsperren](https://pdf.100ideas.net/de/pdf-entsperren/) Werkzeug und schützen Sie die Datei bei Bedarf anschließend wieder mit dem [PDF Schützen](https://pdf.100ideas.net/de/pdf-schuetzen/) Werkzeug.

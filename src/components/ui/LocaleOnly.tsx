@@ -12,10 +12,10 @@ interface LocaleOnlyProps {
 /**
  * Renders its children only when `locale` matches `activeLocale`.
  *
- * Tool MDX bodies keep all three languages in one file, each language wrapped
- * in <LocaleOnly locale="de|en|zh-CN">. At build time we inject the active
+ * Tool MDX bodies keep all languages in one file, each language wrapped
+ * in <LocaleOnly locale="de|en|zh-TW|es">. At build time we inject the active
  * locale, so only the matching block is emitted — no hidden duplicate text,
- * which protects SEO (Google won't see 3× duplicated copy).
+ * which protects SEO (Google won't see N× duplicated copy).
  */
 export default function LocaleOnly({ locale, activeLocale, children }: LocaleOnlyProps) {
   if (locale !== activeLocale) return null;

@@ -4,12 +4,13 @@
  * - `t(locale, key)` only accepts keys that actually exist in the dictionaries
  *   (e.g. `t('de', 'common.upload')`). Invalid keys are a compile-time error.
  * - Every locale dictionary is type-checked against the German (`de`) shape, so
- *   a missing translation in `en`/`zh-CN` fails the build.
+ *   a missing translation in `en`/`zh-TW`/`es` fails the build.
  */
 
 import de from './de.json';
 import en from './en.json';
-import zhCN from './zh-CN.json';
+import zhTW from './zh-TW.json';
+import es from './es.json';
 import type { Locale } from './config';
 
 /** Source-of-truth dictionary shape (German defines the canonical structure). */
@@ -33,7 +34,8 @@ export type TranslationKey = Flatten<Dict>;
 const dictionaries: Record<Locale, Dict> = {
   de,
   en,
-  'zh-CN': zhCN,
+  'zh-TW': zhTW,
+  es,
 };
 
 function lookup(dict: Dict, key: string): string | undefined {

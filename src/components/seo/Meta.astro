@@ -36,8 +36,9 @@ const alternates = locales.map((l) => ({
 }));
 const xDefault = alternates.find((a) => a.locale === 'de')?.url ?? alternates[0].url;
 
-// OG uses underscores for region (e.g. zh_CN), unlike the routing locale.
-const ogLocale = locale === 'zh-CN' ? 'zh_CN' : locale;
+// OG uses underscores for region (e.g. zh_TW, es_ES), unlike the routing locale.
+const ogLocale =
+  locale === 'zh-TW' ? 'zh_TW' : locale === 'es' ? 'es_ES' : locale;
 
 // OpenGraph share image — programmatically generated per tool (public/og/*.png).
 const ogImage = new URL(`/og/${tool.data.id}.png`, site).href;

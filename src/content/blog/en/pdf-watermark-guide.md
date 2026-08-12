@@ -28,7 +28,7 @@ A good watermark informs rather than interferes. Three settings make the differe
 - **Position:** A diagonal layout across the whole page is the most visible and hardest to remove. A corner or a centered stamp works too.
 - **Size:** Large enough not to be missed, small enough not to cover the text.
 
-With the [PDF Watermark](https://pdf-tools-7q5.pages.dev/en/pdf-watermark/) tool you set the text, opacity and size – the distribution across pages happens automatically and stays local in your browser.
+With the [PDF Watermark](https://pdf.100ideas.net/en/pdf-watermark/) tool you set the text, opacity and size – the distribution across pages happens automatically and stays local in your browser.
 
 ## How to add a watermark
 
@@ -46,8 +46,8 @@ As with all our tools, your file is not uploaded. The watermark is stamped onto 
 
 A watermark is often part of a bigger document strategy:
 
-- **Protection:** Combine the watermark with [password protection](https://pdf-tools-7q5.pages.dev/en/pdf-protect/) for highly sensitive files.
-- **Preparation:** Merge several documents first with the [Merge PDF](https://pdf-tools-7q5.pages.dev/en/pdf-merge/) tool, then stamp the result with a watermark. Our guide [Why and how to merge PDFs](https://pdf-tools-7q5.pages.dev/en/blog/why-merge-pdfs/) explains the first step in detail.
+- **Protection:** Combine the watermark with [password protection](https://pdf.100ideas.net/en/pdf-protect/) for highly sensitive files.
+- **Preparation:** Merge several documents first with the [Merge PDF](https://pdf.100ideas.net/en/pdf-merge/) tool, then stamp the result with a watermark. Our guide [Why and how to merge PDFs](https://pdf.100ideas.net/en/blog/why-merge-pdfs/) explains the first step in detail.
 
 ## Frequently asked questions
 
@@ -77,4 +77,4 @@ Yes. Because processing runs in the browser, it works on desktop and mobile alik
 
 ## Wrap-up
 
-A watermark makes documents instantly recognizable and discourages unwanted redistribution. With the [PDF Watermark](https://pdf-tools-7q5.pages.dev/en/pdf-watermark/) tool you can stamp it in seconds – locally in the browser, with no upload. For highly sensitive files, combine the watermark with [password protection](https://pdf-tools-7q5.pages.dev/en/pdf-protect/).
+A watermark makes documents instantly recognizable and discourages unwanted redistribution. With the [PDF Watermark](https://pdf.100ideas.net/en/pdf-watermark/) tool you can stamp it in seconds – locally in the browser, with no upload. For highly sensitive files, combine the watermark with [password protection](https://pdf.100ideas.net/en/pdf-protect/).

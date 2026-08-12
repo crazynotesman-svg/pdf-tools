@@ -13,7 +13,7 @@
  *     language switcher can link them. This deliberately does NOT use the tool
  *     page MDX <LocaleOnly> pattern.
  *
- * Every localized field is modelled as an explicit { de, en, 'zh-CN' } object
+ * Every localized field is modelled as an explicit { de, en, 'zh-TW', es } object
  * (never a loose Record) so a missing locale fails the build — exactly like the
  * i18n JSON type-check in T2.
  */
@@ -75,7 +75,7 @@ const tools = defineCollection({
     base: './src/content/tools',
     // IMPORTANT: Astro's glob loader reserves the frontmatter `slug` field to
     // derive the entry id. Our `slug` is a *multilingual object* ({ de, en,
-    // 'zh-CN' }), so we must supply our own id generator (file name without
+    // 'zh-TW', 'es' }), so we must supply our own id generator (file name without
     // extension) and keep `slug` as plain data. Without this, the loader would
     // try to use the object as the id and crash (`id.endsWith is not a function`).
     generateId: ({ entry }) => {
@@ -111,35 +111,40 @@ const tools = defineCollection({
     slug: z.object({
       de: z.string(),
       en: z.string(),
-      'zh-CN': z.string(),
+      'zh-TW': z.string(),
+      es: z.string(),
     }),
 
     /** SEO <title> + meta description, per locale. */
     seo: z.object({
       de: seoBlock,
       en: seoBlock,
-      'zh-CN': seoBlock,
+      'zh-TW': seoBlock,
+      es: seoBlock,
     }),
 
     /** Hero copy (H1 + intro), per locale. */
     content: z.object({
       de: contentBlock,
       en: contentBlock,
-      'zh-CN': contentBlock,
+      'zh-TW': contentBlock,
+      es: contentBlock,
     }),
 
     /** At least 5 entries recommended for the FAQPage rich result. */
     faq: z.object({
       de: z.array(faqItem),
       en: z.array(faqItem),
-      'zh-CN': z.array(faqItem),
+      'zh-TW': z.array(faqItem),
+      es: z.array(faqItem),
     }),
 
     /** Step-by-step instructions for the HowToSchema rich result. */
     howTo: z.object({
       de: z.array(howToStep),
       en: z.array(howToStep),
-      'zh-CN': z.array(howToStep),
+      'zh-TW': z.array(howToStep),
+      es: z.array(howToStep),
     }),
 
     /** Cross-links to other tool ids (rendered by RelatedTools in T6). */
@@ -164,21 +169,24 @@ const tools = defineCollection({
     features: z.object({
       de: z.array(listItem),
       en: z.array(listItem),
-      'zh-CN': z.array(listItem),
+      'zh-TW': z.array(listItem),
+      es: z.array(listItem),
     }),
 
     /** User-facing benefits — what the user gains. Multilingual. */
     benefits: z.object({
       de: z.array(listItem),
       en: z.array(listItem),
-      'zh-CN': z.array(listItem),
+      'zh-TW': z.array(listItem),
+      es: z.array(listItem),
     }),
 
     /** Honest limitations (e.g. browser-side constraints). Multilingual. */
     limitations: z.object({
       de: z.array(listItem),
       en: z.array(listItem),
-      'zh-CN': z.array(listItem),
+      'zh-TW': z.array(listItem),
+      es: z.array(listItem),
     }),
 
     /**
@@ -189,7 +197,8 @@ const tools = defineCollection({
     searchKeywords: z.object({
       de: z.array(z.string()),
       en: z.array(z.string()),
-      'zh-CN': z.array(z.string()),
+      'zh-TW': z.array(z.string()),
+      es: z.array(z.string()),
     }),
 
     /** Primary target keyword per locale (Phase 3.2.2) — base for title/H1/meta
@@ -197,7 +206,8 @@ const tools = defineCollection({
     primaryKeyword: z.object({
       de: z.string(),
       en: z.string(),
-      'zh-CN': z.string(),
+      'zh-TW': z.string(),
+      es: z.string(),
     }),
 
     /**
@@ -208,7 +218,8 @@ const tools = defineCollection({
     longTailKeywords: z.object({
       de: z.array(z.string()),
       en: z.array(z.string()),
-      'zh-CN': z.array(z.string()),
+      'zh-TW': z.array(z.string()),
+      es: z.array(z.string()),
     }),
 
     /** Search intent of the tool's primary keyword (single value, language-agnostic). */
@@ -239,7 +250,7 @@ const tools = defineCollection({
 // Language-separated files: src/content/blog/{lang}/{slug}.md
 //   de/warum-pdfs-zusammenfuegen.md
 //   en/why-merge-pdfs.md
-//   zh-CN/wei-shi-me-he-bing-pdf.md
+//   zh-TW/wei-shi-me-he-bing-pdf.md
 //
 // The glob loader's default `generateId` would again try to read frontmatter
 // `slug`; here we keep the path as the id (`de/warum-pdfs-zusammenfuegen`) so a

@@ -28,7 +28,7 @@ Ein gutes Wasserzeichen stört nicht, sondern informiert. Drei Stellschrauben ma
 - **Position:** Eine diagonale Anordnung über die gesamte Seite ist am auffälligsten und am schwersten zu entfernen. Alternativ eignet sich eine Ecke oder ein zentrierter Stempel.
 - **Größe:** Das Wasserzeichen sollte groß genug sein, um nicht übersehen zu werden, aber klein genug, um den Text nicht zu überdecken.
 
-Mit dem [PDF Wasserzeichen](https://pdf-tools-7q5.pages.dev/de/pdf-wasserzeichen/) Werkzeug legen Sie Text, Deckkraft und Größe fest – die Verteilung über die Seiten erfolgt automatisch und bleibt lokal in Ihrem Browser.
+Mit dem [PDF Wasserzeichen](https://pdf.100ideas.net/de/pdf-wasserzeichen/) Werkzeug legen Sie Text, Deckkraft und Größe fest – die Verteilung über die Seiten erfolgt automatisch und bleibt lokal in Ihrem Browser.
 
 ## So fügen Sie ein Wasserzeichen hinzu
 
@@ -46,8 +46,8 @@ Wie bei allen unseren Werkzeugen wird Ihre Datei nicht hochgeladen. Das Wasserze
 
 Ein Wasserzeichen ist oft Teil einer größeren Dokumentenstrategie:
 
-- **Schutz:** Kombinieren Sie das Wasserzeichen mit einem [Passwortschutz](https://pdf-tools-7q5.pages.dev/de/pdf-schuetzen/) für besonders sensible Dateien.
-- **Vorbereitung:** Führen Sie zuerst mehrere Dokumente mit dem [PDFs zusammenführen](https://pdf-tools-7q5.pages.dev/de/pdf-zusammenfuegen/) Werkzeug zusammen und versehen Sie das Ergebnis anschließend mit einem Wasserzeichen. Unsere Anleitung [Warum und wie Sie PDFs zusammenführen](https://pdf-tools-7q5.pages.dev/de/blog/warum-pdfs-zusammenfuegen/) erklärt den ersten Schritt im Detail.
+- **Schutz:** Kombinieren Sie das Wasserzeichen mit einem [Passwortschutz](https://pdf.100ideas.net/de/pdf-schuetzen/) für besonders sensible Dateien.
+- **Vorbereitung:** Führen Sie zuerst mehrere Dokumente mit dem [PDFs zusammenführen](https://pdf.100ideas.net/de/pdf-zusammenfuegen/) Werkzeug zusammen und versehen Sie das Ergebnis anschließend mit einem Wasserzeichen. Unsere Anleitung [Warum und wie Sie PDFs zusammenführen](https://pdf.100ideas.net/de/blog/warum-pdfs-zusammenfuegen/) erklärt den ersten Schritt im Detail.
 
 ## Häufige Fragen
 
@@ -77,4 +77,4 @@ Ja. Da die Verarbeitung im Browser läuft, funktioniert es auf Desktop und Mobil
 
 ## Fazit
 
-Ein Wasserzeichen macht Dokumente sofort erkennbar und schützt sie vor ungewollter Weiterverbreitung. Mit dem [PDF Wasserzeichen](https://pdf-tools-7q5.pages.dev/de/pdf-wasserzeichen/) Werkzeug setzen Sie es in Sekunden – lokal im Browser, ohne Upload. Für besonders sensible Dateien kombinieren Sie das Wasserzeichen am besten mit einem [Passwortschutz](https://pdf-tools-7q5.pages.dev/de/pdf-schuetzen/).
+Ein Wasserzeichen macht Dokumente sofort erkennbar und schützt sie vor ungewollter Weiterverbreitung. Mit dem [PDF Wasserzeichen](https://pdf.100ideas.net/de/pdf-wasserzeichen/) Werkzeug setzen Sie es in Sekunden – lokal im Browser, ohne Upload. Für besonders sensible Dateien kombinieren Sie das Wasserzeichen am besten mit einem [Passwortschutz](https://pdf.100ideas.net/de/pdf-schuetzen/).

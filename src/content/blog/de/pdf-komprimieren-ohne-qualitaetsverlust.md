@@ -30,7 +30,7 @@ Die Komprimierung muss nicht auf einem Server stattfinden. Moderne PDF-Werkzeuge
 
 **Starke Komprimierung:** Jede Seite wird als Bild neu erzeugt und stärker komprimiert gespeichert. Das erzielt die größte Größenreduktion – allerdings wird der Text danach zu einem Bild und kann nicht mehr markiert oder durchsucht werden.
 
-Mit dem [PDF Komprimieren](https://pdf-tools-7q5.pages.dev/de/pdf-komprimieren/) Werkzeug wählen Sie selbst, welcher Ansatz passt: Standard ist vorausgewählt und bewahrt den Text, die starke Variante ist nur ein Klick entfernt.
+Mit dem [PDF Komprimieren](https://pdf.100ideas.net/de/pdf-komprimieren/) Werkzeug wählen Sie selbst, welcher Ansatz passt: Standard ist vorausgewählt und bewahrt den Text, die starke Variante ist nur ein Klick entfernt.
 
 ## So verkleinern Sie ein PDF in drei Schritten
 
@@ -79,8 +79,8 @@ Ja. Da die Verarbeitung im Browser läuft, funktioniert das Werkzeug auf Android
 
 ## Passende Werkzeuge
 
-Nach dem Verkleinern möchten Sie vielleicht mehrere Dokumente bündeln oder Seiten als Bilder speichern: [PDFs zusammenführen](https://pdf-tools-7q5.pages.dev/de/pdf-zusammenfuegen/) und [PDF in Bilder umwandeln](https://pdf-tools-7q5.pages.dev/de/pdf-in-jpg/) ergänzen die Komprimierung perfekt. Auch unsere Anleitungen [Warum und wie Sie PDFs zusammenführen](https://pdf-tools-7q5.pages.dev/de/blog/warum-pdfs-zusammenfuegen/) und [PDF in Bilder umwandeln](https://pdf-tools-7q5.pages.dev/de/blog/pdf-in-bilder-umwandeln/) helfen weiter.
+Nach dem Verkleinern möchten Sie vielleicht mehrere Dokumente bündeln oder Seiten als Bilder speichern: [PDFs zusammenführen](https://pdf.100ideas.net/de/pdf-zusammenfuegen/) und [PDF in Bilder umwandeln](https://pdf.100ideas.net/de/pdf-in-jpg/) ergänzen die Komprimierung perfekt. Auch unsere Anleitungen [Warum und wie Sie PDFs zusammenführen](https://pdf.100ideas.net/de/blog/warum-pdfs-zusammenfuegen/) und [PDF in Bilder umwandeln](https://pdf.100ideas.net/de/blog/pdf-in-bilder-umwandeln/) helfen weiter.
 
 ## Fazit
 
-Eine große PDF-Datei ist kein Grund, das Dokument neu zu erstellen. Mit der richtigen Methode – Standard für Textdokumente, Stark für maximale Ersparnis – verkleinern Sie Ihre Datei in Sekunden, lokal und sicher. Probieren Sie das [PDF Komprimieren](https://pdf-tools-7q5.pages.dev/de/pdf-komprimieren/) Werkzeug direkt aus.
+Eine große PDF-Datei ist kein Grund, das Dokument neu zu erstellen. Mit der richtigen Methode – Standard für Textdokumente, Stark für maximale Ersparnis – verkleinern Sie Ihre Datei in Sekunden, lokal und sicher. Probieren Sie das [PDF Komprimieren](https://pdf.100ideas.net/de/pdf-komprimieren/) Werkzeug direkt aus.

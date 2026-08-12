@@ -1,0 +1,192 @@
+{
+  "common": {
+    "siteName": "PDF 工具",
+    "tagline": "瀏覽器內的免費 PDF 工具",
+    "upload": "選擇檔案",
+    "orDrop": "或將檔案拖曳到這裡",
+    "download": "下載",
+    "processing": "處理中…",
+    "language": "語言",
+    "free": "免費",
+    "home": "首頁",
+    "menu": {
+      "tools": "工具",
+      "blog": "部落格",
+      "privacy": "隱私政策",
+      "imprint": "法律聲明",
+      "contact": "聯絡我們"
+    }
+  },
+  "home": {
+    "eyebrow": "免費且私密",
+    "title": "免費線上 PDF 工具",
+    "subtitle": "合併、分割、旋轉以及轉換為圖片——快速、安全且無需上傳。",
+    "intro": "PDF 工具是一個免費的線上平台，用於處理最常見的 PDF 任務。無論是合併、分割、旋轉文件，還是將其轉換為圖片，所有工具都在您的瀏覽器中快速、安全地運作。",
+    "securityHeading": "安全與隱私",
+    "securityNote": "您的檔案永遠不會離開您的瀏覽器。所有操作都在您本機裝置上完成。",
+    "categoriesHeading": "依分類瀏覽工具",
+    "faqHeading": "常見問題",
+    "cta": "開始使用",
+    "toolsHeading": "我們的 PDF 工具",
+    "toolsSubheading": "所有工具完全在您的瀏覽器中運作。",
+    "popularHeading": "熱門 PDF 工具",
+    "popularSubheading": "最常用的工具——直接在您的瀏覽器中使用。",
+    "howWorksHeading": "使用方法",
+    "howWorksSubheading": "三步完成 PDF 處理——無需註冊。",
+    "step1Title": "選擇檔案",
+    "step1Text": "將 PDF 檔案拖曳到方框中，或從裝置中選擇。",
+    "step2Title": "執行工具",
+    "step2Text": "調整選項並點擊「開始處理」——一切都在您的瀏覽器本機運作。",
+    "step3Title": "下載",
+    "step3Text": "將處理完成的 PDF 直接儲存到您的裝置。",
+    "ctaFooterHeading": "準備好處理您的第一個檔案了嗎？",
+    "ctaFooterText": "所有工具均免費、私密，無需註冊。",
+    "trust": {
+      "browserTitle": "100% 瀏覽器內運作",
+      "browserText": "您的檔案永遠不會離開您的裝置。",
+      "noRegTitle": "無需註冊",
+      "noRegText": "立即開始——無需帳號，無需登入。",
+      "privacyTitle": "隱私優先",
+      "privacyText": "不上傳，不在伺服器儲存任何內容。"
+    },
+    "faq": [
+      {
+        "question": "我的檔案安全嗎？",
+        "answer": "安全。所有 PDF 僅在您的瀏覽器本機處理，檔案永遠不會上傳到伺服器。"
+      },
+      {
+        "question": "真的免費嗎？",
+        "answer": "是的，所有工具永久免費，無需註冊。"
+      },
+      {
+        "question": "需要註冊嗎？",
+        "answer": "不需要。您可以直接使用任何工具，無需帳號或登入。"
+      },
+      {
+        "question": "支援哪些作業系統？",
+        "answer": "由於全部在瀏覽器中運作，工具支援 Windows、macOS、Linux、Android 和 iOS。"
+      },
+      {
+        "question": "PDF 檔案可以多大？",
+        "answer": "處理在您的裝置上完成。非常大的檔案取決於您的記憶體；大多數文件都沒有問題。"
+      }
+    ]
+  },
+  "categories": {
+    "merge": "合併",
+    "split": "分割",
+    "rotate": "旋轉",
+    "toImage": "轉為圖片",
+    "compress": "壓縮",
+    "protect": "加密保護",
+    "unlock": "解鎖",
+    "watermark": "浮水印"
+  },
+  "toolPage": {
+    "faqHeading": "常見問題",
+    "featuresHeading": "主要功能",
+    "limitationsHeading": "說明與限制",
+    "relatedHeading": "相關工具",
+    "moreHeading": "更多工具",
+    "blogHeading": "相關文章",
+    "updated": "更新"
+  },
+  "toolCluster": {
+    "title": "分類",
+    "moreTools": "此分類下的更多工具",
+    "categories": {
+      "organize": "整理 PDF",
+      "convert": "轉換 PDF",
+      "optimize": "最佳化 PDF",
+      "secure": "保護與加密 PDF"
+    }
+  },
+  "popular": {
+    "badge": "熱門"
+  },
+  "pdfUi": {
+    "title": "處理 PDF",
+    "drop": "將檔案拖曳到這裡，或點擊選擇",
+    "selectFiles": "選擇檔案",
+    "selected": "已選擇",
+    "process": "開始處理",
+    "processing": "處理中…",
+    "download": "下載",
+    "clear": "重設",
+    "rotateLabel": "旋轉角度",
+    "formatLabel": "圖片格式",
+    "errorGeneric": "處理檔案時發生錯誤。",
+    "noFile": "請先選擇一個檔案。",
+    "mergeHint": "選擇兩個或更多 PDF 以合併為一個。",
+    "splitHint": "選擇一個 PDF 檔案以將其分割。",
+    "rotateHint": "選擇一個 PDF 檔案並指定旋轉角度。",
+    "toImageHint": "選擇一個 PDF 檔案以轉換為圖片。",
+    "compressHint": "選擇一個 PDF 檔案以進行壓縮。",
+    "protectHint": "選擇一個 PDF 檔案並設定密碼。",
+    "unlockHint": "選擇受密碼保護的 PDF 並輸入文件密碼。",
+    "watermarkHint": "選擇 PDF 並輸入浮水印文字。",
+    "uploading": "正在讀取檔案…",
+    "completed": "完成——結果已就緒。",
+    "formatHint": "PDF · 最大 50MB",
+    "files": "個檔案",
+    "dropActive": "放開即可上傳",
+    "pages": "頁",
+    "processAnother": "繼續處理其他檔案",
+    "compressModeLabel": "壓縮模式",
+    "compressStandard": "標準壓縮（保留可搜尋文字）",
+    "compressStandardDesc": "保留品質與文字內容。",
+    "compressStrong": "強力壓縮（最大限度縮小體積）",
+    "compressStrongDesc": "最大程度縮小體積，可能有品質損失。",
+    "qualityLabel": "品質",
+    "passwordLabel": "密碼",
+    "unlockPasswordLabel": "文件密碼",
+    "watermarkTextLabel": "浮水印文字",
+    "opacityLabel": "不透明度",
+    "passwordPlaceholder": "輸入密碼",
+    "watermarkPlaceholder": "例如：機密",
+    "wrongPassword": "密碼錯誤，請重試。",
+    "feedbackTitle": "這個工具對你有幫助嗎？",
+    "feedbackYes": "有幫助",
+    "feedbackNo": "沒幫助",
+    "feedbackThanks": "感謝你的回饋！"
+  },
+  "legal": {
+    "privacy": {
+      "title": "隱私政策",
+      "intro": "我們重視您的資料保護。本頁說明我們如何處理您的資訊。"
+    },
+    "impressum": {
+      "title": "法律聲明",
+      "intro": "依法須揭露的資訊。"
+    },
+    "contact": {
+      "title": "聯絡我們",
+      "intro": "您可以透過以下方式聯絡我們。",
+      "name": "聯絡人",
+      "personName": "Ron",
+      "emailLabel": "信箱",
+      "email": "babong@163.com"
+    }
+  },
+  "blog": {
+    "title": "部落格",
+    "intro": "關於 PDF 與文件的小技巧、指南與背景知識。",
+    "empty": "暫無文章，敬請期待。",
+    "readMore": "閱讀全文",
+    "publishedOn": "發布於",
+    "updatedOn": "更新於",
+    "by": "作者",
+    "tags": "標籤",
+    "backToBlog": "返回部落格",
+    "rss": "RSS 訂閱"
+  },
+  "notFound": {
+    "title": "頁面未找到",
+    "description": "您造訪的頁面不存在或已被移動。",
+    "home": "返回首頁"
+  },
+  "footer": {
+    "rights": "版權所有。",
+    "note": "本網站完全在您的瀏覽器本機處理 PDF 檔案。"
+  }
+}

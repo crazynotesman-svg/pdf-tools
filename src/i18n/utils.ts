@@ -15,7 +15,7 @@ export function getLocaleName(locale: Locale): string {
 /**
  * Map a routing locale to its BCP-47 language tag, used for localized date
  * formatting (toLocaleDateString) and the JSON-LD `inLanguage` field.
- *   de -> de-DE, en -> en-US, zh-CN -> zh-CN
+ *   de -> de-DE, en -> en-US, zh-TW -> zh-TW, es -> es-ES
  */
 export function getBCP47(locale: Locale): string {
   switch (locale) {
@@ -23,8 +23,10 @@ export function getBCP47(locale: Locale): string {
       return 'de-DE';
     case 'en':
       return 'en-US';
-    case 'zh-CN':
-      return 'zh-CN';
+    case 'zh-TW':
+      return 'zh-TW';
+    case 'es':
+      return 'es-ES';
   }
 }
 
@@ -34,7 +36,7 @@ export function getBCP47(locale: Locale): string {
  * Examples:
  *   getLocalizedPath('en', '/de/pdf-zusammenfuegen') -> '/en/pdf-zusammenfuegen'
  *   getLocalizedPath('de', '/blog')                 -> '/de/blog'
- *   getLocalizedPath('zh-CN', '/')                  -> '/zh-CN'
+ *   getLocalizedPath('zh-TW', '/')                  -> '/zh-TW'
  *
  * NOTE: tool pages use different slugs per language (e.g. /de/pdf-zusammenfuegen
  * vs /en/pdf-merge). For those, the *caller* must pass the already-localized
